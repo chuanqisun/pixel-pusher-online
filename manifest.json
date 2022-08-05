@@ -3,6 +3,7 @@
   "id": "1137213000706043340",
   "api": "1.0.0",
   "main": "code.js",
+  "ui": "control-panel.html",
   "editorType": [
     "figma",
     "figjam"

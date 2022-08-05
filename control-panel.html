@@ -1,0 +1,13 @@
+<div id="arrow-keys">
+  <button data-direction="up">up</button>
+  <button data-direction="down">down</button>
+</div>
+
+<script>
+  document.getElementById('arrow-keys').onclick = (e) => {
+    const dir = e.target.closest('[data-direction]').getAttribute("data-direction");
+    console.log(dir);
+    const message = { pluginMessage: {dir} };
+    parent.postMessage(message, '*')
+  }
+</script>
