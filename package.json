@@ -1,0 +1,16 @@
+{
+  "name": "test-widget",
+  "version": "1.0.0",
+  "description": "Your Figma widget",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "npm run build -- --watch"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@figma/plugin-typings": "*",
+    "@figma/widget-typings": "*",
+    "typescript": "*"
+  }
+}
