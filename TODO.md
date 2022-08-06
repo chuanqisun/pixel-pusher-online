@@ -1,4 +1,7 @@
-- Test sprite
+- [OK] Test sprite
   - credit: https://onlinepngtools.com/convert-png-to-base64
-- Test web audio
+- [OK] Test web audio
 - Test user id ownership model
+- Test character selector
+- Gray out on blur
+- Push to talk

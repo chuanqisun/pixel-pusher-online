@@ -1,3 +1,5 @@
+import { tones } from "./audio";
+
 async function main() {
   document.getElementById("arrow-keys")!.onclick = (e) => {
     const dir = (e.target as HTMLElement)!.closest("[data-direction]")!.getAttribute("data-direction");
@@ -28,6 +30,8 @@ async function main() {
     const message = { pluginMessage: { dir } };
     parent.postMessage(message, "*");
   });
+
+  document.getElementById("play-sound")!.onclick = () => tones.play("c", 4);
 }
 
 main();
