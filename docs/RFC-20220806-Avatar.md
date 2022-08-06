@@ -1,0 +1,12 @@
+- Size: 40px
+  - Aligns with both 8 and 10 based grid
+  - Roughly size of a touchable button on most UIs
+  - Enough resolution for details
+- Assets
+  - N,E,S,W idle
+  - N,E,S,W walk: 3 frames each
+- Composition
+  - Skeleton + mountable
+- Emotes
+  - Hard coded against the skeleton?
+  - Gear based?
