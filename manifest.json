@@ -1,13 +1,10 @@
 {
-  "name": "test-widget",
-  "id": "1137213000706043340",
+  "name": "HITS Assistant",
+  "id": "1137434697958861539",
   "api": "1.0.0",
-  "main": "code.js",
-  "ui": "control-panel.html",
-  "editorType": [
-    "figma",
-    "figjam"
-  ],
+  "main": "dist/main.js",
+  "editorType": ["figma", "figjam"],
   "containsWidget": true,
-  "widgetApi": "1.0.0"
+  "widgetApi": "1.0.0",
+  "ui": "dist/ui.html"
 }

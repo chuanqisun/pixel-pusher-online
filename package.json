@@ -1,16 +1,17 @@
 {
-  "name": "test-widget",
+  "name": "figma-rpg-mode",
   "version": "1.0.0",
   "description": "Your Figma widget",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "watch": "npm run build -- --watch"
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build -- --watch"
   },
   "author": "",
   "license": "",
   "devDependencies": {
     "@figma/plugin-typings": "*",
     "@figma/widget-typings": "*",
-    "typescript": "*"
+    "@types/node": "^16.11.47",
+    "esbuild": "^0.14.53"
   }
 }
