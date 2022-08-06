@@ -12,6 +12,10 @@ function Widget() {
       if (!widgetNode) return;
 
       switch (message.dir) {
+        case "left":
+          return (widgetNode.x -= 8);
+        case "right":
+          return (widgetNode.x += 8);
         case "up":
           return (widgetNode.y -= 8);
         case "down":
@@ -19,14 +23,12 @@ function Widget() {
       }
     };
   });
-  const [pos, setPos] = useSyncedState("x", [0, 0]);
-
   const openControlPanel = () =>
     new Promise((resolve) => {
       figma.showUI(__html__);
     });
 
-  return <Rectangle onClick={openControlPanel} width={40} height={40} x={pos[0]} y={pos[1]} fill="#333333" />;
+  return <Rectangle onClick={openControlPanel} width={40} height={40} fill="#333333" />;
 }
 
 widget.register(Widget);
