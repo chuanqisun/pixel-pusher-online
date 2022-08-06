@@ -1,6 +1,6 @@
 {
-  "name": "RPG mode",
-  "id": "1137434697958861539",
+  "name": "test-widget",
+  "id": "1137213000706043340",
   "api": "1.0.0",
   "main": "dist/main.js",
   "editorType": ["figma", "figjam"],

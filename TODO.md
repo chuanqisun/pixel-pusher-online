@@ -1,3 +1,4 @@
-- Test svg sprite
+- Test sprite
+  - credit: https://onlinepngtools.com/convert-png-to-base64
 - Test web audio
 - Test user id ownership model
