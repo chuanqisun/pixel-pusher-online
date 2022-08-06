@@ -54,9 +54,6 @@ function Widget() {
       figma.showUI(__html__);
     });
 
-  const imageElement = <Image src={walk} width={100} height={100} />;
-  console.log(imageElement);
-
   const spriteGetter = getSpriteCell.bind(null, 8, 15);
 
   return (
