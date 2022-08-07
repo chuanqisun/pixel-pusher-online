@@ -35,6 +35,7 @@
 
 # Phase 1: Public beta
 
+- Customizable emoji
 - Game control panel
   - Character
   - Emote
