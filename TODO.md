@@ -6,3 +6,4 @@
 - [OK] Test display user name
 - [OK] One character per user
 - Push to talk
+- Persist character across sessions
