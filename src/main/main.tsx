@@ -22,13 +22,14 @@ function Widget() {
   const [emote, setEmote] = useSyncedState("emote", "");
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
+  const [nickname, setNickname] = useSyncedState("nickname", "");
 
   // Auto-open UI on creation
   useEffect(() => {
     if (!isUiOpen)
       waitForTask(
         new Promise((resolve) => {
-          figma.showUI(__html__);
+          figma.showUI(__html__, { height: 600, width: 400 });
           isUiOpen = true;
           figma.currentPage.selection = [];
         })
@@ -52,6 +53,7 @@ function Widget() {
       const lastInstance = [...otherInstances].pop() as WidgetNode | undefined;
 
       setUser(figma.currentUser);
+      setNickname(figma.currentUser.name);
       widgetNode.setPluginData("userId", figma.currentUser.id);
 
       if (lastInstance) {
@@ -75,6 +77,11 @@ function Widget() {
       if (message.focusCharacter) {
         figma.viewport.scrollAndZoomIntoView([widgetNode]);
         figma.viewport.zoom = 1;
+      }
+
+      if (message.setNickname) {
+        figma.notify(`Nickname updated to "${message.setNickname}"`);
+        setNickname(message.setNickname);
       }
 
       if (message.dir) {
@@ -153,7 +160,7 @@ function Widget() {
     figma.currentPage.selection = [];
 
     await new Promise((resolve) => {
-      figma.showUI(__html__);
+      figma.showUI(__html__, { height: 600, width: 400 });
     });
   };
 
@@ -178,7 +185,7 @@ function Widget() {
         y={{ type: "top", offset: -24 }}
       >
         <Text fill="#fff" opacity={1} fontSize={12} horizontalAlignText="center">
-          {user?.name}
+          {nickname}
         </Text>
       </AutoLayout>
 

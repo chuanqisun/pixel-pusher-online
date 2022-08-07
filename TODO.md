@@ -12,11 +12,11 @@
 
 - Persist character setting across sessions
   - Remove inactive characters
-- Allow nickname
-  - Render with Figma user color
-  - Hover tooltip shows real name
-- Simple chatroom
+- Simple bubble chat
 - Test object creation from character
+- [OK] Allow nickname
+  - [OK] Render with Figma user color
+  - [OK] Hover tooltip shows real name
 - [OK] Auto open UI on creation
 - [OK] Render user name in Figma Label style
 - [OK] Emoji-based emote
@@ -34,6 +34,11 @@
 
 # Phase 1: Public beta
 
+- Game control panel
+  - Character
+  - Emote
+  - Chat
+  - Other player detail display
 - Ground shadow effect
 - Smooth walk animation
 - Proximity text chat

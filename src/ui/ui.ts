@@ -10,6 +10,8 @@ async function main() {
 
   document.addEventListener("keydown", (e) => {
     const dir = (() => {
+      if ((e.target as HTMLElement).matches("input,textarea")) return;
+
       switch (e.code) {
         case "KeyA":
         case "ArrowLeft":
@@ -54,6 +56,18 @@ async function main() {
     if (!emote) return;
     const message = { pluginMessage: { emote } };
     parent.postMessage(message, "*");
+  };
+
+  document.getElementById("name-form")!.onsubmit = (e) => {
+    e.preventDefault();
+
+    console.log(e.target);
+    if ((e.target as HTMLFormElement).checkValidity()) {
+      console.log("submit11");
+      const nickname = new FormData(e.target as HTMLFormElement).get("nickname") as string;
+      const message = { pluginMessage: { setNickname: nickname } };
+      parent.postMessage(message, "*");
+    }
   };
 
   window.focus();
