@@ -9,6 +9,7 @@
 - [OK] One character per user
 - Render user name in Figma Label style
 - Persist character across sessions
+- Toggle camera auto-centering
 - Allow nickname
   - Render with Figma user color
   - Hover tooltip shows real name
