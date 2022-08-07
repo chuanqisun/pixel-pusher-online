@@ -3,6 +3,7 @@
 - [DONE] Hot reload any asset change
 - [DONE] Bunlde single html output
 - Sprite generator
+- Vertical jiggle issue
 - Handle Ctrl-Z in figma
 - Implement useEffect w/ deps array
 - Implement useMemo w/ deps array
@@ -38,6 +39,7 @@
 
 # Phase 1: Public beta
 
+- Render quick menu directly on the widget
 - Customizable emoji
 - Game control panel
   - Character
