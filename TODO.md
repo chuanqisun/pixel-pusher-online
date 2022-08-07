@@ -10,12 +10,15 @@
 
 # Phase 0: Technical POC
 
-- Render user name in Figma Label style
-- Persist character across sessions
+- Persist character setting across sessions
+  - Remove inactive characters
 - Allow nickname
   - Render with Figma user color
   - Hover tooltip shows real name
 - Simple chatroom
+- Test object creation from character
+- [OK] Render user name in Figma Label style
+- [OK] Emoji-based emote
 - [OK] camera auto-centering
 - [OK] "Find my character" button
 - [OK] Test sprite
@@ -41,5 +44,4 @@
 - Proximity audio
 - P2P Video chat
 - Skeleton based animation
-- Emote
 - Map with occlusion

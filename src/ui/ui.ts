@@ -45,6 +45,13 @@ async function main() {
     parent.postMessage(message, "*");
   };
 
+  document.getElementById("emote")!.onclick = (e) => {
+    const emote = (e.target as HTMLElement)!.closest("button")?.textContent;
+    if (!emote) return;
+    const message = { pluginMessage: { emote } };
+    parent.postMessage(message, "*");
+  };
+
   window.focus();
 }
 

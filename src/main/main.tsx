@@ -3,7 +3,7 @@
 import { walk } from "./sprite";
 
 const { widget, showUI, createImage } = figma;
-const { useSyncedState, usePropertyMenu, AutoLayout, Rectangle, Text, SVG, Image, useWidgetId, useEffect, waitForTask } = widget;
+const { useSyncedState, usePropertyMenu, AutoLayout, Frame, Rectangle, Text, SVG, Image, useWidgetId, useEffect, waitForTask } = widget;
 
 function Widget() {
   const widgetId = useWidgetId();
@@ -16,6 +16,8 @@ function Widget() {
 
   // Sprite pos
   const [spritePos, setSpritePos] = useSyncedState("spritePos", getSpritePos(avatar, pose));
+
+  const [emote, setEmote] = useSyncedState("emote", "");
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
 
@@ -58,10 +60,15 @@ function Widget() {
 
       if (message.focusCharacter) {
         figma.viewport.scrollAndZoomIntoView([widgetNode]);
+        figma.viewport.zoom = 1;
       }
 
       if (message.dir) {
         handleMove(message.dir, widgetNode);
+      }
+
+      if (message.emote) {
+        setEmote(message.emote === "Clear" ? "" : message.emote);
       }
 
       if (message.setAvatar) {
@@ -116,6 +123,7 @@ function Widget() {
     }
 
     figma.viewport.scrollAndZoomIntoView([node]);
+    figma.viewport.zoom = 1;
   };
 
   const handleAvatarClick = async () => {
@@ -138,14 +146,43 @@ function Widget() {
   const spriteGetter = getSpriteCell.bind(null, 8, 15);
 
   return (
-    <AutoLayout horizontalAlignItems="center" direction="vertical" spacing={4}>
-      <Text fontSize={12}>{user?.name}</Text>
+    <AutoLayout tooltip={user?.name} width={32} height={32} overflow="visible">
       <Rectangle
         onClick={handleAvatarClick}
         fill={{ type: "image", imageTransform: spriteGetter(...spritePos), src: walk, scaleMode: "crop" }}
         width={32}
         height={32}
       />
+
+      <AutoLayout
+        opacity={emote ? 0.2 : 1}
+        fill={user?.color}
+        padding={{ vertical: 2, horizontal: 4 }}
+        cornerRadius={4}
+        positioning="absolute"
+        x={{ type: "center", offset: 0 }}
+        y={{ type: "top", offset: -24 }}
+      >
+        <Text fill="#fff" opacity={1} fontSize={12} horizontalAlignText="center">
+          {user?.name}
+        </Text>
+      </AutoLayout>
+
+      <AutoLayout
+        hidden={!emote}
+        positioning="absolute"
+        width={48}
+        height={48}
+        padding={8}
+        cornerRadius={24}
+        stroke={"#000"}
+        strokeWidth={2}
+        fill="#fff"
+        x={{ type: "right", offset: -32 }}
+        y={{ type: "top", offset: -48 }}
+      >
+        <Text fontSize={32}>{emote}</Text>
+      </AutoLayout>
     </AutoLayout>
   );
 }
