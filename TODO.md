@@ -5,5 +5,10 @@
 - [OK] Test character selector
 - [OK] Test display user name
 - [OK] One character per user
-- Push to talk
+- Render user name in Figma Label style
 - Persist character across sessions
+- Allow nickname
+  - Render with Figma user color
+  - Hover tooltip shows real name
+- Simple chatroom
+- Push to talk
