@@ -1,3 +1,11 @@
+# Dev tasks
+
+- vite UI
+  - Hot reload any asset change
+  - Bunlde single html output
+  - Sprite generator
+- Handle Ctrl-Z in figma
+
 # Phase 0: Technical POC
 
 - [OK] Test sprite
@@ -7,7 +15,10 @@
 - [OK] Test character selector
 - [OK] Test display user name
 - [OK] One character per user
+
+- Test autonomous walk
 - Render user name in Figma Label style
+- First press to turn without move
 - Persist character across sessions
 - Toggle camera auto-centering
 - "Find my character" button

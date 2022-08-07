@@ -3,7 +3,7 @@
 import { walk } from "./sprite";
 
 const { widget, showUI, createImage } = figma;
-const { useSyncedState, usePropertyMenu, AutoLayout, Rectangle, Text, SVG, Image, useWidgetId, useEffect } = widget;
+const { useSyncedState, usePropertyMenu, AutoLayout, Rectangle, Text, SVG, Image, useWidgetId, useEffect, waitForTask } = widget;
 
 function Widget() {
   const widgetId = useWidgetId();
@@ -17,6 +17,9 @@ function Widget() {
   // Sprite pos
   const [spritePos, setSpritePos] = useSyncedState("spritePos", getSpritePos(avatar, pose as [number, number]));
 
+  // Auto walk
+  const [isAutoWalk, setIsAutoWalk] = useSyncedState("isAutoWalk", false);
+
   const [user, setUser] = useSyncedState<User | null>("user", null);
 
   useEffect(() => {
@@ -24,6 +27,17 @@ function Widget() {
     if (newRenderPos[0] === spritePos[0] && newRenderPos[1] === spritePos[1]) return;
 
     setSpritePos(newRenderPos);
+  });
+
+  useEffect(() => {
+    isAutoWalk &&
+      waitForTask(
+        new Promise<void>((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        })
+      );
   });
 
   // Assign widget to current user
@@ -57,36 +71,7 @@ function Widget() {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.dir) {
-        switch (message.dir) {
-          case "left":
-            if (pose[0] !== 1) {
-              setPose([1, 1]);
-            } else {
-              setPose([1, (pose[1] + 1) % 4]);
-            }
-            return (widgetNode.x -= 8);
-          case "right":
-            if (pose[0] !== 2) {
-              setPose([2, 1]);
-            } else {
-              setPose([2, (pose[1] + 1) % 4]);
-            }
-            return (widgetNode.x += 8);
-          case "up":
-            if (pose[0] !== 3) {
-              setPose([3, 1]);
-            } else {
-              setPose([3, (pose[1] + 1) % 4]);
-            }
-            return (widgetNode.y -= 8);
-          case "down":
-            if (pose[0] !== 0) {
-              setPose([0, 1]);
-            } else {
-              setPose([0, (pose[1] + 1) % 4]);
-            }
-            return (widgetNode.y += 8);
-        }
+        handleMove(message.dir, widgetNode);
       }
 
       if (message.setAvatar) {
@@ -101,8 +86,49 @@ function Widget() {
             return;
         }
       }
+
+      if (message.toggleAutoWalk) {
+        setIsAutoWalk((prev) => !prev);
+      }
     };
   });
+
+  const handleMove = (dir: any, node: WidgetNode) => {
+    switch (dir) {
+      case "left":
+        if (pose[0] !== 1) {
+          setPose([1, 1]);
+        } else {
+          setPose([1, (pose[1] + 1) % 4]);
+          node.x -= 8;
+        }
+        break;
+      case "right":
+        if (pose[0] !== 2) {
+          setPose([2, 1]);
+        } else {
+          setPose([2, (pose[1] + 1) % 4]);
+          node.x += 8;
+        }
+        break;
+      case "up":
+        if (pose[0] !== 3) {
+          setPose([3, 1]);
+        } else {
+          setPose([3, (pose[1] + 1) % 4]);
+          node.x += 8;
+        }
+        break;
+      case "down":
+        if (pose[0] !== 0) {
+          setPose([0, 1]);
+        } else {
+          setPose([0, (pose[1] + 1) % 4]);
+          node.x += 8;
+        }
+        break;
+    }
+  };
 
   const handleAvatarClick = async () => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;

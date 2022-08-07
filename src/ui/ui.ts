@@ -40,6 +40,11 @@ async function main() {
     parent.postMessage(message, "*");
   };
 
+  document.getElementById("auto-walk")!.onclick = () => {
+    const message = { pluginMessage: { toggleAutoWalk: true } };
+    parent.postMessage(message, "*");
+  };
+
   window.focus();
 }
 
