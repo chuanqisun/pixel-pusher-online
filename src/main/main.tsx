@@ -8,10 +8,12 @@ const { useSyncedState, usePropertyMenu, AutoLayout, Rectangle, Text, SVG, Image
 function Widget() {
   const widgetId = useWidgetId();
 
-  const [spritePos, setSpritePos] = useSyncedState("spritePos", [0, 1]);
+  const [avatarIndex, setAvatarIndex] = useSyncedState("avatarIndex", 0);
+  const [poseSpritePos, setPoseSpritePos] = useSyncedState("poseSpritePos", [0, 1]);
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
 
+  // Assign widget to current user
   useEffect(() => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
     if (!widgetNode) return;
@@ -22,41 +24,71 @@ function Widget() {
     }
   });
 
+  const getAvatarPoseSpritePos = (avatarIndex: number, posePos: [row: number, col: number]) => {
+    const avatarBaseRow = Math.floor(avatarIndex / 5) * 4;
+    const avatarBaseCol = (avatarIndex % 5) * 3;
+    return [avatarBaseRow + posePos[0], avatarBaseCol + posePos[1]];
+  };
+
+  // Handle user input
   useEffect(() => {
+    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+    if (!widgetNode) return;
+
+    const user = JSON.parse(widgetNode.getPluginData("user")) as User;
+    if (user.id !== figma.currentUser.id) return;
+
     figma.ui.onmessage = (message) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
       if (!widgetNode) return;
 
       if (message.dir) {
+        const setPos = (pos: [row: number, col: number]) => setPoseSpritePos(getAvatarPoseSpritePos(avatarIndex, pos));
+
         switch (message.dir) {
           case "left":
-            if (spritePos[0] !== 1) {
-              setSpritePos([1, 1]);
+            if (poseSpritePos[0] !== 1) {
+              setPos([1, 1]);
             } else {
-              setSpritePos([1, (spritePos[1] + 1) % 3]);
+              setPos([1, (poseSpritePos[1] + 1) % 3]);
             }
             return (widgetNode.x -= 8);
           case "right":
-            if (spritePos[0] !== 2) {
-              setSpritePos([2, 1]);
+            if (poseSpritePos[0] !== 2) {
+              setPos([2, 1]);
             } else {
-              setSpritePos([2, (spritePos[1] + 1) % 3]);
+              setPos([2, (poseSpritePos[1] + 1) % 3]);
             }
             return (widgetNode.x += 8);
           case "up":
-            if (spritePos[0] !== 3) {
-              setSpritePos([3, 1]);
+            if (poseSpritePos[0] !== 3) {
+              setPos([3, 1]);
             } else {
-              setSpritePos([3, (spritePos[1] + 1) % 3]);
+              setPos([3, (poseSpritePos[1] + 1) % 3]);
             }
             return (widgetNode.y -= 8);
           case "down":
-            if (spritePos[0] !== 0) {
-              setSpritePos([0, 1]);
+            if (poseSpritePos[0] !== 0) {
+              setPos([0, 1]);
             } else {
-              setSpritePos([0, (spritePos[1] + 1) % 3]);
+              setPos([0, (poseSpritePos[1] + 1) % 3]);
             }
             return (widgetNode.y += 8);
+        }
+      }
+
+      if (message.setAvatar) {
+        switch (message.setAvatar) {
+          case "prev":
+            const prevIndex = (avatarIndex - 1) % 10;
+            setAvatarIndex(prevIndex);
+            setPoseSpritePos(getAvatarPoseSpritePos(prevIndex, [0, 1]));
+            return;
+          case "next":
+            const nextIndex = (avatarIndex + 1) % 10;
+            setAvatarIndex(nextIndex);
+            setPoseSpritePos(getAvatarPoseSpritePos(nextIndex, [0, 1]));
+            return;
         }
       }
     };
@@ -68,6 +100,11 @@ function Widget() {
     const user = JSON.parse(widgetNode.getPluginData("user")) as User;
     console.log(`Current data`, user);
 
+    if (user.id !== figma.currentUser.id) {
+      console.log("Avatar created by a different user");
+      return;
+    }
+
     return new Promise((resolve) => {
       figma.showUI(__html__);
     });
@@ -77,10 +114,10 @@ function Widget() {
 
   return (
     <AutoLayout horizontalAlignItems="center" direction="vertical" spacing={4}>
-      <Text fontSize={12}>{user ? user.name : "Click to claim"}</Text>
+      <Text fontSize={12}>{user?.name}</Text>
       <Rectangle
         onClick={handleAvatarClick}
-        fill={{ type: "image", imageTransform: spriteGetter(...spritePos), src: walk, scaleMode: "crop" }}
+        fill={{ type: "image", imageTransform: spriteGetter(...poseSpritePos), src: walk, scaleMode: "crop" }}
         width={32}
         height={32}
       />

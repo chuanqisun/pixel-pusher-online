@@ -1,8 +1,9 @@
 - [OK] Test sprite
   - credit: https://onlinepngtools.com/convert-png-to-base64
 - [OK] Test web audio
-- Test user id ownership model
-- Test character selector
-- Test display user name
-- Gray out on blur
+- [OK] Test user id ownership model
+- [OK] Test character selector
+- [OK] Test display user name
+- One character per user
+- Hide other's character on disconnect
 - Push to talk
