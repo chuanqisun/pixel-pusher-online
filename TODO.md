@@ -16,6 +16,7 @@
 
 # Phase 1: Public beta
 
+- Smooth walk animation
 - Proximity text chat
 - Deep character customization
 - Tiled map builder
