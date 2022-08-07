@@ -5,6 +5,4 @@
 - [OK] Test character selector
 - [OK] Test display user name
 - [OK] One character per user
-- Hide other's character on disconnect
-- Lock during user control
 - Push to talk

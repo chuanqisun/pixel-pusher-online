@@ -8,10 +8,23 @@ const { useSyncedState, usePropertyMenu, AutoLayout, Rectangle, Text, SVG, Image
 function Widget() {
   const widgetId = useWidgetId();
 
-  const [avatarIndex, setAvatarIndex] = useSyncedState("avatarIndex", 0);
-  const [poseSpritePos, setPoseSpritePos] = useSyncedState("poseSpritePos", [0, 1]);
+  // [1..10]
+  const [avatar, setAvatar] = useSyncedState("avatarIndex", 0);
+
+  // [[S|W|E|N], [L|C|R|C]]
+  const [pose, setPose] = useSyncedState("poseSpritePos", [0, 1]);
+
+  // Sprite pos
+  const [spritePos, setSpritePos] = useSyncedState("spritePos", getSpritePos(avatar, pose as [number, number]));
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
+
+  useEffect(() => {
+    const newRenderPos = getSpritePos(avatar, pose as [number, number]);
+    if (newRenderPos[0] === spritePos[0] && newRenderPos[1] === spritePos[1]) return;
+
+    setSpritePos(newRenderPos);
+  });
 
   // Assign widget to current user
   useEffect(() => {
@@ -27,20 +40,13 @@ function Widget() {
 
       if (lastInstance) {
         const avatarIndex = lastInstance.widgetSyncedState.avatarIndex;
-        setAvatarIndex(avatarIndex);
-        setPoseSpritePos(getAvatarPoseSpritePos(lastInstance.widgetSyncedState.avatarIndex, [0, 1]));
+        setAvatar(avatarIndex);
       }
 
       console.log(`Cleanup: ${otherInstances.length} other instances`);
       otherInstances.forEach((instance) => instance.remove());
     }
   });
-
-  const getAvatarPoseSpritePos = (avatarIndex: number, posePos: [row: number, col: number]) => {
-    const avatarBaseRow = Math.floor(avatarIndex / 5) * 4;
-    const avatarBaseCol = (avatarIndex % 5) * 3;
-    return [avatarBaseRow + posePos[0], avatarBaseCol + posePos[1]];
-  };
 
   // Handle user input
   useEffect(() => {
@@ -51,35 +57,33 @@ function Widget() {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.dir) {
-        const setPos = (pos: [row: number, col: number]) => setPoseSpritePos(getAvatarPoseSpritePos(avatarIndex, pos));
-
         switch (message.dir) {
           case "left":
-            if (poseSpritePos[0] !== 1) {
-              setPos([1, 1]);
+            if (pose[0] !== 1) {
+              setPose([1, 1]);
             } else {
-              setPos([1, (poseSpritePos[1] + 1) % 3]);
+              setPose([1, (pose[1] + 1) % 4]);
             }
             return (widgetNode.x -= 8);
           case "right":
-            if (poseSpritePos[0] !== 2) {
-              setPos([2, 1]);
+            if (pose[0] !== 2) {
+              setPose([2, 1]);
             } else {
-              setPos([2, (poseSpritePos[1] + 1) % 3]);
+              setPose([2, (pose[1] + 1) % 4]);
             }
             return (widgetNode.x += 8);
           case "up":
-            if (poseSpritePos[0] !== 3) {
-              setPos([3, 1]);
+            if (pose[0] !== 3) {
+              setPose([3, 1]);
             } else {
-              setPos([3, (poseSpritePos[1] + 1) % 3]);
+              setPose([3, (pose[1] + 1) % 4]);
             }
             return (widgetNode.y -= 8);
           case "down":
-            if (poseSpritePos[0] !== 0) {
-              setPos([0, 1]);
+            if (pose[0] !== 0) {
+              setPose([0, 1]);
             } else {
-              setPos([0, (poseSpritePos[1] + 1) % 3]);
+              setPose([0, (pose[1] + 1) % 4]);
             }
             return (widgetNode.y += 8);
         }
@@ -88,31 +92,31 @@ function Widget() {
       if (message.setAvatar) {
         switch (message.setAvatar) {
           case "prev":
-            const prevIndex = (avatarIndex - 1) % 10;
-            setAvatarIndex(prevIndex);
-            setPoseSpritePos(getAvatarPoseSpritePos(prevIndex, [0, 1]));
+            const prevIndex = (10 + avatar - 1) % 10;
+            setAvatar(prevIndex);
             return;
           case "next":
-            const nextIndex = (avatarIndex + 1) % 10;
-            setAvatarIndex(nextIndex);
-            setPoseSpritePos(getAvatarPoseSpritePos(nextIndex, [0, 1]));
+            const nextIndex = (avatar + 1) % 10;
+            setAvatar(nextIndex);
             return;
         }
       }
     };
   });
 
-  const handleAvatarClick = () => {
+  const handleAvatarClick = async () => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
     console.log(`Current widget`, widgetNode);
     console.log(`Current data`, user);
 
     if (user.id !== figma.currentUser.id) {
-      console.log("Avatar created by a different user");
+      figma.notify("Sorry, this avatar is created by someone else.");
       return;
     }
 
-    return new Promise((resolve) => {
+    figma.currentPage.selection = [];
+
+    await new Promise((resolve) => {
       figma.showUI(__html__);
     });
   };
@@ -124,7 +128,7 @@ function Widget() {
       <Text fontSize={12}>{user?.name}</Text>
       <Rectangle
         onClick={handleAvatarClick}
-        fill={{ type: "image", imageTransform: spriteGetter(...poseSpritePos), src: walk, scaleMode: "crop" }}
+        fill={{ type: "image", imageTransform: spriteGetter(...spritePos), src: walk, scaleMode: "crop" }}
         width={32}
         height={32}
       />
@@ -137,6 +141,17 @@ function getSpriteCell(rows: number, cols: number, row: number, col: number) {
     [1 / cols, 0, col / cols],
     [0, 1 / rows, row / rows],
   ] as Transform;
+}
+
+function getSpritePos(avatar: number, pose: [row: number, col: number]) {
+  const avatarBaseRow = Math.floor(avatar / 5) * 4;
+  const avatarBaseCol = (avatar % 5) * 3;
+  return [avatarBaseRow + pose[0], avatarBaseCol + mapPoseToSprite(pose[1])];
+}
+
+function mapPoseToSprite(pos: number) {
+  // reuse the idle pose the 4th frame
+  return [0, 1, 2, 1][pos];
 }
 
 widget.register(Widget);

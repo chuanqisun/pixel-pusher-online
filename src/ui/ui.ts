@@ -2,7 +2,8 @@ import { tones } from "./audio";
 
 async function main() {
   document.getElementById("arrow-keys")!.onclick = (e) => {
-    const dir = (e.target as HTMLElement)!.closest("[data-direction]")!.getAttribute("data-direction");
+    const dir = (e.target as HTMLElement)!.closest("[data-direction]")?.getAttribute("data-direction");
+    if (!dir) return;
     const message = { pluginMessage: { dir } };
     parent.postMessage(message, "*");
   };
@@ -33,10 +34,13 @@ async function main() {
   document.getElementById("play-sound")!.onclick = () => tones.play("c", 4);
 
   document.getElementById("avatar-selector")!.onclick = (e) => {
-    const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")!.getAttribute("data-set-avatar");
+    const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
+    if (!setAvatar) return;
     const message = { pluginMessage: { setAvatar } };
     parent.postMessage(message, "*");
   };
+
+  window.focus();
 }
 
 main();
