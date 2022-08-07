@@ -28,3 +28,4 @@
 - P2P Video chat
 - Skeleton based animation
 - Emote
+- Map with occlusion
