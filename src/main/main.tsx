@@ -56,6 +56,10 @@ function Widget() {
     figma.ui.onmessage = (message) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
+      if (message.focusCharacter) {
+        figma.viewport.scrollAndZoomIntoView([widgetNode]);
+      }
+
       if (message.dir) {
         handleMove(message.dir, widgetNode);
       }
@@ -110,6 +114,8 @@ function Widget() {
         }
         break;
     }
+
+    figma.viewport.scrollAndZoomIntoView([node]);
   };
 
   const handleAvatarClick = async () => {

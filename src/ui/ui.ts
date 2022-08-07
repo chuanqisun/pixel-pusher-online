@@ -40,6 +40,11 @@ async function main() {
     parent.postMessage(message, "*");
   };
 
+  document.getElementById("focus-character")!.onclick = () => {
+    const message = { pluginMessage: { focusCharacter: true } };
+    parent.postMessage(message, "*");
+  };
+
   window.focus();
 }
 
