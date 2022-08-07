@@ -6,9 +6,8 @@ async function main() {
     entryPoints: ["src/main/main.tsx"],
     bundle: true,
     format: "esm",
-    sourcemap: "inline", // TODO perf?
-    watch: false, // TODO
-    minify: false, // TODO
+    sourcemap: false, // TODO can this work?
+    minify: true, // TODO
     outdir: "dist",
   });
 
@@ -17,7 +16,7 @@ async function main() {
     bundle: true,
     format: "esm",
     sourcemap: "inline", // TODO perf?
-    minify: false, // TODO perf?
+    minify: true, // TODO perf?
     write: false,
   });
 
@@ -25,7 +24,7 @@ async function main() {
     entryPoints: ["src/ui/ui.css"],
     bundle: true,
     sourcemap: "inline",
-    minify: false,
+    minify: true,
     write: false,
   });
 

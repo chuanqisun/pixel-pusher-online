@@ -54,9 +54,7 @@ async function main() {
   document.getElementById("name-form")!.onsubmit = (e) => {
     e.preventDefault();
 
-    console.log(e.target);
     if ((e.target as HTMLFormElement).checkValidity()) {
-      console.log("submit11");
       const nickname = new FormData(e.target as HTMLFormElement).get("nickname") as string;
       const message = { pluginMessage: { setNickname: nickname } };
       parent.postMessage(message, "*");
