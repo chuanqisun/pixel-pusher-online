@@ -10,6 +10,7 @@
 - Implement useMemo w/ deps array
 - Debounce input rate
 - Auto snap to grid when walking
+- UI-main thread rpc utils
 
 # Phase 0: Technical POC
 
