@@ -13,6 +13,8 @@
 
 - Simple bubble chat
 - Add hints for free and open maps
+- One click to load prebuild maps
+- Add credit and donation links for character and map artists
 - Test object creation from character
 - [OK] Persist character setting across sessions
   - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
