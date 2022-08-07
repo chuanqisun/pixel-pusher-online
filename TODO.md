@@ -1,3 +1,5 @@
+# Phase 0: Technical POC
+
 - [OK] Test sprite
   - credit: https://onlinepngtools.com/convert-png-to-base64
 - [OK] Test web audio
@@ -11,4 +13,17 @@
   - Render with Figma user color
   - Hover tooltip shows real name
 - Simple chatroom
-- Push to talk
+
+# Phase 1: Public beta
+
+- Proximity text chat
+- Deep character customization
+- Tiled map builder
+
+# Phase 2: GA
+
+- Pet system
+- Proximity audio
+- P2P Video chat
+- Skeleton based animation
+- Emote
