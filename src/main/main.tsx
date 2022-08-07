@@ -36,6 +36,33 @@ function Widget() {
       );
   });
 
+  // Initialize widget to current user
+  useEffect(() => {
+    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+
+    if (!user) {
+      // find and clean other instances of the same avatar
+      const otherInstances = figma.currentPage.findAll((node) => (node as WidgetNode).getPluginData("userId") === figma.currentUser.id);
+
+      waitForTask(
+        (async () => {
+          const nickname = (await figma.clientStorage.getAsync("nickname")) ?? figma.currentUser.name;
+          const avatarIndex = (await figma.clientStorage.getAsync("avatarIndex")) ?? 0;
+
+          setUser(figma.currentUser);
+          setNickname(nickname);
+          setAvatar(avatarIndex);
+
+          widgetNode.setPluginData("userId", figma.currentUser.id);
+
+          console.log(`Cleanup: ${otherInstances.length} other instances`);
+          otherInstances.forEach((instance) => instance.remove());
+        })()
+      );
+    }
+  });
+
+  // derive sprite from avatar and pose
   useEffect(() => {
     const newRenderPos = getSpritePos(avatar, pose);
     if (newRenderPos[0] === spritePos[0] && newRenderPos[1] === spritePos[1]) return;
@@ -43,35 +70,12 @@ function Widget() {
     setSpritePos(newRenderPos);
   });
 
-  // Assign widget to current user
-  useEffect(() => {
-    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-
-    if (!user) {
-      // find and clean other instances of the same avatar
-      const otherInstances = figma.currentPage.findAll((node) => (node as WidgetNode).getPluginData("userId") === figma.currentUser.id);
-      const lastInstance = [...otherInstances].pop() as WidgetNode | undefined;
-
-      setUser(figma.currentUser);
-      setNickname(figma.currentUser.name);
-      widgetNode.setPluginData("userId", figma.currentUser.id);
-
-      if (lastInstance) {
-        const avatarIndex = lastInstance.widgetSyncedState.avatarIndex;
-        setAvatar(avatarIndex);
-      }
-
-      console.log(`Cleanup: ${otherInstances.length} other instances`);
-      otherInstances.forEach((instance) => instance.remove());
-    }
-  });
-
   // Handle user input
   useEffect(() => {
     if (!user) return;
     if (user.id !== figma.currentUser.id) return;
 
-    figma.ui.onmessage = (message) => {
+    figma.ui.onmessage = async (message) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.focusCharacter) {
@@ -80,7 +84,9 @@ function Widget() {
       }
 
       if (message.setNickname) {
+        await figma.clientStorage.setAsync("nickname", message.setNickname);
         figma.notify(`Nickname updated to "${message.setNickname}"`);
+
         setNickname(message.setNickname);
       }
 
@@ -96,10 +102,12 @@ function Widget() {
         switch (message.setAvatar) {
           case "prev":
             const prevIndex = (10 + avatar - 1) % 10;
+            await figma.clientStorage.setAsync("avatarIndex", prevIndex);
             setAvatar(prevIndex);
             return;
           case "next":
             const nextIndex = (avatar + 1) % 10;
+            await figma.clientStorage.setAsync("avatarIndex", nextIndex);
             setAvatar(nextIndex);
             return;
         }

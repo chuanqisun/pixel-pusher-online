@@ -10,10 +10,10 @@
 
 # Phase 0: Technical POC
 
-- Persist character setting across sessions
-  - Remove inactive characters
 - Simple bubble chat
 - Test object creation from character
+- [OK] Persist character setting across sessions
+  - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
 - [OK] Allow nickname
   - [OK] Render with Figma user color
   - [OK] Hover tooltip shows real name
