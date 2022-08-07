@@ -4,6 +4,6 @@
 - [OK] Test user id ownership model
 - [OK] Test character selector
 - [OK] Test display user name
-- One character per user
+- [OK] One character per user
 - Hide other's character on disconnect
 - Push to talk

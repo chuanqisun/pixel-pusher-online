@@ -16,10 +16,23 @@ function Widget() {
   // Assign widget to current user
   useEffect(() => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-    if (!widgetNode) return;
 
     if (!user) {
+      // find and clean other instances of the same avatar
+      const otherInstances = figma.currentPage.findAll((node) => (node as WidgetNode).getPluginData("userId") === figma.currentUser.id);
+      const lastInstance = [...otherInstances].pop() as WidgetNode | undefined;
+
       setUser(figma.currentUser);
+      widgetNode.setPluginData("userId", figma.currentUser.id);
+
+      if (lastInstance) {
+        const avatarIndex = lastInstance.widgetSyncedState.avatarIndex;
+        setAvatarIndex(avatarIndex);
+        setPoseSpritePos(getAvatarPoseSpritePos(lastInstance.widgetSyncedState.avatarIndex, [0, 1]));
+      }
+
+      console.log(`Cleanup: ${otherInstances.length} other instances`);
+      otherInstances.forEach((instance) => instance.remove());
     }
   });
 
@@ -36,7 +49,6 @@ function Widget() {
 
     figma.ui.onmessage = (message) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-      if (!widgetNode) return;
 
       if (message.dir) {
         const setPos = (pos: [row: number, col: number]) => setPoseSpritePos(getAvatarPoseSpritePos(avatarIndex, pos));
