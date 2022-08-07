@@ -1,12 +1,3 @@
-<h2>Walk</h2>
-<div id="arrow-keys">
-  <button data-direction="n">up</button>
-  <button data-direction="s">down</button>
-  <button data-direction="w">left</button>
-  <button data-direction="e">right</button>
-</div>
-<br />
-
 <h2>Character</h2>
 <div>
   <form id="name-form"><input name="nickname" type="text" required /><button type="submit">Rename</button></form>
@@ -30,6 +21,13 @@
 </div>
 <br />
 
+<h2>Hint</h2>
+<ul>
+  <li>Walk: <kbd>Up</kbd> <kbd>Left</kbd> <kbd>Down</kbd> <kbd>Right</kbd> or <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></li>
+</ul>
+
+<br />
+
 <h2>Experiments</h2>
 <div>
   <button id="play-sound">Play test sound</button>
@@ -43,6 +41,10 @@
   h2 {
     margin: 0;
     font-size: 1rem;
+  }
+  kbd {
+    border: 1px solid #ccc;
+    border-radius: 2px;
   }
 </style>
 

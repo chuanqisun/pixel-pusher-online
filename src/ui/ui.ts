@@ -1,13 +1,6 @@
 import { tones } from "./audio";
 
 async function main() {
-  document.getElementById("arrow-keys")!.onclick = (e) => {
-    const dir = (e.target as HTMLElement)!.closest("[data-direction]")?.getAttribute("data-direction");
-    if (!dir) return;
-    const message = { pluginMessage: { dir } };
-    parent.postMessage(message, "*");
-  };
-
   document.addEventListener("keydown", (e) => {
     const dir = (() => {
       if ((e.target as HTMLElement).matches("input,textarea")) return;
