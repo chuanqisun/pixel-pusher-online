@@ -12,32 +12,18 @@ function Widget() {
   const [avatar, setAvatar] = useSyncedState("avatarIndex", 0);
 
   // [[S|W|E|N], [L|C|R|C]]
-  const [pose, setPose] = useSyncedState("poseSpritePos", [0, 1]);
+  const [pose, setPose] = useSyncedState<[number, number]>("poseSpritePos", [0, 1]);
 
   // Sprite pos
-  const [spritePos, setSpritePos] = useSyncedState("spritePos", getSpritePos(avatar, pose as [number, number]));
-
-  // Auto walk
-  const [isAutoWalk, setIsAutoWalk] = useSyncedState("isAutoWalk", false);
+  const [spritePos, setSpritePos] = useSyncedState("spritePos", getSpritePos(avatar, pose));
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
 
   useEffect(() => {
-    const newRenderPos = getSpritePos(avatar, pose as [number, number]);
+    const newRenderPos = getSpritePos(avatar, pose);
     if (newRenderPos[0] === spritePos[0] && newRenderPos[1] === spritePos[1]) return;
 
     setSpritePos(newRenderPos);
-  });
-
-  useEffect(() => {
-    isAutoWalk &&
-      waitForTask(
-        new Promise<void>((resolve) => {
-          setTimeout(() => {
-            resolve();
-          }, 1000);
-        })
-      );
   });
 
   // Assign widget to current user
@@ -86,16 +72,12 @@ function Widget() {
             return;
         }
       }
-
-      if (message.toggleAutoWalk) {
-        setIsAutoWalk((prev) => !prev);
-      }
     };
   });
 
   const handleMove = (dir: any, node: WidgetNode) => {
     switch (dir) {
-      case "left":
+      case "w":
         if (pose[0] !== 1) {
           setPose([1, 1]);
         } else {
@@ -103,7 +85,7 @@ function Widget() {
           node.x -= 8;
         }
         break;
-      case "right":
+      case "e":
         if (pose[0] !== 2) {
           setPose([2, 1]);
         } else {
@@ -111,20 +93,20 @@ function Widget() {
           node.x += 8;
         }
         break;
-      case "up":
+      case "n":
         if (pose[0] !== 3) {
           setPose([3, 1]);
         } else {
           setPose([3, (pose[1] + 1) % 4]);
-          node.x += 8;
+          node.y -= 8;
         }
         break;
-      case "down":
+      case "s":
         if (pose[0] !== 0) {
           setPose([0, 1]);
         } else {
           setPose([0, (pose[1] + 1) % 4]);
-          node.x += 8;
+          node.y += 8;
         }
         break;
     }
@@ -169,15 +151,19 @@ function getSpriteCell(rows: number, cols: number, row: number, col: number) {
   ] as Transform;
 }
 
-function getSpritePos(avatar: number, pose: [row: number, col: number]) {
+function getSpritePos(avatar: number, pose: number[]): [row: number, col: number] {
   const avatarBaseRow = Math.floor(avatar / 5) * 4;
   const avatarBaseCol = (avatar % 5) * 3;
-  return [avatarBaseRow + pose[0], avatarBaseCol + mapPoseToSprite(pose[1])];
+  return [avatarBaseRow + pose[0], avatarBaseCol + mapPoseFrameToSpriteFrame(pose[1])];
 }
 
-function mapPoseToSprite(pos: number) {
+function mapPoseFrameToSpriteFrame(pose: number) {
   // reuse the idle pose the 4th frame
-  return [0, 1, 2, 1][pos];
+  return [0, 1, 2, 1][pose];
+}
+
+function getOrientation(pose: number[]) {
+  return (["s", "w", "e", "n"] as const)[pose[0]];
 }
 
 widget.register(Widget);

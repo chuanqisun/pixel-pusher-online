@@ -5,6 +5,7 @@
   - Bunlde single html output
   - Sprite generator
 - Handle Ctrl-Z in figma
+- Write a hook with change watch list
 
 # Phase 0: Technical POC
 
@@ -16,7 +17,7 @@
 - [OK] Test display user name
 - [OK] One character per user
 
-- Test autonomous walk
+- [FAIL] Test autonomous walk. -> This require persisted UI
 - Render user name in Figma Label style
 - First press to turn without move
 - Persist character across sessions

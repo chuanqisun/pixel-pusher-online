@@ -13,16 +13,16 @@ async function main() {
       switch (e.code) {
         case "KeyA":
         case "ArrowLeft":
-          return "left";
+          return "w";
         case "KeyD":
         case "ArrowRight":
-          return "right";
+          return "e";
         case "KeyW":
         case "ArrowUp":
-          return "up";
+          return "n";
         case "KeyS":
         case "ArrowDown":
-          return "down";
+          return "s";
       }
     })();
 
@@ -37,11 +37,6 @@ async function main() {
     const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
     if (!setAvatar) return;
     const message = { pluginMessage: { setAvatar } };
-    parent.postMessage(message, "*");
-  };
-
-  document.getElementById("auto-walk")!.onclick = () => {
-    const message = { pluginMessage: { toggleAutoWalk: true } };
     parent.postMessage(message, "*");
   };
 
