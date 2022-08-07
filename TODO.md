@@ -41,6 +41,7 @@
 # Phase 1: Public beta
 
 - Render quick menu directly on the widget
+- Hit box detection, prevent overlap
 - Customizable emoji
 - Game control panel
   - Character

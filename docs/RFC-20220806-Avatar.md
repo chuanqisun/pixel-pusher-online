@@ -1,5 +1,5 @@
-- Size: 40px
-  - Aligns with both 8 and 10 based grid
+- Size: 32px
+  - Compatibility with tiling systems from the industry
   - Roughly size of a touchable button on most UIs
   - Enough resolution for details
 - Assets
