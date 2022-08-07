@@ -4,7 +4,7 @@
   "description": "Your Figma widget",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "nodemon --watch src/ui -e ts,css,html scripts/build.mjs"
+    "dev": "nodemon --watch src -e tsx,ts,css,html scripts/build.mjs"
   },
   "author": "",
   "license": "",

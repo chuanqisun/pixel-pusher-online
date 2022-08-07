@@ -79,8 +79,7 @@ function Widget() {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.focusCharacter) {
-        figma.viewport.scrollAndZoomIntoView([widgetNode]);
-        figma.viewport.zoom = 1;
+        resetViewport(widgetNode);
       }
 
       if (message.setNickname) {
@@ -151,8 +150,7 @@ function Widget() {
         break;
     }
 
-    figma.viewport.scrollAndZoomIntoView([node]);
-    figma.viewport.zoom = 1;
+    resetViewport(node);
   };
 
   const handleAvatarClick = async () => {
@@ -234,8 +232,12 @@ function mapPoseFrameToSpriteFrame(pose: number) {
   return [0, 1, 2, 1][pose];
 }
 
-function getOrientation(pose: number[]) {
-  return (["s", "w", "e", "n"] as const)[pose[0]];
+function resetViewport(node: WidgetNode) {
+  figma.viewport.zoom = 1;
+  figma.viewport.center = {
+    x: node.x + (node.width >> 1),
+    y: node.y + (node.height >> 1),
+  };
 }
 
 widget.register(Widget);

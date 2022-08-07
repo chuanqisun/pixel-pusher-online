@@ -2,8 +2,8 @@
 
 - [DONE] Hot reload any asset change
 - [DONE] Bunlde single html output
+- [DONE] Vertical jiggle issue
 - Sprite generator
-- Vertical jiggle issue
 - Handle Ctrl-Z in figma
 - Implement useEffect w/ deps array
 - Implement useMemo w/ deps array
