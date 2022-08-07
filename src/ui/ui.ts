@@ -13,15 +13,19 @@ async function main() {
       switch (e.code) {
         case "KeyA":
         case "ArrowLeft":
+          e.preventDefault();
           return "w";
         case "KeyD":
         case "ArrowRight":
+          e.preventDefault();
           return "e";
         case "KeyW":
         case "ArrowUp":
+          e.preventDefault();
           return "n";
         case "KeyS":
         case "ArrowDown":
+          e.preventDefault();
           return "s";
       }
     })();

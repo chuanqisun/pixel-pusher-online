@@ -5,6 +5,8 @@ import { walk } from "./sprite";
 const { widget, showUI, createImage } = figma;
 const { useSyncedState, usePropertyMenu, AutoLayout, Frame, Rectangle, Text, SVG, Image, useWidgetId, useEffect, waitForTask } = widget;
 
+let isUiOpen = false;
+
 function Widget() {
   const widgetId = useWidgetId();
 
@@ -20,6 +22,18 @@ function Widget() {
   const [emote, setEmote] = useSyncedState("emote", "");
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
+
+  // Auto-open UI on creation
+  useEffect(() => {
+    if (!isUiOpen)
+      waitForTask(
+        new Promise((resolve) => {
+          figma.showUI(__html__);
+          isUiOpen = true;
+          figma.currentPage.selection = [];
+        })
+      );
+  });
 
   useEffect(() => {
     const newRenderPos = getSpritePos(avatar, pose);

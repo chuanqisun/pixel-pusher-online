@@ -17,6 +17,7 @@
   - Hover tooltip shows real name
 - Simple chatroom
 - Test object creation from character
+- [OK] Auto open UI on creation
 - [OK] Render user name in Figma Label style
 - [OK] Emoji-based emote
 - [OK] camera auto-centering
@@ -33,6 +34,7 @@
 
 # Phase 1: Public beta
 
+- Ground shadow effect
 - Smooth walk animation
 - Proximity text chat
 - Deep character customization
