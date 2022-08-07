@@ -7,6 +7,7 @@
 - Handle Ctrl-Z in figma
 - Write a hook with change watch list
 - Debounce input rate
+- Auto snap to grid when walking
 
 # Phase 0: Technical POC
 
