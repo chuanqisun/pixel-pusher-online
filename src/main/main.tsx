@@ -18,8 +18,7 @@ function Widget() {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
     if (!widgetNode) return;
 
-    if (!widgetNode.getPluginData("user")) {
-      widgetNode.setPluginData("user", JSON.stringify(figma.currentUser));
+    if (!user) {
       setUser(figma.currentUser);
     }
   });
@@ -32,10 +31,7 @@ function Widget() {
 
   // Handle user input
   useEffect(() => {
-    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-    if (!widgetNode) return;
-
-    const user = JSON.parse(widgetNode.getPluginData("user")) as User;
+    if (!user) return;
     if (user.id !== figma.currentUser.id) return;
 
     figma.ui.onmessage = (message) => {
@@ -97,7 +93,6 @@ function Widget() {
   const handleAvatarClick = () => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
     console.log(`Current widget`, widgetNode);
-    const user = JSON.parse(widgetNode.getPluginData("user")) as User;
     console.log(`Current data`, user);
 
     if (user.id !== figma.currentUser.id) {
