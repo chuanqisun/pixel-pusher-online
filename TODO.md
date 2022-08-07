@@ -4,6 +4,7 @@
 - [DONE] Bunlde single html output
 - [DONE] Vertical jiggle issue
 - Sprite generator
+  - Generate one-use sprite from ui thread
 - Handle Ctrl-Z in figma
 - Implement useEffect w/ deps array
 - Implement useMemo w/ deps array
