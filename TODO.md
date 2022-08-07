@@ -3,5 +3,6 @@
 - [OK] Test web audio
 - Test user id ownership model
 - Test character selector
+- Test display user name
 - Gray out on blur
 - Push to talk

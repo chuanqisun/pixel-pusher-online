@@ -10,6 +10,18 @@ function Widget() {
 
   const [spritePos, setSpritePos] = useSyncedState("spritePos", [0, 1]);
 
+  const [user, setUser] = useSyncedState<User | null>("user", null);
+
+  useEffect(() => {
+    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+    if (!widgetNode) return;
+
+    if (!widgetNode.getPluginData("user")) {
+      widgetNode.setPluginData("user", JSON.stringify(figma.currentUser));
+      setUser(figma.currentUser);
+    }
+  });
+
   useEffect(() => {
     figma.ui.onmessage = (message) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
@@ -49,20 +61,28 @@ function Widget() {
       }
     };
   });
-  const openControlPanel = () =>
-    new Promise((resolve) => {
+
+  const handleAvatarClick = () => {
+    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+    console.log(`Current widget`, widgetNode);
+    const user = JSON.parse(widgetNode.getPluginData("user")) as User;
+    console.log(`Current data`, user);
+
+    return new Promise((resolve) => {
       figma.showUI(__html__);
     });
+  };
 
   const spriteGetter = getSpriteCell.bind(null, 8, 15);
 
   return (
-    <AutoLayout>
+    <AutoLayout horizontalAlignItems="center" direction="vertical" spacing={4}>
+      <Text fontSize={12}>{user ? user.name : "Click to claim"}</Text>
       <Rectangle
-        onClick={openControlPanel}
+        onClick={handleAvatarClick}
         fill={{ type: "image", imageTransform: spriteGetter(...spritePos), src: walk, scaleMode: "crop" }}
-        width={16}
-        height={16}
+        width={32}
+        height={32}
       />
     </AutoLayout>
   );
