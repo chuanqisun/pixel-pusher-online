@@ -12,6 +12,7 @@
 # Phase 0: Technical POC
 
 - Simple bubble chat
+- Add hints for free and open maps
 - Test object creation from character
 - [OK] Persist character setting across sessions
   - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
