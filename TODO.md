@@ -1,11 +1,11 @@
 # Dev tasks
 
-- vite UI
-  - Hot reload any asset change
-  - Bunlde single html output
-  - Sprite generator
+- [DONE] Hot reload any asset change
+- [DONE] Bunlde single html output
+- Sprite generator
 - Handle Ctrl-Z in figma
-- Write a hook with change watch list
+- Implement useEffect w/ deps array
+- Implement useMemo w/ deps array
 - Debounce input rate
 - Auto snap to grid when walking
 

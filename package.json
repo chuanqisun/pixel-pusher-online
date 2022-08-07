@@ -4,7 +4,7 @@
   "description": "Your Figma widget",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "npm run build -- --watch"
+    "dev": "nodemon --watch src/ui -e ts,css,html scripts/build.mjs"
   },
   "author": "",
   "license": "",
@@ -12,6 +12,7 @@
     "@figma/plugin-typings": "*",
     "@figma/widget-typings": "*",
     "@types/node": "^16.11.47",
-    "esbuild": "^0.14.53"
+    "esbuild": "^0.14.53",
+    "nodemon": "^2.0.19"
   }
 }
