@@ -1,26 +1,74 @@
-# Dev tasks
+# Roadmap
 
-- [DONE] Hot reload any asset change
-- [DONE] Bunlde single html output
-- [DONE] Vertical jiggle issue
-- Sprite generator
-  - Generate one-use sprite from ui thread
-  - Generate texture atlas
-- Handle Ctrl-Z in figma
-- Implement useEffect w/ deps array
-- Implement useMemo w/ deps array
-- Debounce input rate
-- Auto snap to grid when walking
-- UI-main thread rpc utils
+[!] Planned for public preview
 
-# Phase 0: Technical POC
+- Character customzation
+  - [!] Character panel (self) in UI
+  - [!] Avatar preview
+  - [!] Name display and customization
+  - [!] Nickname length limit
+  - Character panel (others)
+  - Custom name plate color
+  - In-house designed characters
+  - Modular body building
+  - Color customization
+  - Gear system
+- Avatar
+  - [!] Presence indication
+  - [!] Chat typing indication
+  - Shadow effect
+  - Skeleton based animation
+- Walk
+  - [!] Debounce input
+  - Sound effect
+  - Smooth walk animation
+  - Collision detection and prevention
+- Map
+  - [!] One-click built-in map creation
+  - Tiled map builder
+  - Personal object creation
+  - Avatar-tile occlusion
+  - Map environment music
+- Emote
+  - [!] Emote panel in UI
+  - [!] Auto-timeout
+  - [!] Auto-clean up on resume
+  - [!] Full emoji picker
+  - Emote drop as object
+  - Sound effect
+  - Personal emoji palette
+- Chat
+  - [!] Chat panel in UI
+  - [!] Public text chat
+  - Private text chat
+  - Private group chat
+  - Sound effect
+  - Proximity text chat
+  - Proximity audio chat
+  - P2P chat
+  - Video chat
+- UI
+  - [!] Multi-tab panel system
+  - [!] Open source and CC license display
+  - [!] Help and tips
+  - Customizable keybinding
+  - Sound effect
+  - Quick menu on the avatar
+  - Preference panel
+- Pet
+- Infra
+  - [!] Dynamic sprite wih texture atlas
+  - Multiplayer sound broadcast
+  - Main/UI IPC utils
+- Figma integration
+  - [!] Ctrl-Z handling
+  - [!] Auto grid snap
+  - Implement deps array for useEffect and useMemo
 
-- Simple bubble chat
-- Add hints for free and open maps
-- One click to load prebuild maps
-- Add credit and donation links for character and map artists
-- Test object creation from character
-- Timeout the emote
+# Archive
+
+## Phase 0: Technical POC
+
 - [OK] Persist character setting across sessions
   - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
 - [OK] Allow nickname
@@ -40,27 +88,6 @@
 - [OK] One character per user
 - [OK] First press to turn without move
 - [FAIL] Test autonomous walk. -> This require persisted UI
-
-# Phase 1: Public beta
-
-- Render quick menu directly on the widget
-- Hit box detection, prevent overlap
-- Customizable emoji
-- Game control panel
-  - Character
-  - Emote
-  - Chat
-  - Other player detail display
-- Ground shadow effect
-- Smooth walk animation
-- Proximity text chat
-- Deep character customization
-- Tiled map builder
-
-# Phase 2: GA
-
-- Pet system
-- Proximity audio
-- P2P Video chat
-- Skeleton based animation
-- Map with occlusion
+- [DONE] Hot reload any asset change
+- [DONE] Bunlde single html output
+- [DONE] Vertical jiggle issue
