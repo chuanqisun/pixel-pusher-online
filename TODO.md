@@ -20,6 +20,7 @@
   - Skeleton based animation
 - Walk
   - [!] Debounce input
+  - [!] Vertical jitter issue due to unstable figma.viewport.center
   - Sound effect
   - Smooth walk animation
   - Collision detection and prevention
@@ -51,6 +52,7 @@
   - [!] Multi-tab panel system
   - [!] Open source and CC license display
   - [!] Help and tips
+  - [!] Smart initial positioning
   - Customizable keybinding
   - Sound effect
   - Quick menu on the avatar
