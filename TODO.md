@@ -16,16 +16,19 @@
 - Avatar
   - [!] Presence indication
   - [!] Chat typing indication
+  - [!] Bring to top on center
   - Shadow effect
   - Skeleton based animation
 - Walk
   - [!] Debounce input
+  - [!] Bring to top on walk
   - [!] Vertical jitter issue due to unstable figma.viewport.center
   - Sound effect
   - Smooth walk animation
   - Collision detection and prevention
 - Map
   - [!] One-click built-in map creation
+  - [!] Prevent covering avatars
   - Tiled map builder
   - Personal object creation
   - Avatar-tile occlusion
