@@ -5,6 +5,7 @@
 - [DONE] Vertical jiggle issue
 - Sprite generator
   - Generate one-use sprite from ui thread
+  - Generate texture atlas
 - Handle Ctrl-Z in figma
 - Implement useEffect w/ deps array
 - Implement useMemo w/ deps array
