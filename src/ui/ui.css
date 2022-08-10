@@ -9,3 +9,22 @@ kbd {
   border: 1px solid #ccc;
   border-radius: 2px;
 }
+
+.nav-tabs {
+  display: grid;
+  grid-auto-flow: column;
+}
+.nav-button {
+  background: white;
+  height: 40px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.nav-button:hover {
+  background-color: #aaa;
+}
+
+.nav-section:not(.active) {
+  display: none;
+}

@@ -32,6 +32,7 @@
   - Tiled map builder
   - Personal object creation
   - Avatar-tile occlusion
+  - Proceedual map generator
   - Map environment music
 - Emote
   - [!] Emote panel in UI

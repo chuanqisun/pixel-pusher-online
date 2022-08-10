@@ -1,6 +1,17 @@
 import { tones } from "./audio";
+import { View } from "./view";
 
 async function main() {
+  const view = new View(document);
+
+  view.navTabs.addEventListener("click", (e) => {
+    const sectionName = (e.target as HTMLElement).closest("[data-target-section]")?.getAttribute("data-target-section");
+    if (sectionName) {
+      const sections = [...document.querySelectorAll("[data-section]")];
+      sections.forEach((section) => section.classList.toggle("active", section.getAttribute("data-section") === sectionName));
+    }
+  });
+
   document.addEventListener("keydown", (e) => {
     const dir = (() => {
       if ((e.target as HTMLElement).matches("input,textarea")) return;
