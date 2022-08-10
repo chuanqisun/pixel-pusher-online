@@ -53,7 +53,7 @@
   - P2P chat
   - Video chat
 - UI
-  - [!] Multi-tab panel system
+  - [DONE] Multi-tab panel system
   - [!] Open source and CC license display
   - [!] Help and tips
   - [!] Smart initial positioning
