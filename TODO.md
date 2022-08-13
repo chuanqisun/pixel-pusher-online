@@ -70,6 +70,8 @@
 - Infra
   - [!] Non-null origin web view
   - [!] Dynamic sprite wih texture atlas
+  - [!] GitHub page host
+  - Cloudflare DNS on top of GitHub page
   - Static app deployment pipeline
   - Figma plugin packaging pipeline
   - Multiplayer sound broadcast
