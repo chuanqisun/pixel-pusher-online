@@ -50,9 +50,6 @@ export function App() {
         <button class="nav-button" data-target-section="character">
           🧑
         </button>
-        <button class="nav-button" data-target-section="emote">
-          🎭
-        </button>
         <button class="nav-button" data-target-section="chat">
           💬
         </button>
@@ -87,17 +84,6 @@ export function App() {
               </button>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section class="nav-section" data-section="emote">
-        <h1>Emote</h1>
-        <div id="emote">
-          <button>👋</button>
-          <button>😆</button>
-          <button>👍</button>
-          <button>💩</button>
-          <button>Clear</button>
         </div>
       </section>
 

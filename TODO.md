@@ -38,9 +38,9 @@
   - Proceedual map generator
   - Map environment music
 - Emote
-  - [!] Emote panel in UI
-  - [!] Auto-timeout
-  - [!] Auto-clean up on resume
+  - Emote panel in UI
+  - Auto-timeout
+  - Auto-clean up on resume
   - Pixel styled emoji
   - Full emoji picker
   - Emote drop as object
