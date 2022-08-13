@@ -130,22 +130,8 @@ function useEventHanlders(sendToMain: (message: any) => any) {
       sendToMain(message);
     });
 
-    // document.getElementById("avatar-selector")!.onclick = (e) => {
-    //   const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
-    //   if (!setAvatar) return;
-    //   const message = { setAvatar };
-    //   sendToMain(message);
-    // };
-
     document.getElementById("focus-character")!.onclick = () => {
       const message = { focusCharacter: true };
-      sendToMain(message);
-    };
-
-    document.getElementById("emote")!.onclick = (e) => {
-      const emote = (e.target as HTMLElement)!.closest("button")?.textContent;
-      if (!emote) return;
-      const message = { emote };
       sendToMain(message);
     };
 
