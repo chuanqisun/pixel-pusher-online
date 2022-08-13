@@ -10,9 +10,6 @@ let isUiOpen = false;
 function Widget() {
   const widgetId = useWidgetId();
 
-  // [1..10]
-  const [avatar, setAvatar] = useSyncedState("avatarIndex", 0);
-
   const [avatarV2, setAvatarV2] = useSyncedState<Atlas | null>("avatarV2", null);
   const [frame, setFrame] = useSyncedState<Frame | null>("frame", null);
 
@@ -41,12 +38,7 @@ function Widget() {
 
       waitForTask(
         (async () => {
-          const nickname = (await figma.clientStorage.getAsync("nickname")) ?? figma.currentUser.name;
-          const avatarIndex = (await figma.clientStorage.getAsync("avatarIndex")) ?? 0;
-
           setUser(figma.currentUser);
-          setNickname(nickname);
-          setAvatar(avatarIndex);
 
           widgetNode.setPluginData("userId", figma.currentUser.id);
 
@@ -144,11 +136,6 @@ function Widget() {
       )}
     </AutoLayout>
   );
-}
-
-function mapPoseFrameToSpriteFrame(pose: number) {
-  // reuse the idle pose the 4th frame
-  return [0, 1, 2, 1][pose];
 }
 
 function resetViewport(node: WidgetNode) {
