@@ -1,4 +1,3 @@
-import { tones } from "./audio";
 import { View } from "./view";
 
 async function main() {
@@ -40,8 +39,6 @@ async function main() {
     const message = { pluginMessage: { dir } };
     parent.postMessage(message, "*");
   });
-
-  document.getElementById("play-sound")!.onclick = () => tones.play("c", 4);
 
   document.getElementById("avatar-selector")!.onclick = (e) => {
     const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
