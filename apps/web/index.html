@@ -4,63 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Preact + TS</title>
+    <title>RPG Mode</title>
   </head>
   <body>
     <div id="app"></div>
-    <!DOCTYPE html>
-    <head>
-      <title>RPG Mode</title>
-      <!-- STYLE_OUTPUT -->
-    </head>
-    <body>
-      <nav id="nav-tabs" class="nav-tabs">
-        <button class="nav-button" data-target-section="character">🧑</button>
-        <button class="nav-button" data-target-section="emote">🎭</button>
-        <button class="nav-button" data-target-section="chat">💬</button>
-        <button class="nav-button" data-target-section="map">🗺️</button>
-        <button class="nav-button" data-target-section="help">📋</button>
-      </nav>
-
-      <section class="nav-section" data-section="character">
-        <h1>Character</h1>
-        <div>
-          <form id="name-form"><input name="nickname" type="text" required /><button type="submit">Rename</button></form>
-          <div>
-            <span id="avatar-selector">
-              <button data-set-avatar="prev">prev</button>
-              <button data-set-avatar="next">next</button>
-            </span>
-            <button id="focus-character">center</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="nav-section" data-section="emote">
-        <h1>Emote</h1>
-        <div id="emote">
-          <button>👋</button>
-          <button>😆</button>
-          <button>👍</button>
-          <button>💩</button>
-          <button>Clear</button>
-        </div>
-      </section>
-
-      <section class="nav-section" data-section="chat">
-        <h1>Chat</h1>
-        <textarea placeholder="Chat message"></textarea>
-      </section>
-
-      <section class="nav-section" data-section="map">
-        <h1>Map</h1>
-      </section>
-
-      <section class="nav-section" data-section="help"><h1>Help</h1></section>
-
-      <!-- SCRIPT_OUTPUT -->
-    </body>
-
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

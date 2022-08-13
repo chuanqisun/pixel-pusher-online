@@ -1,47 +1,25 @@
 import esbuild from "esbuild";
 import fs from "fs/promises";
 
+const isDev = process.argv.includes("--dev");
+
 async function main() {
+  await fs.mkdir("dist", { recursive: true });
+  await fs.copyFile("src/manifest.json", "dist/manifest.json");
+
   const mainBuildAsync = esbuild.build({
-    entryPoints: ["src/main/main.tsx"],
+    entryPoints: ["src/main.tsx"],
     bundle: true,
+    define: {
+      "process.env.WEB_URL": isDev ? `"http://localhost:8192"` : `"http://localhost:8192"`,
+    },
     format: "esm",
-    sourcemap: false, // TODO can this work?
-    minify: true, // TODO
+    minify: true,
+    watch: process.argv.includes("--dev"),
     outdir: "dist",
   });
 
-  const uiScriptBuildOutAsync = esbuild.build({
-    entryPoints: ["src/ui/ui.ts"],
-    bundle: true,
-    format: "esm",
-    sourcemap: "inline", // TODO perf?
-    minify: true, // TODO perf?
-    write: false,
-  });
-
-  const uiStyleBuildOutAsync = esbuild.build({
-    entryPoints: ["src/ui/ui.css"],
-    bundle: true,
-    sourcemap: "inline",
-    minify: true,
-    write: false,
-  });
-
-  const [uiScriptBuildOut, uiStyleBuildOut] = await Promise.all([uiScriptBuildOutAsync, uiStyleBuildOutAsync]);
-
-  outputHtml(uiScriptBuildOut.outputFiles[0].text, uiStyleBuildOut.outputFiles[0].text);
-
   await mainBuildAsync;
-}
-
-async function outputHtml(scriptOuput, styleOutput) {
-  const templateHmlt = await fs.readFile("src/ui/ui.html", "utf-8");
-  const resultHtml = templateHmlt
-    .replace("<!-- SCRIPT_OUTPUT -->", `<script type="module">${scriptOuput}</script>`)
-    .replace("<!-- STYLE_OUTPUT -->", `<style>${styleOutput}</style>`);
-  await fs.mkdir("dist", { recursive: true });
-  await fs.writeFile("dist/ui.html", resultHtml);
 }
 
 main();
