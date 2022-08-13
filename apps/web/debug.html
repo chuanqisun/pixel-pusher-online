@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+  <title>Sandbox</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: grid;
+      place-content: center center;
+    }
+
+    iframe {
+      border: none;
+      width: 360px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="http://localhost:8192"></iframe>
+  <script type="module" src="./src/dev-shim.ts"></script>
+</body>
