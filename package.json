@@ -1,18 +1,26 @@
 {
   "name": "figma-rpg-mode",
   "version": "1.0.0",
-  "description": "Your Figma widget",
-  "scripts": {
-    "build": "node scripts/build.mjs",
-    "dev": "nodemon --watch src -e tsx,ts,css,html scripts/build.mjs"
+  "description": "Below are the steps to get your widget running. You can also find instructions at:",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuanqisun/figma-rpg-mode.git"
+  },
+  "keywords": [],
   "author": "",
-  "license": "",
-  "devDependencies": {
-    "@figma/plugin-typings": "*",
-    "@figma/widget-typings": "*",
-    "@types/node": "^16.11.47",
-    "esbuild": "^0.14.53",
-    "nodemon": "^2.0.19"
-  }
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chuanqisun/figma-rpg-mode/issues"
+  },
+  "homepage": "https://github.com/chuanqisun/figma-rpg-mode#readme",
+  "workspaces": [
+    "apps/*"
+  ]
 }

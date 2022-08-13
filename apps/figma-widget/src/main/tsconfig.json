@@ -6,6 +6,6 @@
     "target": "es6",
     "noEmit": true,
     "lib": ["es6"],
-    "typeRoots": ["../../node_modules/@types", "../../node_modules/@figma"]
+    "typeRoots": ["../../../../node_modules/@types", "../../../../node_modules/@figma"]
   }
 }

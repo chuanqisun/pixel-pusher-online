@@ -1,0 +1,11 @@
+{
+  "name": "test-widget",
+  "id": "1137213000706043340",
+  "api": "1.0.0",
+  "main": "dist/main.js",
+  "editorType": ["figma", "figjam"],
+  "containsWidget": true,
+  "widgetApi": "1.0.0",
+  "permissions": ["currentuser"],
+  "ui": "dist/ui.html"
+}
