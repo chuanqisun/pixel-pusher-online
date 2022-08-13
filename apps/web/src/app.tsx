@@ -4,6 +4,7 @@ import { sendMessage } from "./utils/ipc";
 import type { Atlas, Frame } from "assets";
 import { avatars } from "./data/avatars";
 
+const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
 
 export function App() {
@@ -32,9 +33,10 @@ export function App() {
     const activeAtlas = avatars[activeDemoAvatarId];
     const demoAnimations = ["walkS", "walkW", "walkN", "walkE"];
     const allFrames = demoAnimations.map((animationName) => activeAtlas.animations[animationName]).flat();
+    const scale = getAvatarScale(activeAtlas.cellSize);
     let i = 0;
     const timer = setInterval(() => {
-      setDemoFrame(getFrameCss(getDisplayFrame(2, activeAtlas, allFrames[i])));
+      setDemoFrame(getFrameCss(getDisplayFrame(scale, activeAtlas, allFrames[i])));
       i = (i + 1) % allFrames.length;
     }, 200);
 
@@ -207,5 +209,11 @@ function getFrameCss({ url, mapWidth, mapHeight, x, y, size, transform }: Displa
 }
 
 function getStaticDemoFrame(atlas: Atlas) {
-  return getFrameCss(getDisplayFrame(2, atlas, atlas.animations.idleS[0]));
+  return getFrameCss(getDisplayFrame(getAvatarScale(atlas.cellSize), atlas, atlas.animations.idleS[0]));
 }
+
+function getScale(targetSize: number, srcSize: number) {
+  return Math.floor(targetSize / srcSize); // TODO optimize perf
+}
+
+const getAvatarScale = getScale.bind(null, AVATAR_SIZE);
