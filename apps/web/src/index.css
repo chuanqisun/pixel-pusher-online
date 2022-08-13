@@ -27,6 +27,16 @@ button {
   cursor: pointer;
 }
 
+.character-button {
+  padding: 16px;
+}
+
+.character-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .name-form {
   display: grid;
   width: 100%;

@@ -1,9 +1,10 @@
-import { useCallback, useEffect } from "preact/hooks";
+import { useCallback, useEffect, useState } from "preact/hooks";
 import { sendMessage } from "./utils/ipc";
 
-import { char01Atlas } from "assets";
+import type { Atlas, Frame } from "assets";
+import { avatars } from "./data/avatars";
 
-console.log(char01Atlas);
+const allAvatars = Object.entries(avatars);
 
 export function App() {
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
@@ -16,6 +17,101 @@ export function App() {
     }
   }, []);
 
+  const handleSelectAvatar = useCallback((id: string) => {
+    sendToMain({ setAvatar: avatars[id] });
+  }, []);
+
+  useEventHanlders(sendToMain);
+
+  const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
+  const [activeDemoFrame, setDemoFrame] = useState<any>(null);
+  useEffect(() => {
+    if (activeDemoAvatarId === null) {
+      setDemoFrame(null);
+      return;
+    }
+    const activeAtlas = avatars[activeDemoAvatarId];
+    const demoAnimations = ["walkS", "walkW", "walkN", "walkE"];
+    const allFrames = demoAnimations.map((animationName) => activeAtlas.animations[animationName]).flat();
+    let i = 0;
+    const timer = setInterval(() => {
+      setDemoFrame(getFrameCss(getDisplayFrame(activeAtlas, allFrames[i])));
+      i = (i + 1) % allFrames.length;
+    }, 200);
+
+    return () => clearInterval(timer);
+  }, [activeDemoAvatarId]);
+
+  return (
+    <>
+      <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
+        <button class="nav-button" data-target-section="character">
+          🧑
+        </button>
+        <button class="nav-button" data-target-section="emote">
+          🎭
+        </button>
+        <button class="nav-button" data-target-section="chat">
+          💬
+        </button>
+        <button class="nav-button" data-target-section="map">
+          🗺️
+        </button>
+        <button class="nav-button" data-target-section="help">
+          📋
+        </button>
+      </nav>
+
+      <section class="nav-section" data-section="character">
+        <h1>Character</h1>
+        <button id="focus-character">Locate myself</button>
+        <div>
+          <h2>Name</h2>
+          <form id="name-form" class="name-form">
+            <input name="nickname" type="text" required />
+            <button type="submit">Change</button>
+          </form>
+          <h2>Avatar</h2>
+          <div class="character-grid">
+            {allAvatars.map(([id, atlas]) => (
+              <button
+                class="character-button"
+                key={id}
+                onMouseEnter={() => setDemoAvatarId(id)}
+                onMouseLeave={() => setDemoAvatarId(null)}
+                onClick={() => handleSelectAvatar(id)}
+              >
+                <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(atlas)}></div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="nav-section" data-section="emote">
+        <h1>Emote</h1>
+        <div id="emote">
+          <button>👋</button>
+          <button>😆</button>
+          <button>👍</button>
+          <button>💩</button>
+          <button>Clear</button>
+        </div>
+      </section>
+
+      <section class="nav-section" data-section="chat">
+        <h1>Chat</h1>
+        <textarea placeholder="Chat message"></textarea>
+      </section>
+
+      <section class="nav-section" data-section="map">
+        <h1>Map</h1>
+      </section>
+    </>
+  );
+}
+
+function useEventHanlders(sendToMain: (message: any) => any) {
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       const dir = (() => {
@@ -46,12 +142,12 @@ export function App() {
       sendToMain(message);
     });
 
-    document.getElementById("avatar-selector")!.onclick = (e) => {
-      const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
-      if (!setAvatar) return;
-      const message = { setAvatar };
-      sendToMain(message);
-    };
+    // document.getElementById("avatar-selector")!.onclick = (e) => {
+    //   const setAvatar = (e.target as HTMLElement)!.closest("[data-set-avatar]")?.getAttribute("data-set-avatar");
+    //   if (!setAvatar) return;
+    //   const message = { setAvatar };
+    //   sendToMain(message);
+    // };
 
     document.getElementById("focus-character")!.onclick = () => {
       const message = { focusCharacter: true };
@@ -75,65 +171,28 @@ export function App() {
       }
     };
   }, []);
+}
 
-  return (
-    <>
-      <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
-        <button class="nav-button" data-target-section="character">
-          🧑
-        </button>
-        <button class="nav-button" data-target-section="emote">
-          🎭
-        </button>
-        <button class="nav-button" data-target-section="chat">
-          💬
-        </button>
-        <button class="nav-button" data-target-section="map">
-          🗺️
-        </button>
-        <button class="nav-button" data-target-section="help">
-          📋
-        </button>
-      </nav>
+function getDisplayFrame(atlas: Atlas, frame: Frame) {
+  const { col, row, transform } = frame;
+  const size = atlas.cellSize;
+  const x = size * col;
+  const y = size * row;
+  const url = atlas.imgUrl;
 
-      <section class="nav-section" data-section="character">
-        <h1>Character</h1>
-        <div>
-          <h2>Name</h2>
-          <form id="name-form" class="name-form">
-            <input name="nickname" type="text" required />
-            <button type="submit">Change</button>
-          </form>
-          <h2>Avatar</h2>
-          <div>
-            <span id="avatar-selector">
-              <button data-set-avatar="prev">prev</button>
-              <button data-set-avatar="next">next</button>
-            </span>
-            <button id="focus-character">center</button>
-          </div>
-        </div>
-      </section>
+  return { x, y, transform, url, size };
+}
 
-      <section class="nav-section" data-section="emote">
-        <h1>Emote</h1>
-        <div id="emote">
-          <button>👋</button>
-          <button>😆</button>
-          <button>👍</button>
-          <button>💩</button>
-          <button>Clear</button>
-        </div>
-      </section>
+function getFrameCss({ url, x, y, size, transform }: { url: string; x: number; y: number; size: number; transform?: number[] }) {
+  return {
+    transform: transform ? `matrix(${transform.join(", ")})` : undefined,
+    width: size,
+    height: size,
+    backgroundImage: `url("${url}")`,
+    backgroundPosition: `-${x}px -${y}px`,
+  };
+}
 
-      <section class="nav-section" data-section="chat">
-        <h1>Chat</h1>
-        <textarea placeholder="Chat message"></textarea>
-      </section>
-
-      <section class="nav-section" data-section="map">
-        <h1>Map</h1>
-      </section>
-    </>
-  );
+function getStaticDemoFrame(atlas: Atlas) {
+  return getFrameCss(getDisplayFrame(atlas, atlas.animations.idleS[0]));
 }
