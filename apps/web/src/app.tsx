@@ -24,7 +24,6 @@ export function App() {
   useEventHanlders(sendToMain);
 
   const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
-  const [activeDemoFrame, setDemoFrame] = useState<any>(null);
   useEffect(() => {
     if (activeDemoAvatarId === null) {
       setDemoFrame(null);
@@ -41,6 +40,7 @@ export function App() {
 
     return () => clearInterval(timer);
   }, [activeDemoAvatarId]);
+  const [activeDemoFrame, setDemoFrame] = useState<any>(null);
 
   return (
     <>
