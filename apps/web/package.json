@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "assets": "file:packages/assets",
     "preact": "^10.10.2"
   },
   "devDependencies": {

@@ -1,6 +1,10 @@
 import { useCallback, useEffect } from "preact/hooks";
 import { sendMessage } from "./utils/ipc";
 
+import { char01Atlas } from "assets";
+
+console.log(char01Atlas);
+
 export function App() {
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
 
