@@ -4,8 +4,5 @@ import "./index.css";
 
 render(<App />, document.getElementById("app") as HTMLElement);
 
-async function main() {
-  window.focus();
-}
-
-main();
+// start handling keyboard input
+window.focus();

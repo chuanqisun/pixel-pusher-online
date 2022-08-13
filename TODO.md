@@ -58,6 +58,7 @@
 - UI
   - [DONE] Multi-tab panel system
   - [!] Open source and CC license display
+  - [!] Auto open help tab on initial launch
   - [!] Help and tips
   - [!] Smart initial positioning
   - Customizable keybinding

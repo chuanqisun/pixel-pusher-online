@@ -95,9 +95,9 @@ export function App() {
       <section class="nav-section" data-section="character">
         <h1>Character</h1>
         <div>
-          <form id="name-form">
+          <form id="name-form" class="name-form">
             <input name="nickname" type="text" required />
-            <button type="submit">Rename</button>
+            <button type="submit">Change</button>
           </form>
           <div>
             <span id="avatar-selector">
