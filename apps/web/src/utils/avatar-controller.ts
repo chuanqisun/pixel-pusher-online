@@ -8,7 +8,7 @@ export interface AvatarController {
   idle(): any;
 }
 
-export function getAvatarController(atlas: Atlas, onFrame: (frame: Frame) => any): AvatarController {
+export function getAvatarController(atlas: Atlas, onFrame: (frame: Frame) => any, onMove: (dir: Direction) => any): AvatarController {
   let frameIndex = 0;
   let currentDir: Direction = "S";
   let currentPose = "idle";
@@ -26,8 +26,10 @@ export function getAvatarController(atlas: Atlas, onFrame: (frame: Frame) => any
       frameIndex = 0;
       currentPose = "walk";
       frames = getFrames();
+      onMove(currentDir);
     } else {
       frameIndex = (frameIndex + 1) % frames.length;
+      onMove(currentDir);
     }
 
     onFrame(getFrames()[frameIndex]);

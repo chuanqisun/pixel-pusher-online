@@ -29,7 +29,15 @@ export function App() {
     sendToMain({ setAvatar: avatars[selectedAvatarId] });
   }, [selectedAvatarId]);
 
-  const avatarcontroller = useMemo(() => getAvatarController(avatars[selectedAvatarId], (frame) => sendToMain({ frame })), [selectedAvatarId]);
+  const avatarcontroller = useMemo(
+    () =>
+      getAvatarController(
+        avatars[selectedAvatarId],
+        (frame) => sendToMain({ frame }),
+        (move) => sendToMain({ move })
+      ),
+    [selectedAvatarId]
+  );
 
   useEffect(() => {
     avatarcontroller.idle();

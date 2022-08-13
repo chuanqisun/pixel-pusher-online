@@ -80,6 +80,23 @@ function Widget() {
         setFrame(message.frame);
       }
 
+      if (message.move) {
+        switch (message.move) {
+          case "N":
+            widgetNode.y -= 8;
+            break;
+          case "E":
+            widgetNode.x += 8;
+            break;
+          case "S":
+            widgetNode.y += 8;
+            break;
+          case "W":
+            widgetNode.x -= 8;
+            break;
+        }
+      }
+
       if (message.setAvatar) {
         setAvatarV2(message.setAvatar);
       }
