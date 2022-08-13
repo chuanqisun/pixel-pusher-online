@@ -78,6 +78,10 @@
   - [!] Ctrl-Z handling
   - [!] Auto grid snap
   - Implement deps array for useEffect and useMemo
+- Marketing
+  - [!] Favicon
+  - [!] Figma splash screen
+  - [!] Figma market place introduction
 
 # Archive
 
