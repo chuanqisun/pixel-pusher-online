@@ -4,8 +4,8 @@ import imgUrl from "./spritesheet.png";
 
 export const animalRat01: Atlas = {
   imgUrl,
-  mapWidth: 256,
-  mapHeight: 480,
+  cols: 16,
+  rows: 30,
   cellSize: 16,
   animations: {
     idleS: [{ row: 10, col: 0 }],

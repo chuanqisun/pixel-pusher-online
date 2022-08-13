@@ -3,8 +3,8 @@ import imgUrl from "./01-generic.png";
 
 export const rpgGeneric01: Atlas = {
   imgUrl,
-  mapWidth: 240,
-  mapHeight: 128,
+  cols: 15,
+  rows: 8,
   cellSize: 16,
   animations: {
     idleN: [{ row: 3, col: 1 }],

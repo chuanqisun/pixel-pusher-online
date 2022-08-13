@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect, useMemo, useState } from "preact/hooks";
 import { sendMessage } from "./utils/ipc";
 
-import type { Atlas, Frame } from "assets";
 import { avatars } from "./data/avatars";
+import { AvatarController, getAvatarController } from "./utils/avatar-controller";
+import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
-const AVATAR_SIZE = 32;
+export const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
 
 export function App() {
@@ -18,11 +19,23 @@ export function App() {
     }
   }, []);
 
+  const [selectedAvatarId, setSelectedAvatarId] = useState("alec");
+
   const handleSelectAvatar = useCallback((id: string) => {
-    sendToMain({ setAvatar: avatars[id] });
+    setSelectedAvatarId(id);
   }, []);
 
-  useEventHanlders(sendToMain);
+  useEffect(() => {
+    sendToMain({ setAvatar: avatars[selectedAvatarId] });
+  }, [selectedAvatarId]);
+
+  const avatarcontroller = useMemo(() => getAvatarController(avatars[selectedAvatarId], (frame) => sendToMain({ frame })), [selectedAvatarId]);
+
+  useEffect(() => {
+    avatarcontroller.idle();
+  }, [avatarcontroller]);
+
+  useEventHanlders(avatarcontroller);
 
   const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
   useEffect(() => {
@@ -80,7 +93,7 @@ export function App() {
                 onMouseLeave={() => setDemoAvatarId(null)}
                 onClick={() => handleSelectAvatar(id)}
               >
-                <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(atlas)}></div>
+                <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.cellSize), atlas)}></div>
               </button>
             ))}
           </div>
@@ -99,9 +112,9 @@ export function App() {
   );
 }
 
-function useEventHanlders(sendToMain: (message: any) => any) {
+function useEventHanlders(controller: AvatarController) {
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
+    const keydownListener = (e: KeyboardEvent) => {
       const dir = (() => {
         if ((e.target as HTMLElement).matches("input,textarea")) return;
 
@@ -109,83 +122,31 @@ function useEventHanlders(sendToMain: (message: any) => any) {
           case "KeyA":
           case "ArrowLeft":
             e.preventDefault();
-            return "w";
+            return "W";
           case "KeyD":
           case "ArrowRight":
             e.preventDefault();
-            return "e";
+            return "E";
           case "KeyW":
           case "ArrowUp":
             e.preventDefault();
-            return "n";
+            return "N";
           case "KeyS":
           case "ArrowDown":
             e.preventDefault();
-            return "s";
+            return "S";
         }
       })();
 
       if (!dir) return;
-      const message = { dir };
-      sendToMain(message);
-    });
 
-    document.getElementById("focus-character")!.onclick = () => {
-      const message = { focusCharacter: true };
-      sendToMain(message);
+      controller.step(dir);
     };
 
-    document.getElementById("name-form")!.onsubmit = (e) => {
-      e.preventDefault();
+    document.addEventListener("keydown", keydownListener);
 
-      if ((e.target as HTMLFormElement).checkValidity()) {
-        const nickname = new FormData(e.target as HTMLFormElement).get("nickname") as string;
-        const message = { setNickname: nickname };
-        sendToMain(message);
-      }
+    return () => {
+      document.removeEventListener("keydown", keydownListener);
     };
-  }, []);
+  }, [controller]);
 }
-
-export interface DisplayFrame {
-  url: string;
-  mapWidth: number;
-  mapHeight: number;
-  x: number;
-  y: number;
-  size: number;
-  transform?: number[];
-}
-
-function getDisplayFrame(scale: number, atlas: Atlas, frame: Frame): DisplayFrame {
-  const { col, row, transform } = frame;
-  const size = atlas.cellSize * scale;
-  const x = size * col;
-  const y = size * row;
-  const url = atlas.imgUrl;
-  const mapWidth = atlas.mapWidth * scale;
-  const mapHeight = atlas.mapHeight * scale;
-
-  return { mapWidth, mapHeight, x, y, transform, url, size };
-}
-
-function getFrameCss({ url, mapWidth, mapHeight, x, y, size, transform }: DisplayFrame) {
-  return {
-    transform: transform ? `matrix(${transform.join(", ")})` : undefined,
-    width: size,
-    height: size,
-    backgroundImage: `url("${url}")`,
-    backgroundPosition: `-${x}px -${y}px`,
-    backgroundSize: `${mapWidth}px ${mapHeight}px`,
-  };
-}
-
-function getStaticDemoFrame(atlas: Atlas) {
-  return getFrameCss(getDisplayFrame(getAvatarScale(atlas.cellSize), atlas, atlas.animations.idleS[0]));
-}
-
-function getScale(targetSize: number, srcSize: number) {
-  return Math.floor(targetSize / srcSize); // TODO optimize perf
-}
-
-const getAvatarScale = getScale.bind(null, AVATAR_SIZE);

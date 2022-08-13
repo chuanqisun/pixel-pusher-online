@@ -1,7 +1,7 @@
 export interface Atlas {
   imgUrl: string;
-  mapWidth: number;
-  mapHeight: number;
+  rows: number;
+  cols: number;
   cellSize: number;
   animations: Record<string, Frame[]>;
 }
