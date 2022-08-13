@@ -29,6 +29,7 @@ button {
 
 .character-button {
   padding: 16px;
+  image-rendering: pixelated;
 }
 
 .character-grid {

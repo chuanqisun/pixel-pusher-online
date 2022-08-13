@@ -34,7 +34,7 @@ export function App() {
     const allFrames = demoAnimations.map((animationName) => activeAtlas.animations[animationName]).flat();
     let i = 0;
     const timer = setInterval(() => {
-      setDemoFrame(getFrameCss(getDisplayFrame(activeAtlas, allFrames[i])));
+      setDemoFrame(getFrameCss(getDisplayFrame(2, activeAtlas, allFrames[i])));
       i = (i + 1) % allFrames.length;
     }, 200);
 
@@ -173,26 +173,39 @@ function useEventHanlders(sendToMain: (message: any) => any) {
   }, []);
 }
 
-function getDisplayFrame(atlas: Atlas, frame: Frame) {
+export interface DisplayFrame {
+  url: string;
+  mapWidth: number;
+  mapHeight: number;
+  x: number;
+  y: number;
+  size: number;
+  transform?: number[];
+}
+
+function getDisplayFrame(scale: number, atlas: Atlas, frame: Frame): DisplayFrame {
   const { col, row, transform } = frame;
-  const size = atlas.cellSize;
+  const size = atlas.cellSize * scale;
   const x = size * col;
   const y = size * row;
   const url = atlas.imgUrl;
+  const mapWidth = atlas.mapWidth * scale;
+  const mapHeight = atlas.mapHeight * scale;
 
-  return { x, y, transform, url, size };
+  return { mapWidth, mapHeight, x, y, transform, url, size };
 }
 
-function getFrameCss({ url, x, y, size, transform }: { url: string; x: number; y: number; size: number; transform?: number[] }) {
+function getFrameCss({ url, mapWidth, mapHeight, x, y, size, transform }: DisplayFrame) {
   return {
     transform: transform ? `matrix(${transform.join(", ")})` : undefined,
     width: size,
     height: size,
     backgroundImage: `url("${url}")`,
     backgroundPosition: `-${x}px -${y}px`,
+    backgroundSize: `${mapWidth}px ${mapHeight}px`,
   };
 }
 
 function getStaticDemoFrame(atlas: Atlas) {
-  return getFrameCss(getDisplayFrame(atlas, atlas.animations.idleS[0]));
+  return getFrameCss(getDisplayFrame(2, atlas, atlas.animations.idleS[0]));
 }
