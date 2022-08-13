@@ -70,6 +70,8 @@
 - Infra
   - [!] Non-null origin web view
   - [!] Dynamic sprite wih texture atlas
+  - Static app deployment pipeline
+  - Figma plugin packaging pipeline
   - Multiplayer sound broadcast
   - Main/UI IPC utils
 - Figma integration
