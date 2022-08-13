@@ -29,6 +29,7 @@ function Widget() {
     if (!isUiOpen)
       waitForTask(
         new Promise((resolve) => {
+          // figma.showUI(`<script>window.location.href = "https://www.wikipedia.org"</script>`, { height: 600, width: 400 });
           figma.showUI(__html__, { height: 600, width: 400 });
           isUiOpen = true;
           figma.currentPage.selection = [];
