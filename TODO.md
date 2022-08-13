@@ -4,9 +4,10 @@
 
 - Character customzation
   - [!] Character panel (self) in UI
-  - [!] Avatar preview
+  - [!] Avatar selection list with static preview
   - [!] Name display and customization
   - [!] Nickname length limit
+  - Avatar selection list with animated preview
   - Character panel (others)
   - Custom name plate color
   - In-house designed characters
@@ -24,7 +25,7 @@
 - Walk
   - [!] Debounce input
   - [!] Bring to top on walk
-  - [!] Vertical jitter issue due to unstable figma.viewport.center
+  - [!] Jitter issue due to unstable figma.viewport.center
   - Sound effect
   - Smooth walk animation
   - Collision detection and prevention
