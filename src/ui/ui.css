@@ -13,12 +13,14 @@ kbd {
 .nav-tabs {
   display: grid;
   grid-auto-flow: column;
+  gap: 4px;
 }
 .nav-button {
+  border: 2px solid black;
+  box-shadow: 3px 4px 0px -1px #666;
   background: white;
   height: 40px;
-  border: none;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
 }
 .nav-button:hover {
