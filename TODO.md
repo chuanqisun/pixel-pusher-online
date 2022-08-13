@@ -17,6 +17,8 @@
   - [!] Presence indication
   - [!] Chat typing indication
   - [!] Bring to top on center
+  - [!] Pixel font for name play
+  - 64px hit box for easiser mouse selection
   - Shadow effect
   - Skeleton based animation
 - Walk
@@ -38,7 +40,8 @@
   - [!] Emote panel in UI
   - [!] Auto-timeout
   - [!] Auto-clean up on resume
-  - [!] Full emoji picker
+  - Pixel styled emoji
+  - Full emoji picker
   - Emote drop as object
   - Sound effect
   - Personal emoji palette
@@ -63,6 +66,7 @@
   - Preference panel
 - Pet
 - Infra
+  - [!] Non-null origin web view
   - [!] Dynamic sprite wih texture atlas
   - Multiplayer sound broadcast
   - Main/UI IPC utils
