@@ -95,10 +95,12 @@ export function App() {
       <section class="nav-section" data-section="character">
         <h1>Character</h1>
         <div>
+          <h2>Name</h2>
           <form id="name-form" class="name-form">
             <input name="nickname" type="text" required />
             <button type="submit">Change</button>
           </form>
+          <h2>Avatar</h2>
           <div>
             <span id="avatar-selector">
               <button data-set-avatar="prev">prev</button>
