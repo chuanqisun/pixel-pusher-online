@@ -11,12 +11,9 @@ const allAvatars = Object.entries(avatars);
 
 export function App() {
   const storedNickname = useMemo(() => localStorage.getItem("nickname") ?? "", []);
-  const storedAvatarId = useMemo(() => localStorage.getItem("avatarId") ?? "alec", []);
+  const storedAvatarId = useMemo(() => localStorage.getItem("avatarId") ?? allAvatars[0][0], []);
 
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
-
-  const throttledSendFrameToMain = useMemo(() => throttle(sendToMain, 500), [sendToMain]);
-  const throttledSendMoveToMain = useMemo(() => throttle(sendToMain, 50), [sendToMain]);
 
   const handleNavTabClick = useCallback((e: Event) => {
     const sectionName = (e.target as HTMLElement).closest("[data-target-section]")?.getAttribute("data-target-section");
@@ -36,6 +33,11 @@ export function App() {
         setNickname(pluginMessage.defaultNickname);
         localStorage.setItem("nickname", pluginMessage.defaultNickname);
       }
+
+      if (pluginMessage.reset) {
+        localStorage.clear();
+        location.reload();
+      }
     };
 
     window.addEventListener("message", handleMainMessage);
@@ -47,7 +49,6 @@ export function App() {
     const normalized = nickname.trim();
     if (normalized) {
       localStorage.setItem("nickname", normalized);
-      console.log("setting", normalized);
       setNickname(normalized);
     }
   }, []);
@@ -59,6 +60,7 @@ export function App() {
   const [selectedAvatarId, setSelectedAvatarId] = useState(storedAvatarId);
 
   const handleSelectAvatar = useCallback((id: string) => {
+    localStorage.setItem("avatarId", id);
     setSelectedAvatarId(id);
   }, []);
 
