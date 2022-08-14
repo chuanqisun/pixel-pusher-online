@@ -65,6 +65,7 @@
   - [!] Auto open help tab on initial launch
   - [!] Help and tips
   - [!] Smart initial positioning
+  - [!] Panel button pixel art
   - Customizable keybinding
   - Sound effect
   - Quick menu on the avatar
