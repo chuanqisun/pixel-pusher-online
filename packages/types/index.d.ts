@@ -11,6 +11,7 @@ export interface MessageToMain {
   newMessage?: NewMessage;
   move?: Direction;
   imgUrl?: string;
+  getHistoryMessages?: GetMessage;
 }
 
 export type AffineMatrix = [[scaleX: number, skewX: number, translateX: number], [skewY: number, scaleY: number, translateY: number]];
@@ -26,6 +27,10 @@ export interface HistoryMessage {
 
 export interface NewMessage {
   content: string;
+}
+
+export interface GetMessage {
+  lastId?: string;
 }
 
 export type Direction = "N" | "E" | "S" | "W";

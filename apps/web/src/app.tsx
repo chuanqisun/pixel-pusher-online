@@ -124,6 +124,14 @@ export function App() {
 
   const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      sendToMain({ getHistoryMessages: { lastId: chatMessages[chatMessages.length - 1]?.msgId } });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [chatMessages]);
+
   return (
     <>
       <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>

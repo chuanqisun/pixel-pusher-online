@@ -3,11 +3,9 @@ import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 
 const { useSyncedState, AutoLayout, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
-const HISTORY_MESSAGE_LIMIT = 10;
-const CHAT_POLLING_INTERVAL = 1000;
+const HISTORY_MESSAGE_LIMIT = 128;
 
 let isUiOpen = false;
-let isPolling = false;
 
 function Widget() {
   const widgetId = useWidgetId();
@@ -51,26 +49,6 @@ function Widget() {
         otherInstances.forEach((instance) => instance.remove());
       })()
     );
-  });
-
-  // Alternative chat implementation with polling
-  useEffect(() => {
-    if (isPolling) return;
-
-    isPolling = true;
-
-    setInterval(() => {
-      const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-      const latest = figma.currentPage.getPluginData("syncedMessageId");
-      const syned = widgetNode.getPluginData("syncedMessageId");
-
-      if (latest !== syned) {
-        console.log(`[chat] new message detected`);
-        const historyMessages = getHistoryMessages();
-        sendToUI({ historyMessages });
-        widgetNode.setPluginData("syncedMessageId", latest);
-      }
-    }, CHAT_POLLING_INTERVAL);
   });
 
   // Handle user input
@@ -118,6 +96,15 @@ function Widget() {
         sendToUI({ historyMessages: allMessages });
       }
 
+      if (message.getHistoryMessages) {
+        const latestId = figma.currentPage.getPluginData("syncedMessageId");
+        if (latestId !== message.getHistoryMessages.lastId) {
+          console.log(`[chat] new message available for UI`);
+          const historyMessages = getHistoryMessages();
+          sendToUI({ historyMessages });
+        }
+      }
+
       if (message.move) {
         switch (message.move) {
           case "N":
@@ -159,7 +146,6 @@ function Widget() {
 
     await new Promise((resolve) => {
       figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
-      widgetNode.setPluginData("syncedMessageId", "");
     });
   };
 
