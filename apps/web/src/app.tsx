@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "preact/hooks";
 import { sendMessage } from "./utils/ipc";
 
+import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 import { avatars } from "./data/avatars";
 import { AvatarController, getAvatarController } from "./utils/avatar-controller";
 import { throttle } from "./utils/throttle";
@@ -27,7 +28,7 @@ export function App() {
 
   useEffect(() => {
     const handleMainMessage = (e: MessageEvent) => {
-      const { pluginMessage } = e.data;
+      const pluginMessage = e.data.pluginMessage as MessageToUI;
       console.log(`[ipc] received from main`, e.data.pluginMessage);
       if (pluginMessage.defaultNickname && !storedNickname.length) {
         setNickname(pluginMessage.defaultNickname);
@@ -37,6 +38,10 @@ export function App() {
       if (pluginMessage.reset) {
         localStorage.clear();
         location.reload();
+      }
+
+      if (pluginMessage.historyMessages) {
+        setChatMessages(pluginMessage.historyMessages);
       }
     };
 
@@ -68,7 +73,10 @@ export function App() {
     sendToMain({ imgUrl: avatars[selectedAvatarId].imgUrl });
   }, [selectedAvatarId]);
 
-  const avatarController = useMemo(() => getAvatarController(avatars[selectedAvatarId], (change) => sendToMain({ ...change })), [selectedAvatarId]);
+  const avatarController = useMemo(
+    () => getAvatarController(avatars[selectedAvatarId], (change) => sendToMain({ ...change } as MessageToMain)),
+    [selectedAvatarId]
+  );
 
   useEffect(() => {
     avatarController.idle();
@@ -100,16 +108,21 @@ export function App() {
     sendToMain({ findMyself: true });
   }, []);
 
-  const handleChatKeyDown = (e: KeyboardEvent) => {
-    console.log(e);
+  const handleChatKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
       const textarea = e.target as HTMLTextAreaElement;
-      sendToMain({ chat: textarea.value });
+      sendToMain({
+        newMessage: {
+          content: textarea.value,
+        },
+      });
       e.stopPropagation(); // prevent other handlers
       e.preventDefault(); // prevent inserting a line break
       textarea.value = "";
     }
-  };
+  }, []);
+
+  const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
 
   return (
     <>
@@ -128,7 +141,7 @@ export function App() {
         </button>
       </nav>
 
-      <section class="nav-section active" data-section="character">
+      <section class="app-layout__main nav-section active" data-section="character">
         <h2>Name</h2>
         <input
           class="u-bdr-2 u-pad-8 u-fs-16"
@@ -155,33 +168,19 @@ export function App() {
         </div>
       </section>
 
-      <section class="nav-section chat-layout" data-section="chat">
+      <section class="app-layout__main nav-section chat-layout" data-section="chat">
         <div class="chat-layout__messages">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
-            justo laoreet digac blandit dolor purus quis mauris.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
-            justo laoreet digac blandit dolor purus quis mauris.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
-            justo laoreet digac blandit dolor purus quis mauris.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
-            justo laoreet digac blandit dolor purus quis mauris.
-          </p>
-          <p>
-            Lorem ipsum dolor sit us. Aliquam erat volutpat. Mauris bibendum, erat id varius pharetra, risus dui pulvinar turpis, ac blandit dolor purus quis
-            mauris.
-          </p>
+          {chatMessages.map((chatMessage) => (
+            <div key={chatMessage.msgId}>
+              <div>{chatMessage.fromNickname}</div>
+              <p>{chatMessage.content}</p>
+            </div>
+          ))}
         </div>
         <textarea rows={3} class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box" placeholder='Press "ENTER" to send' onKeyDown={handleChatKeyDown}></textarea>
       </section>
 
-      <section class="nav-section" data-section="map">
+      <section class="app-layout__main nav-section" data-section="map">
         <h1>Map</h1>
       </section>
     </>

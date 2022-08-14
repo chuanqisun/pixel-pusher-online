@@ -17,11 +17,6 @@ body {
   height: 100%;
 }
 
-.app-layout {
-  display: flex;
-  flex-direction: column;
-}
-
 .character-button {
   padding: 16px;
   image-rendering: pixelated;

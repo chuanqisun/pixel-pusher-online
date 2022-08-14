@@ -1,3 +1,14 @@
+/* APP */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-layout__main {
+  min-height: 0px;
+  flex-grow: 1;
+}
+
 /* CHAT */
 
 .chat-layout {
@@ -5,6 +16,7 @@
   flex-direction: column;
 }
 .chat-layout__messages {
+  flex-grow: 1;
   overflow-y: auto;
 }
 .chat-layout__text-box {
@@ -19,10 +31,6 @@
   grid-auto-columns: 1fr;
   gap: 4px;
   margin-bottom: 8px;
-}
-
-.nav-section {
-  min-height: 0px;
 }
 
 .nav-section:not(.active) {

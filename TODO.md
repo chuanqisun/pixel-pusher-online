@@ -16,6 +16,7 @@
   - Gear system
 - Avatar
   - [DONE] Bring to top on center
+  - [!] Handle clicking on other people's avatar
   - Auto-align to pixel grid
   - Chat typing indication
   - Presence indication (outline name plate when blurred)

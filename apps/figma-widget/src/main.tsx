@@ -1,4 +1,5 @@
 // This is a counter widget with buttons to increment and decrement the number.
+import type { MessageToMain, MessageToUI } from "types";
 
 const { useSyncedState, AutoLayout, Frame, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
@@ -38,7 +39,7 @@ function Widget() {
           setUser(figma.currentUser);
 
           widgetNode.setPluginData("userId", figma.currentUser.id);
-          figma.ui.postMessage({ defaultNickname: figma.currentUser.name });
+          sendToUI({ defaultNickname: figma.currentUser.name });
 
           console.log(`Cleanup: ${otherInstances.length} other instances`);
           otherInstances.forEach((instance) => instance.remove());
@@ -52,7 +53,7 @@ function Widget() {
     if (!user) return;
     if (user.id !== figma.currentUser.id) return;
 
-    figma.ui.onmessage = async (message) => {
+    figma.ui.onmessage = async (message: MessageToMain) => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.findMyself) {
@@ -67,6 +68,11 @@ function Widget() {
 
       if (message.transform) {
         setTransform(message.transform);
+      }
+
+      if (message.newMessage) {
+        // push chat message in current page node
+        // update synced state on all widget nodes
       }
 
       if (message.move) {
@@ -156,6 +162,10 @@ function getNodeCenter(node: WidgetNode) {
     x: node.x + (node.width >> 1),
     y: node.y + (node.height >> 1),
   };
+}
+
+function sendToUI(message: MessageToUI) {
+  figma.ui.postMessage(message);
 }
 
 figma.widget.register(Widget);
