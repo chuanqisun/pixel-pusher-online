@@ -9,8 +9,10 @@ window.addEventListener("click", (e) => {
   const action = (e.target as HTMLElement).closest("[data-action]")?.getAttribute("data-action");
   switch (action) {
     case "reset":
-      console.log("reset");
       sendMessageFromMockMain({ reset: true });
+      break;
+    case "init-nickname":
+      sendMessageFromMockMain({ defaultNickname: "Test user" });
       break;
   }
 });
