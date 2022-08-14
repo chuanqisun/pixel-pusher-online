@@ -4,8 +4,10 @@ import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 const { useSyncedState, AutoLayout, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
 const HISTORY_MESSAGE_LIMIT = 10;
+const CHAT_POLLING_INTERVAL = 1000;
 
 let isUiOpen = false;
+let isPolling = false;
 
 function Widget() {
   const widgetId = useWidgetId();
@@ -15,8 +17,6 @@ function Widget() {
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
   const [nickname, setNickname] = useSyncedState("nickname", "");
-
-  const [isHistorySynced, setIsHistorySynced] = useSyncedState("isHistorySynced", false); // new node has no history
 
   // Auto-open UI on creation
   useEffect(() => {
@@ -53,15 +53,24 @@ function Widget() {
     );
   });
 
-  // Digest new chat message
+  // Alternative chat implementation with polling
   useEffect(() => {
-    if (isHistorySynced) return;
-    console.log("[chat] history has changed!");
-    setIsHistorySynced(true);
+    if (isPolling) return;
 
-    sendToUI({
-      historyMessages: getHistoryMessages(),
-    });
+    isPolling = true;
+
+    setInterval(() => {
+      const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+      const latest = figma.currentPage.getPluginData("syncedMessageId");
+      const syned = widgetNode.getPluginData("syncedMessageId");
+
+      if (latest !== syned) {
+        console.log(`[chat] new message detected`);
+        const historyMessages = getHistoryMessages();
+        sendToUI({ historyMessages });
+        widgetNode.setPluginData("syncedMessageId", latest);
+      }
+    }, CHAT_POLLING_INTERVAL);
   });
 
   // Handle user input
@@ -87,7 +96,6 @@ function Widget() {
       }
 
       if (message.newMessage) {
-        console.log("widget id", widgetNode.widgetId);
         const historyMessage: HistoryMessage = {
           // sessionId (unique among active users) | timestamp (100 days unique) | pseudorandom (6 digit)
           msgId: `${figma.currentUser.sessionId}-${Date.now().toString().slice(-10)}-${Math.random().toFixed(6).slice(2)}`,
@@ -104,15 +112,10 @@ function Widget() {
 
         figma.currentPage.setPluginData("historyMessages", JSON.stringify(allMessages));
 
-        const allWidgetNodes = figma.currentPage.findWidgetNodesByWidgetId(widgetNode.widgetId).filter((node) => node); // HACK, figma returns undefined as the first element in the array
-        console.log(`[chat] message broadcasted to ${allWidgetNodes.length} users`);
+        figma.currentPage.setPluginData("syncedMessageId", historyMessage.msgId);
+        widgetNode.setPluginData("syncedMessageId", historyMessage.msgId);
 
-        allWidgetNodes.forEach((node) => {
-          node.setWidgetSyncedState({
-            ...node.widgetSyncedState,
-            isHistorySynced: false, // potential race condition
-          });
-        });
+        sendToUI({ historyMessages: allMessages });
       }
 
       if (message.move) {
@@ -156,7 +159,6 @@ function Widget() {
 
     await new Promise((resolve) => {
       figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
-      setIsHistorySynced(false);
     });
   };
 
