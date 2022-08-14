@@ -89,7 +89,7 @@
   - [!] Favicon
   - [!] Figma splash screen
   - [!] Figma market place introduction
-  - [!] Name: Pixel World Online
+  - [!] Name: Pixel World Online, Figverse, Pixel Hangout
 
 # Archive
 
