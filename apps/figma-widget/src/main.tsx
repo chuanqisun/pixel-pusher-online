@@ -1,5 +1,5 @@
 // This is a counter widget with buttons to increment and decrement the number.
-import type { MessageToMain, MessageToUI } from "types";
+import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 
 const { useSyncedState, AutoLayout, Frame, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
@@ -71,6 +71,15 @@ function Widget() {
       }
 
       if (message.newMessage) {
+        const historyMessage: HistoryMessage = {
+          msgId: `${figma.currentUser.sessionId}-${Date.now().toString().slice(-12)}-${Math.random().toFixed(6).slice(2)}`,
+          fromId: user.id,
+          fromNickname: nickname,
+          fromColor: user.color,
+          timestamp: Date.now(),
+          content: message.newMessage.content,
+        };
+        console.log(historyMessage);
         // push chat message in current page node
         // update synced state on all widget nodes
       }
