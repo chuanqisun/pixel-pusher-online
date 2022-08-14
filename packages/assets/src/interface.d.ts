@@ -9,6 +9,6 @@ export interface Atlas {
 export interface Frame {
   row: number;
   col: number;
-  transform?: number[];
+  flipX?: boolean;
   duration?: number;
 }

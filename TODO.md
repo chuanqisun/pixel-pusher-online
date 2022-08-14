@@ -79,6 +79,7 @@
 - Figma integration
   - [!] Ctrl-Z handling
   - [!] Auto grid snap
+  - Anonymous user handling (figma.activeUser = null)
   - Implement deps array for useEffect and useMemo
 - Marketing
   - [!] Favicon

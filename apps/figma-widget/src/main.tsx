@@ -1,7 +1,5 @@
 // This is a counter widget with buttons to increment and decrement the number.
 
-import type { Atlas, Frame } from "assets";
-
 const { useSyncedState, AutoLayout, Frame, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
 let isUiOpen = false;
@@ -9,8 +7,8 @@ let isUiOpen = false;
 function Widget() {
   const widgetId = useWidgetId();
 
-  const [avatarV2, setAvatarV2] = useSyncedState<Atlas | null>("avatarV2", null);
-  const [frame, setFrame] = useSyncedState<Frame | null>("frame", null);
+  const [imageUrl, setImageUrl] = useSyncedState<string | null>("imageUrl", null);
+  const [transform, setTransform] = useSyncedState<Transform | null>("transform", null);
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
   const [nickname, setNickname] = useSyncedState("nickname", "");
@@ -62,12 +60,12 @@ function Widget() {
         resetViewport(widgetNode);
       }
 
-      if (message.setNickname) {
-        setNickname(message.setNickname);
+      if (message.nickname) {
+        setNickname(message.nickname);
       }
 
-      if (message.frame) {
-        setFrame(message.frame);
+      if (message.transform) {
+        setTransform(message.transform);
       }
 
       if (message.move) {
@@ -87,8 +85,8 @@ function Widget() {
         }
       }
 
-      if (message.setAvatar) {
-        setAvatarV2(message.setAvatar);
+      if (message.imgUrl) {
+        setImageUrl(message.imgUrl);
       }
     };
   });
@@ -124,7 +122,7 @@ function Widget() {
           {nickname}
         </Text>
       </AutoLayout>
-      {frame && avatarV2 && (
+      {transform && imageUrl && (
         <Rectangle
           onClick={handleAvatarClick}
           width={32}
@@ -132,11 +130,8 @@ function Widget() {
           fill={{
             type: "image",
             scaleMode: "crop",
-            imageTransform: [
-              [1 / avatarV2.cols, 0, frame.col / avatarV2.cols],
-              [0, 1 / avatarV2.rows, frame.row / avatarV2.rows],
-            ],
-            src: avatarV2.imgUrl,
+            imageTransform: transform,
+            src: imageUrl,
           }}
         />
       )}

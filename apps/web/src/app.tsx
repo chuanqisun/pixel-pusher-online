@@ -3,7 +3,7 @@ import { sendMessage } from "./utils/ipc";
 
 import { avatars } from "./data/avatars";
 import { AvatarController, getAvatarController } from "./utils/avatar-controller";
-import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
+import { getAvatarScale, getDisplayFrame, getFigmaImageTransform, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
 export const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
@@ -49,7 +49,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    sendToMain({ setNickname: nickname });
+    sendToMain({ nickname });
   }, [nickname]);
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(storedAvatarId);
@@ -59,24 +59,24 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    sendToMain({ setAvatar: avatars[selectedAvatarId] });
+    sendToMain({ imgUrl: avatars[selectedAvatarId].imgUrl });
   }, [selectedAvatarId]);
 
-  const avatarcontroller = useMemo(
+  const avatarController = useMemo(
     () =>
       getAvatarController(
         avatars[selectedAvatarId],
-        (frame) => sendToMain({ frame }),
+        (frame) => sendToMain({ transform: getFigmaImageTransform(avatars[selectedAvatarId], frame) }),
         (move) => sendToMain({ move })
       ),
     [selectedAvatarId]
   );
 
   useEffect(() => {
-    avatarcontroller.idle();
-  }, [avatarcontroller]);
+    avatarController.idle();
+  }, [avatarController]);
 
-  useKeyboardEvents(avatarcontroller);
+  useKeyboardEvents(avatarController);
 
   const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
   useEffect(() => {
