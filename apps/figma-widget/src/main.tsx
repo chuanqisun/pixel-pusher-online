@@ -55,15 +55,13 @@ function Widget() {
 
   // Digest new chat message
   useEffect(() => {
-    console.log("will check history");
     if (isHistorySynced) return;
-    console.log("history has changed!");
-
-    const historyMessages = getHistoryMessages();
-    sendToUI({
-      historyMessages,
-    });
+    console.log("[chat] history has changed!");
     setIsHistorySynced(true);
+
+    sendToUI({
+      historyMessages: getHistoryMessages(),
+    });
   });
 
   // Handle user input
@@ -158,6 +156,7 @@ function Widget() {
 
     await new Promise((resolve) => {
       figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
+      setIsHistorySynced(false);
     });
   };
 
