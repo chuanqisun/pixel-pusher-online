@@ -25,7 +25,7 @@
   - Skeleton based animation
 - Walk
   - [DONE] Jitter issue due to unstable figma.viewport.center
-  - [!] Debounce input
+  - [DONE] Debounce input
   - Bring to top on walk
   - Sound effect
   - Smooth walk animation
@@ -33,6 +33,7 @@
 - Map
   - [!] One-click built-in map creation
   - [!] Prevent covering avatars
+  - Map scale adjustment
   - Auto-align to pixel grid
   - Tiled map builder
   - Personal object creation
