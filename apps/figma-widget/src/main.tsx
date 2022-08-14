@@ -2,8 +2,7 @@
 
 import type { Atlas, Frame } from "assets";
 
-const { widget, showUI, createImage } = figma;
-const { useSyncedState, usePropertyMenu, AutoLayout, Frame, Rectangle, Text, SVG, Image, useWidgetId, useEffect, waitForTask } = widget;
+const { useSyncedState, AutoLayout, Frame, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
 let isUiOpen = false;
 
@@ -41,6 +40,7 @@ function Widget() {
           setUser(figma.currentUser);
 
           widgetNode.setPluginData("userId", figma.currentUser.id);
+          figma.ui.postMessage({ defaultNickname: figma.currentUser.name });
 
           console.log(`Cleanup: ${otherInstances.length} other instances`);
           otherInstances.forEach((instance) => instance.remove());
@@ -55,6 +55,7 @@ function Widget() {
     if (user.id !== figma.currentUser.id) return;
 
     figma.ui.onmessage = async (message) => {
+      console.log(`[ipc] received from UI`, message);
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
       if (message.focusCharacter) {
@@ -62,8 +63,6 @@ function Widget() {
       }
 
       if (message.setNickname) {
-        figma.notify(`Nickname updated to "${message.setNickname}"`);
-
         setNickname(message.setNickname);
       }
 
@@ -93,10 +92,6 @@ function Widget() {
       }
     };
   });
-
-  const handleMove = (dir: any, node: WidgetNode) => {
-    resetViewport(node);
-  };
 
   const handleAvatarClick = async () => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
@@ -157,4 +152,4 @@ function resetViewport(node: WidgetNode) {
   };
 }
 
-widget.register(Widget);
+figma.widget.register(Widget);

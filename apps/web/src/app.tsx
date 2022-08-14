@@ -8,10 +8,10 @@ import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from
 export const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
 
-const storedNickname = localStorage.getItem("nickname") ?? "";
-const storedAvatarId = localStorage.getItem("avatarId") ?? "alec";
-
 export function App() {
+  const storedNickname = useMemo(() => localStorage.getItem("nickname") ?? "", []);
+  const storedAvatarId = useMemo(() => localStorage.getItem("avatarId") ?? "alec", []);
+
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
 
   const handleNavTabClick = useCallback((e: Event) => {
@@ -24,11 +24,33 @@ export function App() {
 
   const [nickname, setNickname] = useState(storedNickname);
 
-  const handleNickname = useCallback((nickname: string) => {
-    localStorage.setItem("nickname", nickname);
-    setNickname(nickname);
-    sendToMain({ setNickname: nickname });
+  useEffect(() => {
+    const handleMainMessage = (e: MessageEvent) => {
+      const { pluginMessage } = e.data;
+      console.log(`[ipc] received from main`, e.data.pluginMessage);
+      if (pluginMessage.defaultNickname && !storedNickname.length) {
+        setNickname(pluginMessage.defaultNickname);
+        localStorage.setItem("nickname", pluginMessage.defaultNickname);
+      }
+    };
+
+    window.addEventListener("message", handleMainMessage);
+
+    return () => window.removeEventListener("message", handleMainMessage);
   }, []);
+
+  const handleNickname = useCallback((nickname: string) => {
+    const normalized = nickname.trim();
+    if (normalized) {
+      localStorage.setItem("nickname", normalized);
+      console.log("setting", normalized);
+      setNickname(normalized);
+    }
+  }, []);
+
+  useEffect(() => {
+    sendToMain({ setNickname: nickname });
+  }, [nickname]);
 
   const [selectedAvatarId, setSelectedAvatarId] = useState(storedAvatarId);
 
@@ -54,7 +76,7 @@ export function App() {
     avatarcontroller.idle();
   }, [avatarcontroller]);
 
-  useEventHanlders(avatarcontroller);
+  useKeyboardEvents(avatarcontroller);
 
   const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
   useEffect(() => {
@@ -98,7 +120,7 @@ export function App() {
         <button id="focus-character">Locate myself</button>
         <div>
           <h2>Name</h2>
-          <input name="nickname" type="text" required value={nickname} onChange={(e) => handleNickname((e.target as HTMLInputElement).value)} />
+          <input name="nickname" type="text" required value={nickname} onInput={(e) => handleNickname((e.target as HTMLInputElement).value)} />
           <h2>Avatar</h2>
           <div class="character-grid">
             {allAvatars.map(([id, atlas]) => (
@@ -128,7 +150,7 @@ export function App() {
   );
 }
 
-function useEventHanlders(controller: AvatarController) {
+function useKeyboardEvents(controller: AvatarController) {
   useEffect(() => {
     const keydownListener = (e: KeyboardEvent) => {
       const dir = (() => {
