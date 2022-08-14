@@ -1,7 +1,9 @@
 // This is a counter widget with buttons to increment and decrement the number.
 import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 
-const { useSyncedState, AutoLayout, Frame, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
+const { useSyncedState, AutoLayout, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
+
+const HISTORY_MESSAGE_LIMIT = 10;
 
 let isUiOpen = false;
 
@@ -13,6 +15,8 @@ function Widget() {
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
   const [nickname, setNickname] = useSyncedState("nickname", "");
+
+  const [isHistorySynced, setIsHistorySynced] = useSyncedState("isHistorySynced", false); // new node has no history
 
   // Auto-open UI on creation
   useEffect(() => {
@@ -29,23 +33,37 @@ function Widget() {
   // Assign new widget to current user
   useEffect(() => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+    if (user) return;
 
-    if (!user) {
-      // find and clean other instances of the same avatar
-      const otherInstances = figma.currentPage.findAll((node) => (node as WidgetNode).getPluginData("userId") === figma.currentUser.id);
+    // find and clean other instances of the same avatar
+    const otherInstances = figma.currentPage
+      .findWidgetNodesByWidgetId(widgetNode.widgetId)
+      .filter((node) => node.getPluginData("userId") === figma.currentUser.id);
 
-      waitForTask(
-        (async () => {
-          setUser(figma.currentUser);
+    waitForTask(
+      (async () => {
+        setUser(figma.currentUser);
 
-          widgetNode.setPluginData("userId", figma.currentUser.id);
-          sendToUI({ defaultNickname: figma.currentUser.name });
+        widgetNode.setPluginData("userId", figma.currentUser.id);
+        sendToUI({ defaultNickname: figma.currentUser.name });
 
-          console.log(`Cleanup: ${otherInstances.length} other instances`);
-          otherInstances.forEach((instance) => instance.remove());
-        })()
-      );
-    }
+        console.log(`Cleanup: ${otherInstances.length} other instances`);
+        otherInstances.forEach((instance) => instance.remove());
+      })()
+    );
+  });
+
+  // Digest new chat message
+  useEffect(() => {
+    console.log("will check history");
+    if (isHistorySynced) return;
+    console.log("history has changed!");
+
+    const historyMessages = getHistoryMessages();
+    sendToUI({
+      historyMessages,
+    });
+    setIsHistorySynced(true);
   });
 
   // Handle user input
@@ -71,8 +89,10 @@ function Widget() {
       }
 
       if (message.newMessage) {
+        console.log("widget id", widgetNode.widgetId);
         const historyMessage: HistoryMessage = {
-          msgId: `${figma.currentUser.sessionId}-${Date.now().toString().slice(-12)}-${Math.random().toFixed(6).slice(2)}`,
+          // sessionId (unique among active users) | timestamp (100 days unique) | pseudorandom (6 digit)
+          msgId: `${figma.currentUser.sessionId}-${Date.now().toString().slice(-10)}-${Math.random().toFixed(6).slice(2)}`,
           fromId: user.id,
           fromNickname: nickname,
           fromColor: user.color,
@@ -80,8 +100,21 @@ function Widget() {
           content: message.newMessage.content,
         };
         console.log(historyMessage);
-        // push chat message in current page node
-        // update synced state on all widget nodes
+
+        const existingHistoryMessages = getHistoryMessages();
+        const allMessages = [...existingHistoryMessages, historyMessage].slice(-HISTORY_MESSAGE_LIMIT);
+
+        figma.currentPage.setPluginData("historyMessages", JSON.stringify(allMessages));
+
+        const allWidgetNodes = figma.currentPage.findWidgetNodesByWidgetId(widgetNode.widgetId).filter((node) => node); // HACK, figma returns undefined as the first element in the array
+        console.log(`[chat] message broadcasted to ${allWidgetNodes.length} users`);
+
+        allWidgetNodes.forEach((node) => {
+          node.setWidgetSyncedState({
+            ...node.widgetSyncedState,
+            isHistorySynced: false, // potential race condition
+          });
+        });
       }
 
       if (message.move) {
@@ -175,6 +208,12 @@ function getNodeCenter(node: WidgetNode) {
 
 function sendToUI(message: MessageToUI) {
   figma.ui.postMessage(message);
+}
+
+function getHistoryMessages(): HistoryMessage[] {
+  const storedMessageString = figma.currentPage.getPluginData("historyMessages");
+  const storedMessages: HistoryMessage[] = storedMessageString.length ? JSON.parse(storedMessageString) : [];
+  return storedMessages;
 }
 
 figma.widget.register(Widget);
