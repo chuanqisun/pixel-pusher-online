@@ -1,0 +1,30 @@
+/* CHAT */
+
+.chat-layout {
+  display: flex;
+  flex-direction: column;
+}
+.chat-layout__messages {
+  overflow-y: auto;
+}
+.chat-layout__text-box {
+  flex-shrink: 0;
+  resize: none;
+}
+
+/* NAV */
+.nav-tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.nav-section {
+  min-height: 0px;
+}
+
+.nav-section:not(.active) {
+  display: none;
+}

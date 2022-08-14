@@ -100,28 +100,45 @@ export function App() {
     sendToMain({ findMyself: true });
   }, []);
 
+  const handleChatKeyDown = (e: KeyboardEvent) => {
+    console.log(e);
+    if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
+      const textarea = e.target as HTMLTextAreaElement;
+      sendToMain({ chat: textarea.value });
+      e.stopPropagation(); // prevent other handlers
+      e.preventDefault(); // prevent inserting a line break
+      textarea.value = "";
+    }
+  };
+
   return (
     <>
       <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
-        <button class="nav-button" data-target-section="character">
-          🧑
+        <button class="u-bdr-2 u-fs-24" data-target-section="character">
+          Me
         </button>
-        <button class="nav-button" data-target-section="chat">
-          💬
+        <button class="u-bdr-2 u-fs-24" data-target-section="chat">
+          Chat
         </button>
-        <button class="nav-button" data-target-section="map">
-          🗺️
+        <button class="u-bdr-2 u-fs-24" data-target-section="map">
+          Map
         </button>
-        <button class="nav-button" data-target-section="help">
-          📋
+        <button class="u-bdr-2 u-fs-24" data-target-section="help">
+          Info
         </button>
       </nav>
 
       <section class="nav-section active" data-section="character">
-        <h1>Character</h1>
-        <button onClick={handleFindMyself}>Find myself</button>
         <h2>Name</h2>
-        <input name="nickname" type="text" required value={nickname} onInput={(e) => handleNickname((e.target as HTMLInputElement).value)} />
+        <input
+          class="u-bdr-2 u-pad-8 u-fs-16"
+          name="nickname"
+          type="text"
+          required
+          value={nickname}
+          onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
+        />
+        <button onClick={handleFindMyself}>Find myself</button>
         <h2>Avatar</h2>
         <div class="character-grid">
           {allAvatars.map(([id, atlas]) => (
@@ -138,9 +155,30 @@ export function App() {
         </div>
       </section>
 
-      <section class="nav-section" data-section="chat">
-        <h1>Chat</h1>
-        <textarea placeholder="Chat message"></textarea>
+      <section class="nav-section chat-layout" data-section="chat">
+        <div class="chat-layout__messages">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
+            justo laoreet digac blandit dolor purus quis mauris.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
+            justo laoreet digac blandit dolor purus quis mauris.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
+            justo laoreet digac blandit dolor purus quis mauris.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sem lectus, egestas lacinia venenatis at, imperdiet id nisi. Ut pretium odio non
+            justo laoreet digac blandit dolor purus quis mauris.
+          </p>
+          <p>
+            Lorem ipsum dolor sit us. Aliquam erat volutpat. Mauris bibendum, erat id varius pharetra, risus dui pulvinar turpis, ac blandit dolor purus quis
+            mauris.
+          </p>
+        </div>
+        <textarea rows={3} class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box" placeholder='Press "ENTER" to send' onKeyDown={handleChatKeyDown}></textarea>
       </section>
 
       <section class="nav-section" data-section="map">

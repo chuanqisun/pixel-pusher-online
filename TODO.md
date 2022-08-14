@@ -66,6 +66,7 @@
   - [!] Help and tips
   - [!] Smart initial positioning
   - [!] Panel button pixel art
+  - Pixel art mouse cursor
   - Customizable keybinding
   - Sound effect
   - Quick menu on the avatar

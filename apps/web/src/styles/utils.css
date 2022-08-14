@@ -1,0 +1,18 @@
+/* TYPOGRAPH */
+
+.u-fs-16 {
+  font-size: 16px;
+}
+
+/* BORDER */
+
+.u-bdr-2 {
+  border: 2px solid black;
+}
+
+/* SPACING */
+
+.u-pad-8 {
+  padding-inline: 8px;
+  padding-block: 8px;
+}

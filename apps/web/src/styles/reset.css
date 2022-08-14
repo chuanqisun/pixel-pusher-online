@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+  font: inherit;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
