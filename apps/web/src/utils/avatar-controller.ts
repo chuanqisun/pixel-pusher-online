@@ -1,4 +1,5 @@
-import type { Atlas, Frame } from "assets";
+import type { Atlas } from "assets";
+import { getFigmaImageTransform } from "./transform";
 
 export type Pose = "idle" | "walk";
 export type Direction = "N" | "E" | "S" | "W";
@@ -8,13 +9,20 @@ export interface AvatarController {
   idle(): any;
 }
 
-export function getAvatarController(atlas: Atlas, onFrame: (frame: Frame) => any, onMove: (dir: Direction) => any): AvatarController {
+export interface AvatarChange {
+  transform?: number[][];
+  move?: Direction;
+}
+
+export function getAvatarController(atlas: Atlas, onChange: (change: AvatarChange) => any): AvatarController {
   let frameIndex = 0;
   let currentDir: Direction = "S";
   let currentPose = "idle";
   let frames = atlas.animations["idleS"];
 
+  const getFigmaTransform = getFigmaImageTransform.bind(null, atlas);
   const getFrames = () => atlas.animations[`${currentPose}${currentDir}`];
+  const change: AvatarChange = {};
 
   const step = (newDir: Direction) => {
     if (newDir !== currentDir) {
@@ -26,20 +34,22 @@ export function getAvatarController(atlas: Atlas, onFrame: (frame: Frame) => any
       frameIndex = 0;
       currentPose = "walk";
       frames = getFrames();
-      onMove(currentDir);
+      change.move = currentDir;
     } else {
       frameIndex = (frameIndex + 1) % frames.length;
-      onMove(currentDir);
+      change.move = currentDir;
     }
 
-    onFrame(getFrames()[frameIndex]);
+    change.transform = getFigmaTransform(getFrames()[frameIndex]);
+
+    onChange(change);
   };
 
   const idle = () => {
     frameIndex = 0;
     currentPose = "idle";
 
-    onFrame(getFrames()[frameIndex]);
+    onChange({ transform: getFigmaTransform(getFrames()[frameIndex]) });
   };
 
   return {

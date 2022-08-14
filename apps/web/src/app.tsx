@@ -3,7 +3,8 @@ import { sendMessage } from "./utils/ipc";
 
 import { avatars } from "./data/avatars";
 import { AvatarController, getAvatarController } from "./utils/avatar-controller";
-import { getAvatarScale, getDisplayFrame, getFigmaImageTransform, getFrameCss, getStaticDemoFrame } from "./utils/transform";
+import { throttle } from "./utils/throttle";
+import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
 export const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
@@ -13,6 +14,9 @@ export function App() {
   const storedAvatarId = useMemo(() => localStorage.getItem("avatarId") ?? "alec", []);
 
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
+
+  const throttledSendFrameToMain = useMemo(() => throttle(sendToMain, 500), [sendToMain]);
+  const throttledSendMoveToMain = useMemo(() => throttle(sendToMain, 50), [sendToMain]);
 
   const handleNavTabClick = useCallback((e: Event) => {
     const sectionName = (e.target as HTMLElement).closest("[data-target-section]")?.getAttribute("data-target-section");
@@ -62,15 +66,7 @@ export function App() {
     sendToMain({ imgUrl: avatars[selectedAvatarId].imgUrl });
   }, [selectedAvatarId]);
 
-  const avatarController = useMemo(
-    () =>
-      getAvatarController(
-        avatars[selectedAvatarId],
-        (frame) => sendToMain({ transform: getFigmaImageTransform(avatars[selectedAvatarId], frame) }),
-        (move) => sendToMain({ move })
-      ),
-    [selectedAvatarId]
-  );
+  const avatarController = useMemo(() => getAvatarController(avatars[selectedAvatarId], (change) => sendToMain({ ...change })), [selectedAvatarId]);
 
   useEffect(() => {
     avatarController.idle();
@@ -154,7 +150,7 @@ export function App() {
 
 function useKeyboardEvents(controller: AvatarController) {
   useEffect(() => {
-    const keydownListener = (e: KeyboardEvent) => {
+    const keydownListener = throttle((e: KeyboardEvent) => {
       const dir = (() => {
         if ((e.target as HTMLElement).matches("input,textarea")) return;
 
@@ -181,7 +177,7 @@ function useKeyboardEvents(controller: AvatarController) {
       if (!dir) return;
 
       controller.step(dir);
-    };
+    }, 100);
 
     document.addEventListener("keydown", keydownListener);
 
