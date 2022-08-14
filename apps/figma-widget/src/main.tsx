@@ -62,6 +62,7 @@ function Widget() {
     setInterval(() => {
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
       const latest = figma.currentPage.getPluginData("syncedMessageId");
+      console.log(`[chat] latest is ${latest}`);
       const syned = widgetNode.getPluginData("syncedMessageId");
 
       if (latest !== syned) {
