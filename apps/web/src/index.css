@@ -11,18 +11,26 @@ body {
 * {
   box-sizing: border-box;
   font: inherit;
+  margin: 0;
 }
 
 h1 {
-  margin: 0;
   font-size: 28px;
   font-weight: normal;
+  margin-block: 0 16px;
 }
+
+h2 {
+  font-size: 18px;
+  margin-block: 16px 8px;
+}
+
 kbd {
   border: 1px solid #ccc;
   border-radius: 2px;
 }
 button {
+  padding: 8px 16px;
   border: 2px solid black;
   cursor: pointer;
 }
@@ -39,6 +47,7 @@ button {
 }
 
 input {
+  padding-inline: 1ch;
   width: 100%;
   background-color: var(--orange-lighter);
   border: 2px solid black;
@@ -52,6 +61,7 @@ input {
   margin-bottom: 8px;
 }
 .nav-button {
+  padding: 0;
   border: 2px solid black;
   box-shadow: 3px 4px 0px -1px #666;
   background: white;
@@ -61,6 +71,10 @@ input {
 }
 .nav-button:hover {
   background-color: #aaa;
+}
+
+.nav-section {
+  padding: 8px 16px;
 }
 
 .nav-section:not(.active) {

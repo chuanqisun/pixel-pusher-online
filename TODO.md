@@ -3,10 +3,10 @@
 [!] Planned for public preview
 
 - Character customzation
-  - [!] Character panel (self) in UI
-  - [!] Avatar selection list with static preview
-  - [!] Name display and customization
-  - [!] Nickname length limit
+  - [DONE] Name display and customization
+  - [DONE] Avatar selection list with static preview
+  - [DONE] Character panel (self) in UI
+  - Nickname length limit
   - Avatar selection list with animated preview
   - Character panel (others)
   - Custom name plate color
@@ -15,23 +15,25 @@
   - Color customization
   - Gear system
 - Avatar
-  - [!] Presence indication
-  - [!] Chat typing indication
-  - [!] Bring to top on center
-  - [!] Pixel font for name play
+  - [DONE] Bring to top on center
+  - Auto-align to pixel grid
+  - Chat typing indication
+  - Presence indication
+  - Pixel font for name play (Figma missing Silkscreen font)
   - 64px hit box for easiser mouse selection
   - Shadow effect
   - Skeleton based animation
 - Walk
+  - [DONE] Jitter issue due to unstable figma.viewport.center
   - [!] Debounce input
-  - [!] Bring to top on walk
-  - [!] Jitter issue due to unstable figma.viewport.center
+  - Bring to top on walk
   - Sound effect
   - Smooth walk animation
   - Collision detection and prevention
 - Map
   - [!] One-click built-in map creation
   - [!] Prevent covering avatars
+  - Auto-align to pixel grid
   - Tiled map builder
   - Personal object creation
   - Avatar-tile occlusion
@@ -68,8 +70,8 @@
   - Preference panel
 - Pet
 - Infra
-  - [!] Non-null origin web view
-  - [!] Dynamic sprite wih texture atlas
+  - [DONE] Non-null origin web view
+  - [DONE] Dynamic sprite
   - [!] GitHub page host
   - Cloudflare DNS on top of GitHub page
   - Static app deployment pipeline
@@ -78,7 +80,6 @@
   - Main/UI IPC utils
 - Figma integration
   - [!] Ctrl-Z handling
-  - [!] Auto grid snap
   - Anonymous user handling (figma.activeUser = null)
   - Implement deps array for useEffect and useMemo
 - Marketing

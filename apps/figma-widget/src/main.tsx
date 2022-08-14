@@ -53,11 +53,12 @@ function Widget() {
     if (user.id !== figma.currentUser.id) return;
 
     figma.ui.onmessage = async (message) => {
-      console.log(`[ipc] received from UI`, message);
       const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
-      if (message.focusCharacter) {
-        resetViewport(widgetNode);
+      if (message.findMyself) {
+        alignViewport(getNodeCenter(widgetNode));
+        widgetNode.parent.appendChild(widgetNode); // bring to front
+        figma.viewport.zoom = 2;
       }
 
       if (message.nickname) {
@@ -72,15 +73,19 @@ function Widget() {
         switch (message.move) {
           case "N":
             widgetNode.y -= 8;
+            alignViewport({ y: getNodeCenter(widgetNode).y });
             break;
           case "E":
             widgetNode.x += 8;
+            alignViewport({ x: getNodeCenter(widgetNode).x });
             break;
           case "S":
             widgetNode.y += 8;
+            alignViewport({ y: getNodeCenter(widgetNode).y });
             break;
           case "W":
             widgetNode.x -= 8;
+            alignViewport({ x: getNodeCenter(widgetNode).x });
             break;
         }
       }
@@ -139,9 +144,15 @@ function Widget() {
   );
 }
 
-function resetViewport(node: WidgetNode) {
-  figma.viewport.zoom = 1;
+function alignViewport({ x, y }: { x?: number; y?: number }) {
   figma.viewport.center = {
+    x: x ?? figma.viewport.center.x,
+    y: y ?? figma.viewport.center.y,
+  };
+}
+
+function getNodeCenter(node: WidgetNode) {
+  return {
     x: node.x + (node.width >> 1),
     y: node.y + (node.height >> 1),
   };

@@ -98,6 +98,10 @@ export function App() {
   }, [activeDemoAvatarId]);
   const [activeDemoFrame, setDemoFrame] = useState<any>(null);
 
+  const handleFindMyself = useCallback(() => {
+    sendToMain({ findMyself: true });
+  }, []);
+
   return (
     <>
       <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
@@ -115,26 +119,24 @@ export function App() {
         </button>
       </nav>
 
-      <section class="nav-section" data-section="character">
+      <section class="nav-section active" data-section="character">
         <h1>Character</h1>
-        <button id="focus-character">Locate myself</button>
-        <div>
-          <h2>Name</h2>
-          <input name="nickname" type="text" required value={nickname} onInput={(e) => handleNickname((e.target as HTMLInputElement).value)} />
-          <h2>Avatar</h2>
-          <div class="character-grid">
-            {allAvatars.map(([id, atlas]) => (
-              <button
-                class="character-button"
-                key={id}
-                onMouseEnter={() => setDemoAvatarId(id)}
-                onMouseLeave={() => setDemoAvatarId(null)}
-                onClick={() => handleSelectAvatar(id)}
-              >
-                <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.cellSize), atlas)}></div>
-              </button>
-            ))}
-          </div>
+        <button onClick={handleFindMyself}>Find myself</button>
+        <h2>Name</h2>
+        <input name="nickname" type="text" required value={nickname} onInput={(e) => handleNickname((e.target as HTMLInputElement).value)} />
+        <h2>Avatar</h2>
+        <div class="character-grid">
+          {allAvatars.map(([id, atlas]) => (
+            <button
+              class="character-button"
+              key={id}
+              onMouseEnter={() => setDemoAvatarId(id)}
+              onMouseLeave={() => setDemoAvatarId(null)}
+              onClick={() => handleSelectAvatar(id)}
+            >
+              <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.cellSize), atlas)}></div>
+            </button>
+          ))}
         </div>
       </section>
 
