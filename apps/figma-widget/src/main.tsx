@@ -28,7 +28,7 @@ function Widget() {
       );
   });
 
-  // Initialize widget to current user
+  // Assign new widget to current user
   useEffect(() => {
     const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
 
@@ -62,7 +62,6 @@ function Widget() {
       }
 
       if (message.setNickname) {
-        await figma.clientStorage.setAsync("nickname", message.setNickname);
         figma.notify(`Nickname updated to "${message.setNickname}"`);
 
         setNickname(message.setNickname);
@@ -118,6 +117,18 @@ function Widget() {
 
   return (
     <AutoLayout tooltip={user?.name} width={32} height={32} overflow="visible">
+      <AutoLayout
+        fill={user?.color}
+        padding={{ vertical: 2, horizontal: 4 }}
+        cornerRadius={4}
+        positioning="absolute"
+        x={{ type: "center", offset: 0 }}
+        y={{ type: "top", offset: -24 }}
+      >
+        <Text fill="#fff" opacity={1} fontSize={12} horizontalAlignText="center">
+          {nickname}
+        </Text>
+      </AutoLayout>
       {frame && avatarV2 && (
         <Rectangle
           onClick={handleAvatarClick}

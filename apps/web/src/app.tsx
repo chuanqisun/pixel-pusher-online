@@ -8,6 +8,9 @@ import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from
 export const AVATAR_SIZE = 32;
 const allAvatars = Object.entries(avatars);
 
+const storedNickname = localStorage.getItem("nickname") ?? "";
+const storedAvatarId = localStorage.getItem("avatarId") ?? "alec";
+
 export function App() {
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
 
@@ -19,7 +22,15 @@ export function App() {
     }
   }, []);
 
-  const [selectedAvatarId, setSelectedAvatarId] = useState("alec");
+  const [nickname, setNickname] = useState(storedNickname);
+
+  const handleNickname = useCallback((nickname: string) => {
+    localStorage.setItem("nickname", nickname);
+    setNickname(nickname);
+    sendToMain({ setNickname: nickname });
+  }, []);
+
+  const [selectedAvatarId, setSelectedAvatarId] = useState(storedAvatarId);
 
   const handleSelectAvatar = useCallback((id: string) => {
     setSelectedAvatarId(id);
@@ -87,10 +98,7 @@ export function App() {
         <button id="focus-character">Locate myself</button>
         <div>
           <h2>Name</h2>
-          <form id="name-form" class="name-form">
-            <input name="nickname" type="text" required />
-            <button type="submit">Change</button>
-          </form>
+          <input name="nickname" type="text" required value={nickname} onChange={(e) => handleNickname((e.target as HTMLInputElement).value)} />
           <h2>Avatar</h2>
           <div class="character-grid">
             {allAvatars.map(([id, atlas]) => (
