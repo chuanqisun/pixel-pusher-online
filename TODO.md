@@ -52,8 +52,10 @@
   - Sound effect
   - Personal emoji palette
 - Chat
-  - [!] Chat panel in UI
-  - [!] Public text chat
+  - [DONE] Chat panel in UI
+  - [DONE] Public text chat
+  - Message length reminder
+  - Timestamp for older message
   - Private text chat
   - Private group chat
   - Sound effect

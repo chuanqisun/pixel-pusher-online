@@ -14,6 +14,7 @@
 .chat-layout {
   display: flex;
   flex-direction: column;
+  padding: 8px;
 }
 .chat-layout__messages {
   flex-grow: 1;
@@ -27,10 +28,18 @@
   resize: none;
 }
 
+.message-body {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px;
+}
+
 .message-meta {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+.message-meta__sender {
+  padding-inline: 4px;
 }
 .message-meta__time {
   margin-left: auto;

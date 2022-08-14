@@ -1,10 +1,36 @@
-import type { HistoryMessage, MessageToUI } from "types";
+import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 
 export default {};
 console.log("[debug-shim] ready");
 
+const mockMainState = {
+  historyMessages: getMockHistory(),
+};
+
 window.addEventListener("message", (e) => {
   console.log(e.data?.pluginMessage);
+
+  const pluginMessage = e.data?.pluginMessage as MessageToMain;
+
+  if (pluginMessage.getHistoryMessages) {
+    sendMessageFromMockMain({
+      historyMessages: mockMainState.historyMessages,
+    });
+  }
+
+  if (pluginMessage.newMessage) {
+    mockMainState.historyMessages.push({
+      msgId: `${Date.now()}`,
+      fromId: "1",
+      fromNickname: "Test user",
+      fromColor: "#8800AA",
+      timestamp: Date.now(),
+      content: pluginMessage.newMessage.content,
+    });
+    sendMessageFromMockMain({
+      historyMessages: mockMainState.historyMessages,
+    });
+  }
 });
 
 window.addEventListener("click", (e) => {
@@ -17,8 +43,9 @@ window.addEventListener("click", (e) => {
       sendMessageFromMockMain({ defaultNickname: "Test user" });
       break;
     case "init-chat-history":
+      mockMainState.historyMessages = [];
       sendMessageFromMockMain({
-        historyMessages: getMockHistory(),
+        historyMessages: mockMainState.historyMessages,
       });
       break;
   }

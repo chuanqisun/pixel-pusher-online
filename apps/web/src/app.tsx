@@ -186,11 +186,18 @@ export function App() {
                 </span>
                 <time class="message-meta__time">{new Date(chatMessage.timestamp).toLocaleTimeString()}</time>
               </div>
-              <p>{chatMessage.content}</p>
+              <p class="message-body">{chatMessage.content}</p>
             </article>
           ))}
         </div>
-        <textarea rows={3} class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box" placeholder='Press "ENTER" to send' onKeyDown={handleChatKeyDown}></textarea>
+        <textarea
+          maxLength={255}
+          spellcheck={false}
+          rows={3}
+          class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box"
+          placeholder='Press "ENTER" to send'
+          onKeyDown={handleChatKeyDown}
+        ></textarea>
       </section>
 
       <section class="app-layout__main nav-section" data-section="map">
