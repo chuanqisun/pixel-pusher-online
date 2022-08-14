@@ -37,3 +37,40 @@ export const rpgGeneric01: Atlas = {
     ],
   },
 };
+
+export const rpgGeneric03: Atlas = {
+  imgUrl,
+  cols: 15,
+  rows: 8,
+  cellSize: 16,
+  animations: {
+    idleN: [{ row: 3, col: 7 }],
+    idleE: [{ row: 2, col: 7 }],
+    idleS: [{ row: 0, col: 7 }],
+    idleW: [{ row: 1, col: 7 }],
+    walkN: [
+      { row: 3, col: 6 },
+      { row: 3, col: 7 },
+      { row: 3, col: 8 },
+      { row: 3, col: 7 },
+    ],
+    walkE: [
+      { row: 2, col: 6 },
+      { row: 2, col: 7 },
+      { row: 2, col: 8 },
+      { row: 2, col: 7 },
+    ],
+    walkS: [
+      { row: 0, col: 6 },
+      { row: 0, col: 7 },
+      { row: 0, col: 8 },
+      { row: 0, col: 7 },
+    ],
+    walkW: [
+      { row: 1, col: 6 },
+      { row: 1, col: 7 },
+      { row: 1, col: 8 },
+      { row: 1, col: 7 },
+    ],
+  },
+};

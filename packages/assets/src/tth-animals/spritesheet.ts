@@ -37,3 +37,40 @@ export const animalRat01: Atlas = {
     ],
   },
 };
+
+export const animalSheep01: Atlas = {
+  imgUrl,
+  cols: 16,
+  rows: 30,
+  cellSize: 16,
+  animations: {
+    idleS: [{ row: 22, col: 0 }],
+    idleW: [{ row: 21, col: 0, flipX: true }],
+    idleN: [{ row: 23, col: 0 }],
+    idleE: [{ row: 21, col: 0 }],
+    walkS: [
+      { row: 22, col: 1 },
+      { row: 22, col: 2 },
+      { row: 22, col: 3 },
+      { row: 22, col: 2 },
+    ],
+    walkW: [
+      { row: 21, col: 1, flipX: true },
+      { row: 21, col: 2, flipX: true },
+      { row: 21, col: 3, flipX: true },
+      { row: 21, col: 2, flipX: true },
+    ],
+    walkN: [
+      { row: 23, col: 1 },
+      { row: 23, col: 2 },
+      { row: 23, col: 3 },
+      { row: 23, col: 2 },
+    ],
+    walkE: [
+      { row: 21, col: 1 },
+      { row: 21, col: 2 },
+      { row: 21, col: 3 },
+      { row: 21, col: 2 },
+    ],
+  },
+};
