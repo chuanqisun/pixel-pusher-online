@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "preact/hooks";
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { sendMessage } from "./utils/ipc";
 
 import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
@@ -123,14 +123,20 @@ export function App() {
   }, []);
 
   const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
+  const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId, [chatMessages]);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      sendToMain({ getHistoryMessages: { lastId: chatMessages[chatMessages.length - 1]?.msgId } });
+      sendToMain({ getHistoryMessages: { lastId } });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [chatMessages]);
+  }, [lastId]);
+
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
+  }, [lastId]);
 
   return (
     <>
@@ -177,7 +183,7 @@ export function App() {
       </section>
 
       <section class="app-layout__main nav-section chat-layout" data-section="chat">
-        <div class="chat-layout__messages">
+        <div class="chat-layout__messages" ref={chatMessagesRef}>
           {chatMessages.map((chatMessage) => (
             <article key={chatMessage.msgId}>
               <div class="message-meta">

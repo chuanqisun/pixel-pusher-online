@@ -54,6 +54,7 @@
 - Chat
   - [DONE] Chat panel in UI
   - [DONE] Public text chat
+  - [DONE] Auto-scroll to last message
   - Message length reminder
   - Timestamp for older message
   - Private text chat

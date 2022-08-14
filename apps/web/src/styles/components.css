@@ -14,9 +14,9 @@
 .chat-layout {
   display: flex;
   flex-direction: column;
-  padding: 8px;
 }
 .chat-layout__messages {
+  padding: 16px;
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
@@ -51,7 +51,6 @@
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 4px;
-  margin-bottom: 8px;
 }
 
 .nav-section:not(.active) {
