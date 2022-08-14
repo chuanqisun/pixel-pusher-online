@@ -83,10 +83,11 @@
   - [!] Ctrl-Z handling
   - Anonymous user handling (figma.activeUser = null)
   - Implement deps array for useEffect and useMemo
-- Marketing
+- Brand
   - [!] Favicon
   - [!] Figma splash screen
   - [!] Figma market place introduction
+  - [!] Name: Pixel World Online
 
 # Archive
 
