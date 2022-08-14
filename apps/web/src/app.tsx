@@ -171,10 +171,15 @@ export function App() {
       <section class="app-layout__main nav-section chat-layout" data-section="chat">
         <div class="chat-layout__messages">
           {chatMessages.map((chatMessage) => (
-            <div key={chatMessage.msgId}>
-              <div>{chatMessage.fromNickname}</div>
+            <article key={chatMessage.msgId}>
+              <div class="message-meta">
+                <span class="message-meta__sender" style={{ backgroundColor: chatMessage.fromColor, color: "white" }}>
+                  {chatMessage.fromNickname}
+                </span>
+                <time class="message-meta__time">{new Date(chatMessage.timestamp).toLocaleTimeString()}</time>
+              </div>
               <p>{chatMessage.content}</p>
-            </div>
+            </article>
           ))}
         </div>
         <textarea rows={3} class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box" placeholder='Press "ENTER" to send' onKeyDown={handleChatKeyDown}></textarea>

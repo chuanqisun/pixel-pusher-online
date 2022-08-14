@@ -18,10 +18,22 @@
 .chat-layout__messages {
   flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .chat-layout__text-box {
   flex-shrink: 0;
   resize: none;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.message-meta__time {
+  margin-left: auto;
 }
 
 /* NAV */

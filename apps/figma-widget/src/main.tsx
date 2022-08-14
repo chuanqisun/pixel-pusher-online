@@ -159,6 +159,7 @@ function Widget() {
 
     await new Promise((resolve) => {
       figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
+      widgetNode.setPluginData("syncedMessageId", "");
     });
   };
 
