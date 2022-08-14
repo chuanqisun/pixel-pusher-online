@@ -18,7 +18,7 @@
   - [DONE] Bring to top on center
   - Auto-align to pixel grid
   - Chat typing indication
-  - Presence indication
+  - Presence indication (outline name plate when blurred)
   - Pixel font for name play (Figma missing Silkscreen font)
   - 64px hit box for easiser mouse selection
   - Shadow effect
