@@ -164,7 +164,7 @@ export function App() {
           maxLength={24}
           onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
         />
-        <button onClick={handleFindMyself}>Find myself</button>
+        <button onClick={handleFindMyself}>Respawn</button>
         <h2>Avatar</h2>
         <div class="character-grid">
           {allAvatars.map(([id, atlas]) => (
