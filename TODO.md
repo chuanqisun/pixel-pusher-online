@@ -84,6 +84,7 @@
   - [DONE] Non-null origin web view
   - [DONE] Dynamic sprite
   - [!] GitHub page host
+  - Progressive loading of assets
   - Cloudflare DNS on top of GitHub page
   - Static app deployment pipeline
   - Figma plugin packaging pipeline
@@ -97,7 +98,7 @@
   - [!] Favicon
   - [!] Figma splash screen
   - [!] Figma market place introduction
-  - [!] Name: Pixel World Online, Figverse, Pixel Hangout
+  - [!] Name: Figma World Online, Fetaverse, Pixel Hangout, Pixel Pusher
 
 # Archive
 
