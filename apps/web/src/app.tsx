@@ -30,8 +30,8 @@ export function App() {
     const handleMainMessage = (e: MessageEvent) => {
       const pluginMessage = e.data.pluginMessage as MessageToUI;
       console.log(`[ipc] received from main`, e.data.pluginMessage);
-      if (pluginMessage.defaultNickname && !storedNickname.length) {
-        setNickname(pluginMessage.defaultNickname);
+      if (pluginMessage.defaultNickname) {
+        setNickname((prevNickname) => (prevNickname?.length ? prevNickname : pluginMessage.defaultNickname!));
         localStorage.setItem("nickname", pluginMessage.defaultNickname);
       }
 
@@ -52,10 +52,8 @@ export function App() {
 
   const handleNickname = useCallback((nickname: string) => {
     const normalized = nickname.trim();
-    if (normalized) {
-      localStorage.setItem("nickname", normalized);
-      setNickname(normalized);
-    }
+    setNickname(normalized);
+    localStorage.setItem("nickname", normalized);
   }, []);
 
   useEffect(() => {
@@ -163,6 +161,7 @@ export function App() {
           type="text"
           required
           value={nickname}
+          maxLength={24}
           onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
         />
         <button onClick={handleFindMyself}>Find myself</button>
