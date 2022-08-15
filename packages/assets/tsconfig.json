@@ -7,6 +7,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "importsNotUsedAsValues": "error",
     "noEmit": true
   },
   "include": ["src"]

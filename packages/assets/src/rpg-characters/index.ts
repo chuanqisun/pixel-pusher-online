@@ -1,11 +1,28 @@
-import type { Atlas } from "../interface";
+import type { CharacterAtlas } from "../interface";
 import imgUrl from "./01-generic.png";
 
-export const rpgGeneric01: Atlas = {
-  imgUrl,
+const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
+  details: [
+    {
+      key: "Artist",
+      value: "javikolog",
+      link: "https://route1rodent.itch.io/",
+    },
+    {
+      key: "License",
+      value: "CC BY-SA 3.0",
+      link: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+  ],
   cols: 15,
   rows: 8,
-  cellSize: 16,
+  tileSize: 16,
+};
+
+export const alec: CharacterAtlas = {
+  ...shared,
+  name: "Alec",
+  imgUrl: imgUrl,
   animations: {
     idleN: [{ row: 3, col: 1 }],
     idleE: [{ row: 2, col: 1 }],
@@ -38,11 +55,10 @@ export const rpgGeneric01: Atlas = {
   },
 };
 
-export const rpgGeneric03: Atlas = {
-  imgUrl,
-  cols: 15,
-  rows: 8,
-  cellSize: 16,
+export const meg: CharacterAtlas = {
+  ...shared,
+  name: "Meg",
+  imgUrl: imgUrl,
   animations: {
     idleN: [{ row: 3, col: 7 }],
     idleE: [{ row: 2, col: 7 }],

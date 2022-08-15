@@ -1,11 +1,28 @@
-import type { Atlas } from "../interface";
+import type { CharacterAtlas } from "../interface";
 import imgUrl from "./spritesheet.png";
 
-export const animalRat01: Atlas = {
-  imgUrl,
+const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
+  details: [
+    {
+      key: "Artist",
+      value: "Kacper Woźniak",
+      link: "https://thkaspar.itch.io/",
+    },
+    {
+      key: "License",
+      value: "CC BY 4.0",
+      link: "https://creativecommons.org/licenses/by/4.0/",
+    },
+  ],
   cols: 16,
   rows: 30,
-  cellSize: 16,
+  tileSize: 16,
+};
+
+export const lyster: CharacterAtlas = {
+  ...shared,
+  name: "Lyster",
+  imgUrl,
   animations: {
     idleS: [{ row: 10, col: 0 }],
     idleW: [{ row: 9, col: 0, flipX: true }],
@@ -38,11 +55,13 @@ export const animalRat01: Atlas = {
   },
 };
 
-export const animalSheep01: Atlas = {
+export const bek: CharacterAtlas = {
+  ...shared,
+  name: "Bek",
   imgUrl,
   cols: 16,
   rows: 30,
-  cellSize: 16,
+  tileSize: 16,
   animations: {
     idleS: [{ row: 22, col: 0 }],
     idleW: [{ row: 21, col: 0, flipX: true }],

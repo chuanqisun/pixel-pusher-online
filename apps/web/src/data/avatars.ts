@@ -1,9 +1,9 @@
-import type { Atlas } from "assets";
-import { animalRat01, animalSheep01, rpgGeneric01, rpgGeneric03 } from "assets";
+import type { CharacterAtlas } from "assets";
+import { alec, bek, lyster, meg } from "assets";
 
-export const avatars: Record<string, Atlas> = {
-  alec: rpgGeneric01,
-  meg: rpgGeneric03,
-  bek: animalSheep01,
-  lyster: animalRat01,
+export const avatars: Record<string, CharacterAtlas> = {
+  alec,
+  meg,
+  bek,
+  lyster,
 };

@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { sendMessage } from "./utils/ipc";
-
 import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 import { avatars } from "./data/avatars";
 import { AvatarController, getAvatarController } from "./utils/avatar-controller";
+import { sendMessage } from "./utils/ipc";
 import { throttle } from "./utils/throttle";
 import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
@@ -92,7 +91,7 @@ export function App() {
     const activeAtlas = avatars[activeDemoAvatarId];
     const demoAnimations = ["walkS", "walkW", "walkN", "walkE"];
     const allFrames = demoAnimations.map((animationName) => activeAtlas.animations[animationName]).flat();
-    const scale = getAvatarScale(activeAtlas.cellSize);
+    const scale = getAvatarScale(activeAtlas.tileSize);
     let i = 0;
     const timer = setInterval(() => {
       setDemoFrame(getFrameCss(getDisplayFrame(scale, activeAtlas, allFrames[i])));
@@ -176,7 +175,7 @@ export function App() {
               onMouseLeave={() => setDemoAvatarId(null)}
               onClick={() => handleSelectAvatar(id)}
             >
-              <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.cellSize), atlas)}></div>
+              <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.tileSize), atlas)}></div>
             </button>
           ))}
         </div>

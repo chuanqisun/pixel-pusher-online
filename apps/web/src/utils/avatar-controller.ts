@@ -1,4 +1,4 @@
-import type { Atlas } from "assets";
+import type { CharacterAtlas } from "assets";
 import { getFigmaImageTransform } from "./transform";
 
 export type Pose = "idle" | "walk";
@@ -14,7 +14,7 @@ export interface AvatarChange {
   move?: Direction;
 }
 
-export function getAvatarController(atlas: Atlas, onChange: (change: AvatarChange) => any): AvatarController {
+export function getAvatarController(atlas: CharacterAtlas, onChange: (change: AvatarChange) => any): AvatarController {
   let frameIndex = 0;
   let currentDir: Direction = "S";
   let currentPose = "idle";
@@ -42,8 +42,6 @@ export function getAvatarController(atlas: Atlas, onChange: (change: AvatarChang
     }
 
     change.transform = getFigmaTransform(getFrames()[frameIndex]);
-
-    console.log(change);
 
     onChange(change);
   };

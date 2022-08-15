@@ -1,0 +1,3 @@
+- Website: https://franopx.itch.io/rpg-village-tileset-16x16
+- By: [franopx](https://franopx.itch.io/)
+- The author did not use any licnese

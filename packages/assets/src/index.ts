@@ -1,3 +1,4 @@
-export type { Atlas, Frame } from "./interface";
-export * from "./rpg-characters/01-generic";
-export * from "./tth-animals/spritesheet";
+export type { CharacterAtlas, Frame } from "./interface";
+export * from "./leoford";
+export * from "./rpg-characters";
+export * from "./tth-animals";

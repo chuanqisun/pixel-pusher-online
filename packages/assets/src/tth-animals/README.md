@@ -1,3 +1,3 @@
-- [Website](https://thkaspar.itch.io/tth-animals)
-- [Kacper Woźniak](https://thkaspar.itch.io/)
-- [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Website: https://thkaspar.itch.io/tth-animals
+- By: [Kacper Woźniak](https://thkaspar.itch.io/)
+- License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

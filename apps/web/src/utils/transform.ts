@@ -1,4 +1,4 @@
-import type { Atlas, Frame } from "assets";
+import type { CharacterAtlas, Frame } from "assets";
 
 export interface DisplayFrame {
   url: string;
@@ -10,9 +10,9 @@ export interface DisplayFrame {
   flipX?: boolean;
 }
 
-export function getDisplayFrame(scale: number, atlas: Atlas, frame: Frame): DisplayFrame {
+export function getDisplayFrame(scale: number, atlas: CharacterAtlas, frame: Frame): DisplayFrame {
   const { col, row, flipX } = frame;
-  const size = atlas.cellSize * scale;
+  const size = atlas.tileSize * scale;
   const x = size * col;
   const y = size * row;
   const url = atlas.imgUrl;
@@ -22,7 +22,7 @@ export function getDisplayFrame(scale: number, atlas: Atlas, frame: Frame): Disp
   return { mapWidth, mapHeight, x, y, flipX, url, size };
 }
 
-export function getFigmaImageTransform(atlas: Atlas, frame: Frame) {
+export function getFigmaImageTransform(atlas: CharacterAtlas, frame: Frame) {
   // figma transforms the viewport, not the image
   // transform origin is top-left
   // figma applies scale and skew first, then translate
@@ -46,7 +46,7 @@ export function getFrameCss({ url, mapWidth, mapHeight, x, y, size, flipX }: Dis
   };
 }
 
-export function getStaticDemoFrame(scale: number, atlas: Atlas) {
+export function getStaticDemoFrame(scale: number, atlas: CharacterAtlas) {
   return getFrameCss(getDisplayFrame(scale, atlas, atlas.animations.idleS[0]));
 }
 
