@@ -1,4 +1,5 @@
 const TILE_SIZE = 16;
+const GAP = 2;
 
 const node = figma.currentPage.selection[0] as RectangleNode;
 if (node?.type !== "RECTANGLE") {
@@ -27,8 +28,8 @@ for (let row of rows) {
     const cloned = node.clone();
     cloned.fills = [{ ...imageFill, scaleMode: "CROP", imageTransform: transform }];
     cloned.resize(TILE_SIZE, TILE_SIZE);
-    cloned.x = node.x + col * TILE_SIZE;
-    cloned.y = node.y + height + row * TILE_SIZE;
+    cloned.x = node.x + col * (TILE_SIZE + GAP);
+    cloned.y = node.y + height + row * (TILE_SIZE + GAP);
     console.log(transform);
   }
 }
