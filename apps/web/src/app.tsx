@@ -8,7 +8,7 @@ import { throttle } from "./utils/throttle";
 import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
 export const AVATAR_SIZE = 32;
-export const CHAT_POLLING_INTERVAL = 100000;
+export const CHAT_POLLING_INTERVAL = 1000;
 const allAvatars = Object.entries(avatars);
 
 export function App() {
