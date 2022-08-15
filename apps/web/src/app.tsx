@@ -8,6 +8,7 @@ import { throttle } from "./utils/throttle";
 import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
 export const AVATAR_SIZE = 32;
+export const CHAT_POLLING_INTERVAL = 100000;
 const allAvatars = Object.entries(avatars);
 
 export function App() {
@@ -126,7 +127,7 @@ export function App() {
   useEffect(() => {
     const timer = setInterval(() => {
       sendToMain({ getHistoryMessages: { lastId } });
-    }, 1000);
+    }, CHAT_POLLING_INTERVAL);
 
     return () => clearInterval(timer);
   }, [lastId]);
@@ -164,7 +165,7 @@ export function App() {
           maxLength={24}
           onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
         />
-        <button onClick={handleFindMyself}>Respawn</button>
+        <button onClick={handleFindMyself}>Locate</button>
         <h2>Avatar</h2>
         <div class="character-grid">
           {allAvatars.map(([id, atlas]) => (

@@ -22,9 +22,10 @@ export function getAvatarController(atlas: Atlas, onChange: (change: AvatarChang
 
   const getFigmaTransform = getFigmaImageTransform.bind(null, atlas);
   const getFrames = () => atlas.animations[`${currentPose}${currentDir}`];
-  const change: AvatarChange = {};
 
   const step = (newDir: Direction) => {
+    const change: AvatarChange = {};
+
     if (newDir !== currentDir) {
       frameIndex = 0;
       currentPose = "idle";
@@ -41,6 +42,8 @@ export function getAvatarController(atlas: Atlas, onChange: (change: AvatarChang
     }
 
     change.transform = getFigmaTransform(getFrames()[frameIndex]);
+
+    console.log(change);
 
     onChange(change);
   };
