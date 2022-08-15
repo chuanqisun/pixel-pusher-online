@@ -14,7 +14,7 @@ function Widget() {
   const [transform, setTransform] = useSyncedState<Transform | null>("transform", null);
 
   const [user, setUser] = useSyncedState<User | null>("user", null);
-  const [nickname, setNickname] = useSyncedState("nickname", "");
+  const [nickname, setNickname] = useSyncedState("nickname", "Loading...");
 
   // Auto-open UI on creation
   useEffect(() => {
@@ -65,8 +65,8 @@ function Widget() {
         figma.viewport.zoom = 2;
       }
 
-      if (message.nickname) {
-        setNickname(message.nickname);
+      if (typeof message.nickname === "string") {
+        setNickname(message.nickname.length ? message.nickname : "???");
       }
 
       if (message.transform) {
