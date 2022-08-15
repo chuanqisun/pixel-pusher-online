@@ -55,6 +55,7 @@
   - [DONE] Chat panel in UI
   - [DONE] Public text chat
   - [DONE] Auto-scroll to last message
+  - [!] Auto-focus on open panel
   - Message length reminder
   - Timestamp for older message
   - Private text chat
@@ -71,6 +72,8 @@
   - [!] Help and tips
   - [!] Smart initial positioning
   - [!] Panel button pixel art
+  - [!] Consistent focus outline
+  - [!] Keyboard input handling on tab control
   - Pixel art mouse cursor
   - Customizable keybinding
   - Sound effect
