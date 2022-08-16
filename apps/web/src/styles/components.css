@@ -48,7 +48,7 @@
   transition: none;
 }
 
-.character-button:where(:hover, :focus) {
+.character-button:where(:hover, :focus-visible) {
   filter: grayscale(0);
 }
 
@@ -119,7 +119,7 @@
   will-change: transform, filter;
   transition: all 200ms;
 }
-.map-preview:where(:hover, :focus) .map-preview__image {
+.map-preview:where(:hover, :focus-visible) .map-preview__image {
   transform: scale(1.25);
   filter: grayscale(0);
 }
@@ -130,13 +130,13 @@
   padding-block: 16px 8px;
 }
 .metadata-accordion:hover summary::before,
-.metadata-accordion summary:focus::before {
+.metadata-accordion summary:focus-visible::before {
   content: "▼ ";
   position: absolute;
   left: 12px;
 }
 .metadata-accordion:hover summary,
-.metadata-accordion summary:focus {
+.metadata-accordion summary:focus-visible {
   padding-inline-start: 16px;
 }
 .metadata-accordion summary {

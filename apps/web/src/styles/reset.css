@@ -3,7 +3,7 @@
   font: inherit;
   margin: 0;
 }
-*:focus {
+*:focus-visible {
   outline: none;
 }
 
@@ -18,7 +18,7 @@ summary {
 a {
   text-decoration: none;
 }
-a:where(:hover, :focus) {
+a:where(:hover, :focus-visible) {
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
