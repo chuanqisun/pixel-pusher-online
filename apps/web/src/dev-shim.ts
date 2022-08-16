@@ -61,6 +61,10 @@ window.addEventListener("click", (e) => {
         historyMessages: mockMainState.historyMessages,
       });
       break;
+    case "request-map":
+      sendMessageFromMockMain({
+        requestMap: true,
+      });
   }
 });
 
