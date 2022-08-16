@@ -171,27 +171,27 @@ export function App() {
 
   return (
     <>
-      <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
-        <button class="u-bdr-2 u-fs-24" data-target-section="character">
+      <nav id="nav-tabs" class="nav-tabs u-bdr-2 u-bg-bk" onClick={handleNavTabClick}>
+        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="character">
           Me
         </button>
-        <button class="u-bdr-2 u-fs-24" data-target-section="chat">
+        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="chat">
           Chat
         </button>
-        <button class="u-bdr-2 u-fs-24" data-target-section="map">
+        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="map">
           Map
         </button>
-        <button class="u-bdr-2 u-fs-24" data-target-section="help">
+        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="help">
           Info
         </button>
       </nav>
 
-      <section class="app-layout__main nav-section active" data-section="character">
-        <h2>Name</h2>
-        <div class="name-setup">
+      <section class="app-layout__main nav-section character-layout active" data-section="character">
+        <div class="name-setup character-layout__header">
           <input
             class="u-bdr-2 u-pad-8 u-fs-16 name-setup__nickname"
             name="nickname"
+            placeholder="Nickname"
             type="text"
             required
             value={nickname}
@@ -199,16 +199,16 @@ export function App() {
             maxLength={24}
             onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
           />
-          <button class="u-bdr-2 name-setup__locator" onClick={handleFindMyself}>
+          <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l name-setup__locator" onClick={handleFindMyself}>
             ⌖
           </button>
         </div>
-        <h2>Avatar</h2>
-        <div class="character-list">
+        <div class="character-list u-bg-accent-ll character-layout__scroll">
           {allAvatars.map(([id, atlas]) => (
-            <div class="character-item" key={id}>
+            <div class="u-bdr-2 u-bg-accent-l u-hover-bg-wt character-item" key={id}>
               <button
-                class="character-button"
+                class="u-bdr-0 u-fs-24 u-bg-accent character-button"
+                data-active={selectedAvatarId === id}
                 onMouseEnter={() => setDemoAvatarId(id)}
                 onMouseLeave={() => setDemoAvatarId(null)}
                 onClick={() => handleSelectAvatar(id)}

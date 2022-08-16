@@ -4,6 +4,10 @@
 @import url("./styles/components.css");
 
 body {
+  --color-accent: rgb(243, 173, 75);
+  --color-accent-l: rgb(238, 205, 145);
+  --color-accent-ll: rgb(252, 239, 218);
+  --orange-dark: rgb(243, 173, 75);
   --orange-light: rgb(238, 205, 145);
   --orange-lighter: rgb(252, 239, 218);
 

@@ -4,6 +4,28 @@
   font-size: 16px;
 }
 
+/* BACKGROUND */
+.u-bg-accent {
+  background-color: var(--color-accent);
+}
+.u-bg-accent-l {
+  background-color: var(--color-accent-l);
+}
+.u-bg-accent-ll {
+  background-color: var(--color-accent-ll);
+}
+
+.u-hover-bg-accent-l:hover {
+  background-color: var(--color-accent-l);
+}
+.u-hover-bg-wt:hover {
+  background-color: white;
+}
+
+.u-bg-bk {
+  background-color: black;
+}
+
 /* BORDER */
 
 .u-bdr-0 {
