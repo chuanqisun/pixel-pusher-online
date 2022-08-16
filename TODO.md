@@ -21,9 +21,9 @@
 - Avatar
   - [DONE] Bring to top on center
   - [DONE] When map already exists, spawn on point
-  - [!] Indicating currenly active avatar
-  - [!] Handle clicking on other people's avatar
-    - Use notify API to offer Create or Find myself options
+  - Indicating currenly active avatar
+  - Handle clicking on other people's avatar
+  - Use notify API to offer Create or Find myself options
   - Auto-align to pixel grid
   - Chat typing indication
   - Presence indication (outline name plate when blurred)
@@ -66,6 +66,7 @@
   - [DONE] Public text chat
   - [DONE] Auto-scroll to last message
   - [!] Auto-focus on open panel
+  - [!] Indicate new message
   - Message length reminder
   - Timestamp for older message
   - Private text chat
@@ -78,12 +79,12 @@
 - UI
   - [DONE] Multi-tab panel system
   - [DONE] Smart initial positioning
+  - [DONE] Consistent focus outline
+  - [!] Place panel at upper right corner
   - [!] Help and tips
   - [!] Open source and CC license display
-  - [!] Panel button pixel art
-  - [!] Consistent focus outline
-  - [!] Keyboard input handling on tab control
-  - [!] Place panel at upper right corner
+  - Keyboard input handling on tab control
+  - Panel button pixel art
   - Auto open help tab on initial launch
   - Pixel art mouse cursor
   - Customizable keybinding
@@ -102,19 +103,19 @@
   - Multiplayer sound broadcast
   - Main/UI IPC utils
 - Figma integration
-  - [!] Ctrl-Z handling
+  - Ctrl-Z handling
   - Anonymous user handling (figma.activeUser = null)
   - Implement deps array for useEffect and useMemo
 - Brand
   - [!] Favicon
   - [!] Figma splash screen
   - [!] Figma market place introduction
-  - [!] Name: Figma World Online, Fetaverse, Pixel Hangout, Pixel Pusher
+  - [!] Name: Figma World Online, Fetaverse, Pixel Hangout, Pixel Pusher Online
 - Music
   - https://bakudas.itch.io/generic-rpg-pack
   - https://ansimuz.itch.io/patreons-top-down-collection
 - Map
-  - [!] Forest map
+  - [DONE] Forest map
   - Indoor map
   - Ice world map
   - Dessert map
