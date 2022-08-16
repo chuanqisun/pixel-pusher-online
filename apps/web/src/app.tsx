@@ -1,12 +1,12 @@
-import type { PrebuiltMap } from "assets/src/interface";
 import { Fragment } from "preact";
-import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import type { HistoryMessage, MessageToUI } from "types";
+import { useCallback, useEffect } from "preact/hooks";
+import type { MessageToUI } from "types";
 import { maps } from "./data/maps";
+import { useChatPanel } from "./hooks/use-chat-panel";
+import { useKeyboardControl } from "./hooks/use-keyboard-control";
+import { useMapPanel } from "./hooks/use-map-panel";
 import { useMePanel } from "./hooks/use-me-panel";
-import type { AvatarController } from "./utils/avatar-controller";
 import { sendMessage } from "./utils/ipc";
-import { throttle } from "./utils/throttle";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
 export const CHAT_POLLING_INTERVAL = 1000;
@@ -38,6 +38,12 @@ export function App() {
     setNickname,
   } = useMePanel({ sendToMain });
 
+  useKeyboardControl(avatarController);
+
+  const { setChatMessages, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain });
+
+  const { handleSelectMap } = useMapPanel({ sendToMain });
+
   useEffect(() => {
     const handleMainMessage = (e: MessageEvent) => {
       const pluginMessage = e.data.pluginMessage as MessageToUI;
@@ -64,62 +70,6 @@ export function App() {
     window.addEventListener("message", handleMainMessage);
 
     return () => window.removeEventListener("message", handleMainMessage);
-  }, []);
-
-  useKeyboardEvents(avatarController);
-
-  const handleChatKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
-      const textarea = e.target as HTMLTextAreaElement;
-      sendToMain({
-        newMessage: {
-          content: textarea.value,
-        },
-      });
-      e.stopPropagation(); // prevent other handlers
-      e.preventDefault(); // prevent inserting a line break
-      textarea.value = "";
-    }
-  }, []);
-
-  const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
-  const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId ?? "", [chatMessages]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      sendToMain({ getHistoryMessages: { lastId } });
-    }, CHAT_POLLING_INTERVAL);
-
-    return () => clearInterval(timer);
-  }, [lastId]);
-
-  const chatMessagesRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
-  }, [lastId]);
-
-  const handleSelectMap = useCallback((key: string, selectedMap: PrebuiltMap) => {
-    function dataUriToBytes(uri: string) {
-      const byteString = window.atob(uri.split(",")[1]);
-      const bytes = new Uint8Array(new ArrayBuffer(byteString.length));
-
-      for (let i = 0; i < byteString.length; i++) {
-        bytes[i] = byteString.charCodeAt(i);
-      }
-
-      return bytes;
-    }
-
-    sendToMain({
-      map: {
-        key,
-        name: selectedMap.name,
-        imageBytes: dataUriToBytes(selectedMap.imgUrl),
-        rows: selectedMap.rows,
-        cols: selectedMap.cols,
-        spawnTiles: selectedMap.spawnTiles,
-      },
-    });
   }, []);
 
   return (
@@ -248,43 +198,4 @@ export function App() {
       </section>
     </>
   );
-}
-
-function useKeyboardEvents(controller: AvatarController) {
-  useEffect(() => {
-    const keydownListener = throttle((e: KeyboardEvent) => {
-      const dir = (() => {
-        if ((e.target as HTMLElement).matches("input,textarea")) return;
-
-        switch (e.code) {
-          case "KeyA":
-          case "ArrowLeft":
-            e.preventDefault();
-            return "W";
-          case "KeyD":
-          case "ArrowRight":
-            e.preventDefault();
-            return "E";
-          case "KeyW":
-          case "ArrowUp":
-            e.preventDefault();
-            return "N";
-          case "KeyS":
-          case "ArrowDown":
-            e.preventDefault();
-            return "S";
-        }
-      })();
-
-      if (!dir) return;
-
-      controller.step(dir);
-    }, 100);
-
-    document.addEventListener("keydown", keydownListener);
-
-    return () => {
-      document.removeEventListener("keydown", keydownListener);
-    };
-  }, [controller]);
 }
