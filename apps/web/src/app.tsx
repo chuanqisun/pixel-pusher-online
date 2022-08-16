@@ -259,7 +259,7 @@ export function App() {
           maxLength={255}
           spellcheck={false}
           rows={3}
-          class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt u-focus-bg-wt chat-layout__text-box"
+          class="u-pad-8 u-bg-accent-ll u-hover-bg-wt u-focus-bg-wt chat-layout__text-box"
           placeholder='Press "ENTER" to send'
           onKeyDown={handleChatKeyDown}
         ></textarea>

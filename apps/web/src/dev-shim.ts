@@ -55,7 +55,7 @@ window.addEventListener("click", (e) => {
     case "init-nickname":
       sendMessageFromMockMain({ defaultNickname: "Test user" });
       break;
-    case "init-chat-history":
+    case "clear-chat-history":
       mockMainState.historyMessages = [];
       sendMessageFromMockMain({
         historyMessages: mockMainState.historyMessages,

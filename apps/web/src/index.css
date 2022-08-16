@@ -17,6 +17,7 @@ body {
   -webkit-font-smooth: none;
   height: 100vh;
   font-size: 16px;
+  border: 2px solid black;
 }
 
 #app {
