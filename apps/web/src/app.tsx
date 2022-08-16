@@ -191,6 +191,13 @@ export function App() {
           </div>
         ))}
       </section>
+      <section class="app-layout__main nav-section info-layout" data-active={activeTab === "info"}>
+        <h2>About</h2>
+        <h2>Control</h2>
+        <h2>Chat</h2>
+        <h2>Map</h2>
+        <h2>Contribute</h2>
+      </section>
     </>
   );
 }
