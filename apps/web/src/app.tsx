@@ -1,6 +1,7 @@
 import { Fragment } from "preact";
 import { useCallback, useEffect } from "preact/hooks";
 import type { MessageToUI } from "types";
+import crosshair from "./assets/crosshair.svg";
 import { useChatPanel } from "./hooks/use-chat-panel";
 import { useKeyboardControl } from "./hooks/use-keyboard-control";
 import { useMapPanel } from "./hooks/use-map-panel";
@@ -96,7 +97,7 @@ export function App() {
             onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
           />
           <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll name-setup__locator" title="Find my avatar" onClick={handleFindMyself}>
-            ⌖
+            <img src={crosshair} alt="" />
           </button>
         </div>
         <div class="character-list u-bg-bk character-layout__scroll">

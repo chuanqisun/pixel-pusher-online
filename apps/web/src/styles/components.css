@@ -194,10 +194,9 @@ kbd {
 }
 .name-setup__locator {
   width: 40px;
-  font-size: 32px;
-  line-height: 32px;
   display: flex;
-  place-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /* NAV */
