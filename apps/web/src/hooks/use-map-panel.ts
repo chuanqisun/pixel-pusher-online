@@ -1,5 +1,8 @@
 import type { PrebuiltMap } from "assets/src/interface";
 import { useCallback } from "preact/hooks";
+import { maps } from "../data/maps";
+
+const allMaps = Object.entries(maps);
 
 export interface UseMapPanelProps {
   sendToMain: (message: any) => any;
@@ -29,5 +32,5 @@ export function useMapPanel({ sendToMain }: UseMapPanelProps) {
     });
   }, []);
 
-  return { handleSelectMap };
+  return { allMaps, handleSelectMap };
 }

@@ -1,7 +1,6 @@
 import { Fragment } from "preact";
 import { useCallback, useEffect } from "preact/hooks";
 import type { MessageToUI } from "types";
-import { maps } from "./data/maps";
 import { useChatPanel } from "./hooks/use-chat-panel";
 import { useKeyboardControl } from "./hooks/use-keyboard-control";
 import { useMapPanel } from "./hooks/use-map-panel";
@@ -10,8 +9,6 @@ import { sendMessage } from "./utils/ipc";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
 export const CHAT_POLLING_INTERVAL = 1000;
-
-const allMaps = Object.entries(maps);
 
 export function App() {
   const handleNavTabClick = useCallback((e: Event) => {
@@ -42,7 +39,7 @@ export function App() {
 
   const { setChatMessages, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain });
 
-  const { handleSelectMap } = useMapPanel({ sendToMain });
+  const { allMaps, handleSelectMap } = useMapPanel({ sendToMain });
 
   useEffect(() => {
     const handleMainMessage = (e: MessageEvent) => {
