@@ -17,11 +17,11 @@ if (imageFill?.type !== "IMAGE") {
   figma.notify("Selection is not an image");
 }
 
-const rowLen = Math.round(height / TILE_SIZE); // divider by 16
+const rowLen = Math.round(height / TILE_SIZE);
 const colLen = Math.round(width / TILE_SIZE);
 
-const rows = [...Array(rowLen).keys()]; // divider by 16
-const cols = [...Array(colLen).keys()]; // divider by 16
+const rows = [...Array(rowLen).keys()];
+const cols = [...Array(colLen).keys()];
 
 for (let row of rows) {
   for (let col of cols) {
