@@ -32,7 +32,15 @@ function Widget() {
       }
       waitForTask(
         new Promise((resolve) => {
-          figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
+          figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, {
+            height: 600,
+            width: 400,
+            position: {
+              // top-right corner
+              x: 100000,
+              y: -100000,
+            },
+          });
           isUiOpen = true;
           figma.currentPage.selection = [];
         })

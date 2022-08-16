@@ -81,7 +81,7 @@
   - [DONE] Smart initial positioning
   - [DONE] Consistent focus outline
   - [DONE] Track active panel
-  - [!] Place UI at upper right corner
+  - [DONE] Place UI at upper right corner
   - Keyboard input handling on tab control
   - Panel button pixel art
   - Auto open help tab on initial launch
