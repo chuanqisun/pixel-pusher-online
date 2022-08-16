@@ -207,8 +207,10 @@ function Widget() {
       <AutoLayout
         fill={user?.color}
         padding={{ vertical: 2, horizontal: 4 }}
-        cornerRadius={4}
+        cornerRadius={0}
         positioning="absolute"
+        stroke={"#000"}
+        strokeWidth={2}
         x={{ type: "center", offset: 0 }}
         y={{ type: "top", offset: -24 }}
       >
