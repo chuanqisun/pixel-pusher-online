@@ -173,7 +173,6 @@
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 2px;
-  border-bottom: 2px solid black;
 }
 
 .nav-section:not([data-active]) {
@@ -181,8 +180,10 @@
 }
 
 .nav-button {
-  height: 32px;
+  height: 40px;
+  border-bottom: 2px solid black;
 }
 .nav-button[data-active] {
   background-color: var(--color-accent-l);
+  border-bottom: none;
 }

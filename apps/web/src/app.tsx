@@ -94,7 +94,7 @@ export function App() {
             maxLength={24}
             onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
           />
-          <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll name-setup__locator" onClick={handleFindMyself}>
+          <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll name-setup__locator" title="Find my avatar" onClick={handleFindMyself}>
             ⌖
           </button>
         </div>
@@ -103,6 +103,7 @@ export function App() {
             <div class="u-bg-accent-ll character-item" key={id}>
               <button
                 class="u-bdr-0 u-bg-accent u-active-bg-accent-l character-button"
+                title="Click to select"
                 data-active={selectedAvatarId === id}
                 onMouseEnter={() => setDemoAvatarId(id)}
                 onfocusin={() => setDemoAvatarId(id)}
@@ -182,7 +183,7 @@ export function App() {
                 ))}
               </dl>
             </details>
-            <button class="u-pad-0 u-bdr-0 map-preview" onClick={() => handleSelectMap(mapKey, mapData)}>
+            <button class="u-pad-0 u-bdr-0 map-preview" title="Click to select" onClick={() => handleSelectMap(mapKey, mapData)}>
               <img class="map-preview__image" src={mapData.imgUrl}></img>
             </button>
           </div>
