@@ -1,25 +1,19 @@
 import type { PrebuiltMap } from "assets/src/interface";
 import { Fragment } from "preact";
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
-import { avatars } from "./data/avatars";
+import type { HistoryMessage, MessageToUI } from "types";
 import { maps } from "./data/maps";
-import { AvatarController, getAvatarController } from "./utils/avatar-controller";
+import { useMePanel } from "./hooks/use-me-panel";
+import type { AvatarController } from "./utils/avatar-controller";
 import { sendMessage } from "./utils/ipc";
 import { throttle } from "./utils/throttle";
-import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
+import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
 export const CHAT_POLLING_INTERVAL = 1000;
 
-const allAvatars = Object.entries(avatars);
 const allMaps = Object.entries(maps);
 
 export function App() {
-  const storedNickname = useMemo(() => localStorage.getItem("nickname") ?? "", []);
-  const storedAvatarId = useMemo(() => localStorage.getItem("avatarId") ?? allAvatars[0][0], []);
-
-  const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
-
   const handleNavTabClick = useCallback((e: Event) => {
     const sectionName = (e.target as HTMLElement).closest("[data-target-section]")?.getAttribute("data-target-section");
     if (sectionName) {
@@ -28,7 +22,21 @@ export function App() {
     }
   }, []);
 
-  const [nickname, setNickname] = useState(storedNickname);
+  const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
+
+  const {
+    activeDemoAvatarId,
+    activeDemoFrame,
+    allAvatars,
+    avatarController,
+    handleFindMyself,
+    handleNickname,
+    handleSelectAvatar,
+    nickname,
+    selectedAvatarId,
+    setDemoAvatarId,
+    setNickname,
+  } = useMePanel({ sendToMain });
 
   useEffect(() => {
     const handleMainMessage = (e: MessageEvent) => {
@@ -58,62 +66,7 @@ export function App() {
     return () => window.removeEventListener("message", handleMainMessage);
   }, []);
 
-  const handleNickname = useCallback((nickname: string) => {
-    const normalized = nickname.trim();
-    setNickname(normalized);
-    localStorage.setItem("nickname", normalized);
-  }, []);
-
-  useEffect(() => {
-    sendToMain({ nickname });
-  }, [nickname]);
-
-  const [selectedAvatarId, setSelectedAvatarId] = useState(storedAvatarId);
-
-  const handleSelectAvatar = useCallback((id: string) => {
-    localStorage.setItem("avatarId", id);
-    setSelectedAvatarId(id);
-  }, []);
-
-  useEffect(() => {
-    sendToMain({ avatarUrl: avatars[selectedAvatarId].imgUrl });
-  }, [selectedAvatarId]);
-
-  const avatarController = useMemo(
-    () => getAvatarController(avatars[selectedAvatarId], (change) => sendToMain({ ...change } as MessageToMain)),
-    [selectedAvatarId]
-  );
-
-  useEffect(() => {
-    avatarController.idle();
-  }, [avatarController]);
-
   useKeyboardEvents(avatarController);
-
-  const [activeDemoAvatarId, setDemoAvatarId] = useState<string | null>(null);
-  useEffect(() => {
-    if (activeDemoAvatarId === null) {
-      setDemoFrame(null);
-      return;
-    }
-    const activeAtlas = avatars[activeDemoAvatarId];
-    const demoAnimations = ["walkS", "walkW", "walkN", "walkE"];
-    const allFrames = demoAnimations.map((animationName) => activeAtlas.animations[animationName]).flat();
-    const scale = getAvatarScale(activeAtlas.tileSize);
-    let i = 0;
-    const timer = setInterval(() => {
-      setDemoFrame(getFrameCss(getDisplayFrame(scale, activeAtlas, allFrames[i])));
-      i = (i + 1) % allFrames.length;
-    }, 200);
-
-    return () => clearInterval(timer);
-  }, [activeDemoAvatarId]);
-  const [activeDemoFrame, setDemoFrame] = useState<any>(null);
-
-  const handleFindMyself = useCallback(() => {
-    avatarController.idle();
-    sendToMain({ findMyself: true });
-  }, [avatarController]);
 
   const handleChatKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
