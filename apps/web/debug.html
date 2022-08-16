@@ -14,6 +14,7 @@
     .debug-panel {
       display: flex;
       flex-direction: column;
+      gap: 8px;
     }
 
     iframe {
@@ -25,9 +26,9 @@
 </head>
 <body>
   <div class="debug-panel">
-    <label data-action="allow-polling"><input name="allow-poll" type="checkbox" />Allow history polling</label>
     <button data-action="reset">Reset</button>
     <button data-action="init-nickname">Init nickname</button>
+    <label data-action="allow-polling"><input name="allow-poll" type="checkbox" />Sync chat</label>
     <button data-action="clear-chat-history">Clear chat history</button>
     <button data-action="receive-message">Receive mock message</button>
     <button data-action="request-map">Request map</button>

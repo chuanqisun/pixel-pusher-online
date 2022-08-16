@@ -83,8 +83,6 @@
   - [DONE] Consistent focus outline
   - [DONE] Track active panel
   - [!] Place UI at upper right corner
-  - [!] Help and tips
-  - [!] Open source and CC license display
   - Keyboard input handling on tab control
   - Panel button pixel art
   - Auto open help tab on initial launch
@@ -93,6 +91,9 @@
   - Sound effect
   - Quick menu on the avatar
   - Preference panel
+- Info
+  - [!] Help and tips
+  - [!] Open source and CC license display
 - Pet
 - Infra
   - [DONE] Non-null origin web view
