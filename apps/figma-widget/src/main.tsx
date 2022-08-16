@@ -4,6 +4,7 @@ import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 const { useSyncedState, AutoLayout, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
 const HISTORY_MESSAGE_LIMIT = 128;
+const AVATAR_SIZE = 32;
 
 let isUiOpen = false;
 
@@ -42,6 +43,7 @@ function Widget() {
       (async () => {
         setUser(figma.currentUser);
 
+        widgetNode.name = figma.currentUser.name;
         widgetNode.setPluginData("userId", figma.currentUser.id);
         sendToUI({ defaultNickname: figma.currentUser.name });
 
@@ -66,7 +68,9 @@ function Widget() {
       }
 
       if (typeof message.nickname === "string") {
-        setNickname(message.nickname.length ? message.nickname : "???");
+        const displayNickname = message.nickname.length ? message.nickname : "???";
+        setNickname(displayNickname);
+        widgetNode.name = displayNickname;
       }
 
       if (message.transform) {
@@ -129,6 +133,25 @@ function Widget() {
       if (message.avatarUrl) {
         setImageUrl(message.avatarUrl);
       }
+
+      if (message.map) {
+        const { name, rows, cols, tileSize, imageBytes, spawnTiles } = message.map;
+        const image = figma.createImage(imageBytes);
+
+        const imageFill: ImagePaint = {
+          type: "IMAGE",
+          imageHash: image.hash,
+          scaleMode: "FILL",
+        };
+
+        const rect = figma.createRectangle();
+        rect.resize(cols * tileSize, rows * tileSize);
+        rect.fills = [imageFill];
+        rect.name = name;
+
+        const mapMetadata = { tileSize, spawnTiles };
+        rect.setPluginData("mapMetadata", JSON.stringify(mapMetadata));
+      }
     };
   });
 
@@ -150,7 +173,7 @@ function Widget() {
   };
 
   return (
-    <AutoLayout tooltip={user?.name} width={32} height={32} overflow="visible">
+    <AutoLayout tooltip={user?.name} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
       <AutoLayout
         fill={user?.color}
         padding={{ vertical: 2, horizontal: 4 }}
@@ -166,8 +189,8 @@ function Widget() {
       {transform && imageUrl && (
         <Rectangle
           onClick={handleAvatarClick}
-          width={32}
-          height={32}
+          width={AVATAR_SIZE}
+          height={AVATAR_SIZE}
           fill={{
             type: "image",
             scaleMode: "crop",

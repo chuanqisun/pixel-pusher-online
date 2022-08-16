@@ -1,3 +1,5 @@
+import type { TilePosition } from "types";
+
 export interface PrebuiltMap {
   name: string;
   imgUrl: string;
@@ -5,6 +7,7 @@ export interface PrebuiltMap {
   cols: number;
   tileSize: number;
   details: DetailItem[];
+  spawnTiles: TilePosition[];
 }
 
 export interface CharacterAtlas {
@@ -22,9 +25,7 @@ export interface DetailItem {
   value: string;
   link?: string;
 }
-export interface Frame {
-  row: number;
-  col: number;
+export interface Frame extends TilePosition {
   flipX?: boolean;
   duration?: number;
 }

@@ -34,7 +34,8 @@
   - Collision detection and prevention
 - Map
   - [!] One-click built-in map creation
-  - [!] Prevent covering avatars
+  - [!] Spawn on point
+  - Prevent covering avatars
   - Map scale adjustment
   - Auto-align to pixel grid
   - Tiled map builder

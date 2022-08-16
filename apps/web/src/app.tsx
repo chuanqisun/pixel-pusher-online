@@ -142,7 +142,26 @@ export function App() {
   }, [lastId]);
 
   const handleSelectMap = useCallback((selectedMap: PrebuiltMap) => {
-    sendToMain({ map: selectedMap });
+    function dataUriToBytes(uri: string) {
+      const byteString = window.atob(uri.split(",")[1]);
+      const bytes = new Uint8Array(new ArrayBuffer(byteString.length));
+
+      for (let i = 0; i < byteString.length; i++) {
+        bytes[i] = byteString.charCodeAt(i);
+      }
+
+      return bytes;
+    }
+    sendToMain({
+      map: {
+        name: selectedMap.name,
+        imageBytes: dataUriToBytes(selectedMap.imgUrl),
+        rows: selectedMap.rows,
+        cols: selectedMap.cols,
+        tileSize: selectedMap.tileSize,
+        spawnTiles: selectedMap.spawnTiles,
+      },
+    });
   }, []);
 
   return (

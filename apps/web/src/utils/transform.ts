@@ -1,5 +1,7 @@
 import type { CharacterAtlas, Frame } from "assets";
 
+export const AVATAR_SIZE = 32;
+
 export interface DisplayFrame {
   url: string;
   mapWidth: number;
@@ -54,4 +56,4 @@ export function getScale(targetSize: number, srcSize: number) {
   return Math.floor(targetSize / srcSize); // TODO optimize perf
 }
 
-export const getAvatarScale = getScale.bind(null, 32);
+export const getAvatarScale = getScale.bind(null, AVATAR_SIZE);

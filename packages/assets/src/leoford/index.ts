@@ -18,5 +18,10 @@ export const leowood: PrebuiltMap = {
       link: "https://franopx.itch.io",
     },
   ],
+  spawnTiles: [
+    { row: 8, col: 7 },
+    { row: 17, col: 10 },
+    { row: 7, col: 15 },
+  ],
   imgUrl,
 };

@@ -1,5 +1,3 @@
-import type { PrebuiltMap } from "assets/src/interface";
-
 export interface MessageToUI {
   defaultNickname?: string;
   reset?: ture;
@@ -11,7 +9,7 @@ export interface MessageToMain {
   nickname?: string;
   transform?: AffineMatrix;
   newMessage?: NewMessage;
-  map?: PrebuiltMap;
+  map?: MapSelection;
   move?: Direction;
   avatarUrl?: string;
   getHistoryMessages?: GetMessage;
@@ -37,3 +35,17 @@ export interface GetMessage {
 }
 
 export type Direction = "N" | "E" | "S" | "W";
+
+export interface MapSelection {
+  name: string;
+  imageBytes: Uint8Array;
+  rows: number;
+  cols: number;
+  tileSize: number;
+  spawnTiles: TilePosition[];
+}
+
+export interface TilePosition {
+  row: number;
+  col: number;
+}
