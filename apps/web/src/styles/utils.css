@@ -31,6 +31,10 @@
   background-color: white;
 }
 
+.u-focus-bg-wt:focus {
+  background-color: white;
+}
+
 .u-bg-bk {
   background-color: black;
 }

@@ -189,7 +189,7 @@ export function App() {
       <section class="u-bg-accent-ll app-layout__main nav-section character-layout active" data-section="character">
         <div class="u-bg-accent-l name-setup character-layout__header">
           <input
-            class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt name-setup__nickname"
+            class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt u-focus-bg-wt name-setup__nickname"
             name="nickname"
             placeholder="Nickname"
             type="text"
@@ -257,7 +257,7 @@ export function App() {
           maxLength={255}
           spellcheck={false}
           rows={3}
-          class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt chat-layout__text-box"
+          class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt u-focus-bg-wt chat-layout__text-box"
           placeholder='Press "ENTER" to send'
           onKeyDown={handleChatKeyDown}
         ></textarea>
