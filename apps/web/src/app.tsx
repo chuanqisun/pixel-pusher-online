@@ -1,6 +1,8 @@
+import { Fragment } from "preact";
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
 import { avatars } from "./data/avatars";
+import { maps } from "./data/maps";
 import { AvatarController, getAvatarController } from "./utils/avatar-controller";
 import { sendMessage } from "./utils/ipc";
 import { throttle } from "./utils/throttle";
@@ -8,7 +10,9 @@ import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from
 
 export const AVATAR_SIZE = 32;
 export const CHAT_POLLING_INTERVAL = 1000;
+
 const allAvatars = Object.entries(avatars);
+const allMaps = Object.entries(maps);
 
 export function App() {
   const storedNickname = useMemo(() => localStorage.getItem("nickname") ?? "", []);
@@ -206,7 +210,33 @@ export function App() {
       </section>
 
       <section class="app-layout__main nav-section" data-section="map">
-        <h1>Map</h1>
+        {allMaps.map(([mapKey, mapData]) => (
+          <div key={mapKey}>
+            <details>
+              <summary>{mapData.name}</summary>
+              <dl class="metadata-list">
+                {mapData.details.map((item) => (
+                  <Fragment key={item.key}>
+                    <dt>{item.key}</dt>
+
+                    <dd>
+                      {item.link ? (
+                        <a href={item.link} target="_blank">
+                          {item.value}
+                        </a>
+                      ) : (
+                        item.value
+                      )}
+                    </dd>
+                  </Fragment>
+                ))}
+              </dl>
+            </details>
+            <button class="u-pad-0 u-bdr-0 map-preview">
+              <img class="map-preview__image" src={mapData.imgUrl}></img>
+            </button>
+          </div>
+        ))}
       </section>
     </>
   );

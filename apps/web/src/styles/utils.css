@@ -6,11 +6,19 @@
 
 /* BORDER */
 
+.u-bdr-0 {
+  border: none;
+}
+
 .u-bdr-2 {
   border: 2px solid black;
 }
 
 /* SPACING */
+
+.u-pad-0 {
+  padding: 0;
+}
 
 .u-pad-8 {
   padding-inline: 8px;

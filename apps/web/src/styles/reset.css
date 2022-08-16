@@ -7,3 +7,7 @@
 button {
   cursor: pointer;
 }
+
+summary {
+  cursor: pointer;
+}
