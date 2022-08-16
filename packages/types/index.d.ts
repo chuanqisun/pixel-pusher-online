@@ -38,10 +38,10 @@ export type Direction = "N" | "E" | "S" | "W";
 
 export interface MapSelection {
   name: string;
+  key: string;
   imageBytes: Uint8Array;
   rows: number;
   cols: number;
-  tileSize: number;
   spawnTiles: TilePosition[];
 }
 

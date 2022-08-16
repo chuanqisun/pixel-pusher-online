@@ -19,6 +19,7 @@
   - Gear system
 - Avatar
   - [DONE] Bring to top on center
+  - [!] When map already exists, spawn on point
   - [!] Handle clicking on other people's avatar
     - Use notify API to offer Create or Find myself options
   - Auto-align to pixel grid
@@ -36,8 +37,10 @@
   - Smooth walk animation
   - Collision detection and prevention
 - Map
-  - [!] One-click built-in map creation
-  - [!] Spawn on point
+  - [DONE] One-click built-in map creation
+  - [DONE] Spawn creator on fixed point
+  - [DONE] Enforce single map per file
+  - Spawn on random points
   - Transfer raw bytes in shared memory from UI to main thread
   - Prevent covering avatars
   - Map scale adjustment

@@ -141,7 +141,7 @@ export function App() {
     (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
   }, [lastId]);
 
-  const handleSelectMap = useCallback((selectedMap: PrebuiltMap) => {
+  const handleSelectMap = useCallback((key: string, selectedMap: PrebuiltMap) => {
     function dataUriToBytes(uri: string) {
       const byteString = window.atob(uri.split(",")[1]);
       const bytes = new Uint8Array(new ArrayBuffer(byteString.length));
@@ -155,11 +155,11 @@ export function App() {
 
     sendToMain({
       map: {
+        key,
         name: selectedMap.name,
         imageBytes: dataUriToBytes(selectedMap.imgUrl),
         rows: selectedMap.rows,
         cols: selectedMap.cols,
-        tileSize: selectedMap.tileSize,
         spawnTiles: selectedMap.spawnTiles,
       },
     });
@@ -257,7 +257,7 @@ export function App() {
                 ))}
               </dl>
             </details>
-            <button class="u-pad-0 u-bdr-0 map-preview" onClick={() => handleSelectMap(mapData)}>
+            <button class="u-pad-0 u-bdr-0 map-preview" onClick={() => handleSelectMap(mapKey, mapData)}>
               <img class="map-preview__image" src={mapData.imgUrl}></img>
             </button>
           </div>

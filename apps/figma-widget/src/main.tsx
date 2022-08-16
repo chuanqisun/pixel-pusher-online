@@ -138,7 +138,7 @@ function Widget() {
       }
 
       if (message.map) {
-        const { name, rows, cols, tileSize, imageBytes, spawnTiles } = message.map;
+        const { name, rows, cols, key, imageBytes, spawnTiles } = message.map;
         const image = figma.createImage(imageBytes);
 
         const imageFill: ImagePaint = {
@@ -146,6 +146,15 @@ function Widget() {
           imageHash: image.hash,
           scaleMode: "FILL",
         };
+
+        const mapMetadata = { key, tileSize: AVATAR_SIZE, spawnTiles };
+
+        // no effect on the same map, just update metadata
+        const mapNodes = figma.currentPage.findChildren((node) => node.getPluginDataKeys().includes("mapMetadata"));
+        if (mapNodes.length === 1 && JSON.parse(mapNodes[0].getPluginData("mapMetadata")).key === key) {
+          mapNodes[0].setPluginData("mapMetadata", JSON.stringify(mapMetadata));
+          return;
+        }
 
         // clean up other maps on the canvas
         figma.currentPage.findChildren((node) => node.getPluginDataKeys().includes("mapMetadata")).forEach((node) => node.remove());
@@ -164,7 +173,6 @@ function Widget() {
 
         alignViewport(getNodeCenter(widgetNode));
 
-        const mapMetadata = { tileSize: AVATAR_SIZE, spawnTiles };
         rect.setPluginData("mapMetadata", JSON.stringify(mapMetadata));
         console.log("[map] updated", rect);
       }
