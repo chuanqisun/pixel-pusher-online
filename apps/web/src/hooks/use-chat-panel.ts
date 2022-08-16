@@ -49,12 +49,19 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
   }, []);
 
   const chatMessagesRef = useRef<HTMLDivElement>(null);
+
+  // track unread
   useEffect(() => {
-    (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
     if (!isActive && lastId) {
       setIsUnread(true);
     }
   }, [lastId]);
+
+  // autoscroll to bottom when last id changes
+  useEffect(() => {
+    if (!isActive) return;
+    (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
+  }, [isActive, lastId]);
 
   const chatBoxRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {

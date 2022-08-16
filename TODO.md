@@ -21,7 +21,7 @@
 - Avatar
   - [DONE] Bring to top on center
   - [DONE] When map already exists, spawn on point
-  - [!] PC walk drift issue
+  - [WONTFIX] PC walk drift issue (due to viewport congestion)
   - [!] Center on Avatar when open UI
   - Use notify API to offer Create or Find myself options
   - Indicating currenly active avatar
@@ -69,6 +69,8 @@
   - [DONE] Reduce polling rate when not in chat
   - [DONE] Auto-focus on open panel
   - [DONE] Indicate new message
+  - [DONE] Scroll to bottom on open
+  - [!] Pause scroll when user is browsing history
   - Message length reminder
   - Timestamp for older message
   - Private text chat
