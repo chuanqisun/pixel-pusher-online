@@ -22,6 +22,11 @@ export function useMePanel({ sendToMain }: UseMePanelProps) {
     localStorage.setItem("nickname", normalized);
   }, []);
 
+  const handleDefaultNickname = useCallback((defaultNickname: string) => {
+    setNickname((prevNickname) => (prevNickname?.length ? prevNickname : defaultNickname!));
+    localStorage.setItem("nickname", defaultNickname);
+  }, []);
+
   useEffect(() => {
     sendToMain({ nickname });
   }, [nickname]);
@@ -78,10 +83,10 @@ export function useMePanel({ sendToMain }: UseMePanelProps) {
     avatarController,
     handleFindMyself,
     handleNickname,
+    handleDefaultNickname,
     handleSelectAvatar,
     nickname,
     selectedAvatarId,
     setDemoAvatarId,
-    setNickname,
   };
 }

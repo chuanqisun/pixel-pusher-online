@@ -28,11 +28,11 @@ export function App() {
     avatarController,
     handleFindMyself,
     handleNickname,
+    handleDefaultNickname,
     handleSelectAvatar,
     nickname,
     selectedAvatarId,
     setDemoAvatarId,
-    setNickname,
   } = useMePanel({ sendToMain });
 
   useKeyboardControl(avatarController);
@@ -45,14 +45,13 @@ export function App() {
     const handleMainMessage = (e: MessageEvent) => {
       const pluginMessage = e.data.pluginMessage as MessageToUI;
       console.log(`[ipc] Main -> UI`, pluginMessage);
-      if (pluginMessage.defaultNickname) {
-        setNickname((prevNickname) => (prevNickname?.length ? prevNickname : pluginMessage.defaultNickname!));
-        localStorage.setItem("nickname", pluginMessage.defaultNickname);
-      }
-
       if (pluginMessage.reset) {
         localStorage.clear();
         location.reload();
+      }
+
+      if (pluginMessage.defaultNickname) {
+        handleDefaultNickname(pluginMessage.defaultNickname);
       }
 
       if (pluginMessage.historyMessages) {
