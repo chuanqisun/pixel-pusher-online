@@ -73,7 +73,7 @@ window.addEventListener("click", (e) => {
 });
 
 function sendMessageFromMockMain(message: MessageToUI) {
-  document.querySelector("iframe")!.contentWindow!.postMessage({ pluginMessage: message });
+  document.querySelector("iframe")!.contentWindow!.postMessage({ pluginMessage: message }, "*");
 }
 
 function getMockHistory(): HistoryMessage[] {
