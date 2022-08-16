@@ -1,6 +1,7 @@
 export interface MessageToUI {
   defaultNickname?: string;
-  reset?: ture;
+  requestMap?: true;
+  reset?: true;
   historyMessages?: HistoryMessage[];
 }
 

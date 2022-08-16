@@ -19,9 +19,9 @@ export const leowood: PrebuiltMap = {
     },
   ],
   spawnTiles: [
-    { row: 8, col: 7 },
-    { row: 17, col: 10 },
-    { row: 7, col: 15 },
+    { row: 7, col: 15 }, // Inn
+    { row: 8, col: 7 }, // Pub
+    { row: 17, col: 10 }, // Hispital
   ],
   imgUrl,
 };

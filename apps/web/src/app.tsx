@@ -48,6 +48,10 @@ export function App() {
       if (pluginMessage.historyMessages) {
         setChatMessages(pluginMessage.historyMessages);
       }
+
+      if (pluginMessage.requestMap) {
+        handleSelectMap(...allMaps[0]);
+      }
     };
 
     window.addEventListener("message", handleMainMessage);

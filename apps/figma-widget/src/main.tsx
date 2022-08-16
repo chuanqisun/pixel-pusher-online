@@ -1,5 +1,5 @@
 // This is a counter widget with buttons to increment and decrement the number.
-import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
+import type { HistoryMessage, MessageToMain, MessageToUI, TilePosition } from "types";
 
 const { useSyncedState, AutoLayout, Rectangle, Text, useWidgetId, useEffect, waitForTask } = figma.widget;
 
@@ -7,6 +7,12 @@ const HISTORY_MESSAGE_LIMIT = 128;
 const AVATAR_SIZE = 32;
 
 let isUiOpen = false;
+
+interface MapMetadata {
+  key: string;
+  tileSize: number;
+  spawnTiles: TilePosition[];
+}
 
 function Widget() {
   const widgetId = useWidgetId();
@@ -35,26 +41,32 @@ function Widget() {
     if (user) return;
 
     // find and clean other instances of the same avatar
-    const otherInstances = figma.currentPage
+    figma.currentPage
       .findWidgetNodesByWidgetId(widgetNode.widgetId)
-      .filter((node) => node.getPluginData("userId") === figma.currentUser.id);
+      .filter((node) => node.getPluginData("userId") === figma.currentUser.id)
+      .forEach((instance) => instance.remove());
 
-    waitForTask(
-      (async () => {
-        setUser(figma.currentUser);
+    widgetNode.name = figma.currentUser.name;
+    widgetNode.setPluginData("userId", figma.currentUser.id);
 
-        widgetNode.name = figma.currentUser.name;
-        widgetNode.setPluginData("userId", figma.currentUser.id);
-        alignViewport(getNodeCenter(widgetNode));
-        figma.viewport.zoom = 2;
+    const existingMapMetadataString = figma.currentPage.findChild((node) => node.getPluginDataKeys().includes("mapMetadata"))?.getPluginData("mapMetadata");
+    if (existingMapMetadataString) {
+      // spawn on map
+      const data = JSON.parse(existingMapMetadataString) as MapMetadata;
+      spawnWidgetOnMap(AVATAR_SIZE, widgetNode, data.spawnTiles[0]);
+    } else {
+      // request map
+      sendToUI({ requestMap: true });
+    }
 
-        sendToUI({ defaultNickname: figma.currentUser.name });
+    alignViewport(getNodeCenter(widgetNode));
+    figma.viewport.zoom = 2;
+    setUser(figma.currentUser);
 
-        console.log(`Cleanup: ${otherInstances.length} other instances`);
-        otherInstances.forEach((instance) => instance.remove());
-      })()
-    );
+    sendToUI({ defaultNickname: figma.currentUser.name });
   });
+
+  // Request a map if none exists
 
   // Handle user input
   useEffect(() => {
@@ -147,11 +159,12 @@ function Widget() {
           scaleMode: "FILL",
         };
 
-        const mapMetadata = { key, tileSize: AVATAR_SIZE, spawnTiles };
+        const mapMetadata: MapMetadata = { key, tileSize: AVATAR_SIZE, spawnTiles };
 
         // no effect on the same map, just update metadata
         const mapNodes = figma.currentPage.findChildren((node) => node.getPluginDataKeys().includes("mapMetadata"));
         if (mapNodes.length === 1 && JSON.parse(mapNodes[0].getPluginData("mapMetadata")).key === key) {
+          console.log(`[map] already exists. Update metadata only`, mapMetadata);
           mapNodes[0].setPluginData("mapMetadata", JSON.stringify(mapMetadata));
           return;
         }
@@ -162,14 +175,11 @@ function Widget() {
         const rect = figma.createRectangle();
         rect.resize(cols * AVATAR_SIZE, rows * AVATAR_SIZE);
         rect.fills = [imageFill];
+        rect.locked = true; // prevent accidental move
         rect.name = name;
 
         const allAvatarNodes = figma.currentPage.findWidgetNodesByWidgetId(widgetNode.widgetId);
-        allAvatarNodes.forEach((node) => {
-          node.x = spawnTiles[0].col * AVATAR_SIZE;
-          node.y = spawnTiles[0].row * AVATAR_SIZE;
-          figma.currentPage.appendChild(node); // bring above the map
-        });
+        allAvatarNodes.forEach((node) => spawnWidgetOnMap(AVATAR_SIZE, node, spawnTiles[0]));
 
         alignViewport(getNodeCenter(widgetNode));
 
@@ -249,6 +259,12 @@ function getHistoryMessages(): HistoryMessage[] {
   const storedMessageString = figma.currentPage.getPluginData("historyMessages");
   const storedMessages: HistoryMessage[] = storedMessageString.length ? JSON.parse(storedMessageString) : [];
   return storedMessages;
+}
+
+function spawnWidgetOnMap(avatarSize: number, widgetNode: WidgetNode, spawnTile: TilePosition) {
+  widgetNode.x = spawnTile.col * avatarSize;
+  widgetNode.y = spawnTile.row * avatarSize;
+  figma.currentPage.appendChild(widgetNode); // bring above the map
 }
 
 figma.widget.register(Widget);
