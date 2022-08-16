@@ -39,12 +39,13 @@
   padding: 24px 16px;
   image-rendering: pixelated;
   filter: grayscale(0.8);
-  will-change: transform;
-  transition: all 200ms;
+  will-change: filter, background-color;
+  transition: filter 200ms, background-color 200ms;
 }
 
 .character-button[data-active] {
   filter: grayscale(0);
+  transition: none;
 }
 
 .character-button:where(:hover, :focus) {
@@ -115,7 +116,7 @@
   max-height: 80px;
   object-fit: cover;
   filter: grayscale(0.8);
-  will-change: transform filter;
+  will-change: transform, filter;
   transition: all 200ms;
 }
 .map-preview:where(:hover, :focus) .map-preview__image {

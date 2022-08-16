@@ -29,6 +29,14 @@
   background-color: var(--color-accent-ll);
 }
 
+.u-active-bg-accent-l:active {
+  background-color: var(--color-accent-l);
+}
+
+.u-active-bg-accent-ll:active {
+  background-color: var(--color-accent-ll);
+}
+
 .u-hover-bg-accent-l:where(:hover, :focus) {
   background-color: var(--color-accent-l);
 }

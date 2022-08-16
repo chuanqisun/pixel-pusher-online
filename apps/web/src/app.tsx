@@ -172,16 +172,16 @@ export function App() {
   return (
     <>
       <nav id="nav-tabs" class="u-bg-bk nav-tabs" onClick={handleNavTabClick}>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="character">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="character">
           Me
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="chat">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="chat">
           Chat
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="map">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="map">
           Map
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="help">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="help">
           Info
         </button>
       </nav>
@@ -199,7 +199,7 @@ export function App() {
             maxLength={24}
             onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
           />
-          <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l name-setup__locator" onClick={handleFindMyself}>
+          <button class="u-bdr-2 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll name-setup__locator" onClick={handleFindMyself}>
             ⌖
           </button>
         </div>
@@ -207,7 +207,7 @@ export function App() {
           {allAvatars.map(([id, atlas]) => (
             <div class="u-bg-accent-ll character-item" key={id}>
               <button
-                class="u-bdr-0 u-bg-accent character-button"
+                class="u-bdr-0 u-bg-accent u-active-bg-accent-l character-button"
                 data-active={selectedAvatarId === id}
                 onMouseEnter={() => setDemoAvatarId(id)}
                 onfocusin={() => setDemoAvatarId(id)}
