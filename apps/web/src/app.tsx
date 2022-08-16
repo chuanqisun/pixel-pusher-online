@@ -172,16 +172,16 @@ export function App() {
   return (
     <>
       <nav id="nav-tabs" class="nav-tabs u-bdr-2 u-bg-bk" onClick={handleNavTabClick}>
-        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="character">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="character">
           Me
         </button>
-        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="chat">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="chat">
           Chat
         </button>
-        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="map">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="map">
           Map
         </button>
-        <button class="u-bdr-0 u-fs-24 u-bg-accent u-hover-bg-accent-l" data-target-section="help">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="help">
           Info
         </button>
       </nav>
@@ -189,7 +189,7 @@ export function App() {
       <section class="app-layout__main nav-section character-layout active" data-section="character">
         <div class="name-setup character-layout__header">
           <input
-            class="u-bdr-2 u-pad-8 u-fs-16 name-setup__nickname"
+            class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt name-setup__nickname"
             name="nickname"
             placeholder="Nickname"
             type="text"
@@ -205,9 +205,9 @@ export function App() {
         </div>
         <div class="character-list u-bg-accent-ll character-layout__scroll">
           {allAvatars.map(([id, atlas]) => (
-            <div class="u-bdr-2 u-bg-accent-l u-hover-bg-wt character-item" key={id}>
+            <div class="u-bdr-2 u-bg-accent-l u-hover-bg-accent-ll character-item" key={id}>
               <button
-                class="u-bdr-0 u-fs-24 u-bg-accent character-button"
+                class="u-bdr-0 u-bg-accent character-button"
                 data-active={selectedAvatarId === id}
                 onMouseEnter={() => setDemoAvatarId(id)}
                 onMouseLeave={() => setDemoAvatarId(null)}
@@ -215,7 +215,7 @@ export function App() {
               >
                 <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.tileSize), atlas)}></div>
               </button>
-              <p>
+              <p class="character-bio">
                 <div>{atlas.name}</div>
                 <dl class="character-details">
                   {atlas.details.map((item) => (
@@ -249,7 +249,7 @@ export function App() {
                 </span>
                 <time class="message-meta__time">{new Date(chatMessage.timestamp).toLocaleTimeString()}</time>
               </div>
-              <p class="message-body">{chatMessage.content}</p>
+              <p class="u-bg-accent-ll message-body">{chatMessage.content}</p>
             </article>
           ))}
         </div>
@@ -257,7 +257,7 @@ export function App() {
           maxLength={255}
           spellcheck={false}
           rows={3}
-          class="u-bdr-2 u-pad-8 u-fs-16 chat-layout__text-box"
+          class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt chat-layout__text-box"
           placeholder='Press "ENTER" to send'
           onKeyDown={handleChatKeyDown}
         ></textarea>
@@ -266,13 +266,12 @@ export function App() {
       <section class="app-layout__main nav-section maps-layout" data-section="map">
         {allMaps.map(([mapKey, mapData]) => (
           <div class="map-item" key={mapKey}>
-            <details>
+            <details class="metadata-accordion">
               <summary>{mapData.name}</summary>
               <dl class="metadata-list">
                 {mapData.details.map((item) => (
                   <Fragment key={item.key}>
-                    <dt>{item.key}</dt>
-
+                    <dt>{item.key}:&nbsp;</dt>
                     <dd>
                       {item.link ? (
                         <a href={item.link} target="_blank">

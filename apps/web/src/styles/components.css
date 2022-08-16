@@ -30,25 +30,33 @@
   flex-direction: column;
   gap: 16px;
 }
+
 .character-item {
   display: flex;
-  gap: 8px;
   align-items: flex-start;
 }
+
 .character-button {
   padding: 16px;
   image-rendering: pixelated;
-  border-right: 2px solid black;
   filter: grayscale(0.8);
   will-change: transform;
   transition: all 200ms;
 }
+
 .character-button[data-active] {
   filter: grayscale(0);
 }
+
 .character-button:hover {
   filter: grayscale(0);
 }
+
+.character-bio {
+  padding-block: 4px;
+  padding-inline: 16px;
+}
+
 .character-details :where(dt, dd) {
   display: inline;
 }
@@ -73,7 +81,6 @@
 }
 
 .message-body {
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 4px;
 }
 
@@ -122,18 +129,20 @@
 }
 
 /* METADATA LIST */
+.metadata-accordion:hover summary::after {
+  content: " ▼";
+}
+.metadata-accordion summary {
+  list-style: none;
+}
+.metadata-accordion summary::marker, /* Latest Chrome, Edge, Firefox */ 
+.metadata-accordion summary::-webkit-details-marker /* Safari */ {
+  display: none;
+}
 .metadata-list {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0 16px;
   padding-block-start: 4px;
-}
-.metadata-list dt {
-  width: 140px;
-  text-align: end;
-}
-.metadata-list dd {
-  color: #666;
 }
 
 /* NAME SETUP */
@@ -165,5 +174,5 @@
 }
 
 .nav-button {
-  /* background-color: var(--orange-dark); */
+  height: 32px;
 }

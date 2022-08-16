@@ -1,7 +1,13 @@
 /* TYPOGRAPH */
 
+.u-fs-14 {
+  font-size: 14px;
+}
 .u-fs-16 {
   font-size: 16px;
+}
+.u-fs-18 {
+  font-size: 18px;
 }
 
 /* BACKGROUND */
@@ -17,6 +23,9 @@
 
 .u-hover-bg-accent-l:hover {
   background-color: var(--color-accent-l);
+}
+.u-hover-bg-accent-ll:hover {
+  background-color: var(--color-accent-ll);
 }
 .u-hover-bg-wt:hover {
   background-color: white;
