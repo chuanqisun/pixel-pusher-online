@@ -183,3 +183,6 @@
 .nav-button {
   height: 32px;
 }
+.nav-button[data-active] {
+  background-color: var(--color-accent-l);
+}
