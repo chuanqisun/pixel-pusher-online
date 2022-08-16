@@ -132,16 +132,11 @@
   padding-inline: 16px;
   padding-block: 16px 8px;
 }
-.metadata-accordion:hover summary::before,
-.metadata-accordion summary:focus-visible::before {
-  content: "▼ ";
-  position: absolute;
-  left: 12px;
+.metadata-accordion:hover summary::after,
+.metadata-accordion summary:focus-visible::after {
+  content: " ▼";
 }
-.metadata-accordion:hover summary,
-.metadata-accordion summary:focus-visible {
-  padding-inline-start: 16px;
-}
+
 .metadata-accordion summary {
   list-style: none;
 }
@@ -151,7 +146,6 @@
 }
 .metadata-list {
   padding-block-start: 4px;
-  padding-inline: 16px;
 }
 .metadata-list :where(dt, dd) {
   display: inline;
