@@ -11,3 +11,10 @@ button {
 summary {
   cursor: pointer;
 }
+
+a {
+  text-decoration-thickness: 2px;
+}
+a:not(:hover) {
+  text-decoration: none;
+}

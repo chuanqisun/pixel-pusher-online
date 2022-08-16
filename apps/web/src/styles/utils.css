@@ -10,6 +10,14 @@
   font-size: 18px;
 }
 
+/* FOREGROUND */
+.u-fg-accent-d {
+  color: var(--color-accent-d);
+}
+.u-fg-accent-dd {
+  color: var(--color-accent-dd);
+}
+
 /* BACKGROUND */
 .u-bg-accent {
   background-color: var(--color-accent);

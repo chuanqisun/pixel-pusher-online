@@ -171,7 +171,7 @@ export function App() {
 
   return (
     <>
-      <nav id="nav-tabs" class="nav-tabs u-bdr-2 u-bg-bk" onClick={handleNavTabClick}>
+      <nav id="nav-tabs" class="u-bg-bk nav-tabs" onClick={handleNavTabClick}>
         <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l nav-button" data-target-section="character">
           Me
         </button>
@@ -223,7 +223,7 @@ export function App() {
                       <dt>{item.key}: </dt>
                       <dd>
                         {item.link ? (
-                          <a href={item.link} target="_blank">
+                          <a class="u-fg-accent-d" href={item.link} target="_blank">
                             {item.value}
                           </a>
                         ) : (
@@ -270,18 +270,18 @@ export function App() {
               <summary>{mapData.name}</summary>
               <dl class="metadata-list">
                 {mapData.details.map((item) => (
-                  <Fragment key={item.key}>
+                  <div key={item.key}>
                     <dt>{item.key}:&nbsp;</dt>
                     <dd>
                       {item.link ? (
-                        <a href={item.link} target="_blank">
+                        <a class="u-fg-accent-dd" href={item.link} target="_blank">
                           {item.value}
                         </a>
                       ) : (
                         item.value
                       )}
                     </dd>
-                  </Fragment>
+                  </div>
                 ))}
               </dl>
             </details>

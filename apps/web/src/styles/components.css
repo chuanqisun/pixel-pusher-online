@@ -144,10 +144,11 @@
   display: none;
 }
 .metadata-list {
-  display: grid;
-  grid-template-columns: auto 1fr;
   padding-block-start: 4px;
   padding-inline: 16px;
+}
+.metadata-list :where(dt, dd) {
+  display: inline;
 }
 
 /* NAME SETUP */
@@ -172,6 +173,7 @@
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   gap: 2px;
+  border-block: 2px solid black;
 }
 
 .nav-section:not(.active) {

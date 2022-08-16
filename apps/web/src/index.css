@@ -4,6 +4,8 @@
 @import url("./styles/components.css");
 
 body {
+  --color-accent-dd: rgb(123, 47, 0);
+  --color-accent-d: rgb(154, 74, 0);
   --color-accent: rgb(243, 173, 75);
   --color-accent-l: rgb(238, 205, 145);
   --color-accent-ll: rgb(252, 239, 218);

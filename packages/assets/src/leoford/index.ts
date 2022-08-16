@@ -8,12 +8,12 @@ export const leowood: PrebuiltMap = {
   tileSize: 16,
   details: [
     {
-      key: "Map design",
+      key: "Map artist",
       value: "d0tn3t",
       link: "https://chuanqisun.com",
     },
     {
-      key: "Tile design",
+      key: "Tile artist",
       value: "franopx",
       link: "https://franopx.itch.io",
     },
