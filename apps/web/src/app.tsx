@@ -30,7 +30,7 @@ export function App() {
 
   useKeyboardControl(avatarController);
 
-  const { setChatMessages, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain, isActive: activeTab === "chat" });
+  const { setChatMessages, chatBoxRef, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain, isActive: activeTab === "chat" });
 
   const { allMaps, handleSelectMap } = useMapPanel({ sendToMain });
 
@@ -150,6 +150,7 @@ export function App() {
           ))}
         </div>
         <textarea
+          ref={chatBoxRef}
           maxLength={255}
           spellcheck={false}
           rows={3}

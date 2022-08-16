@@ -66,7 +66,7 @@
   - [DONE] Public text chat
   - [DONE] Auto-scroll to last message
   - [DONE] Reduce polling rate when not in chat
-  - [!] Auto-focus on open panel
+  - [DONE] Auto-focus on open panel
   - [!] Indicate new message
   - Message length reminder
   - Timestamp for older message
