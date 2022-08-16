@@ -206,13 +206,13 @@ function Widget() {
     <AutoLayout tooltip={user?.name} onClick={noop} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
       <AutoLayout
         fill={user?.color}
-        padding={{ vertical: 2, horizontal: 4 }}
-        cornerRadius={0}
+        padding={{ vertical: 4, horizontal: 6 }}
+        cornerRadius={4}
         positioning="absolute"
         stroke={"#000"}
         strokeWidth={2}
         x={{ type: "center", offset: 0 }}
-        y={{ type: "top", offset: -24 }}
+        y={{ type: "top", offset: -28 }}
       >
         <Text fill="#fff" opacity={1} fontSize={12} horizontalAlignText="center">
           {nickname}
