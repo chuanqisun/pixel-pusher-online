@@ -43,6 +43,10 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
     },
     isActive ? ACTIVE_POLL_INTERVAL : BACKGROUND_POLL_INTERVAL
   );
+  // fetch initial message
+  useEffect(() => {
+    sendToMain({ getHistoryMessages: { lastId } });
+  }, []);
 
   const chatMessagesRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
