@@ -190,9 +190,11 @@ kbd {
   gap: 8px;
 }
 .name-setup__nickname {
+  min-width: 0; /* It may need to shrink on some Windows */
   flex-grow: 1;
 }
 .name-setup__locator {
+  flex-shrink: 0;
   width: 40px;
   font-size: 32px;
   line-height: 32px;
