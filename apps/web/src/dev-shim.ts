@@ -55,6 +55,9 @@ window.addEventListener("click", (e) => {
     case "init-nickname":
       sendMessageFromMockMain({ defaultNickname: "Test user" });
       break;
+    case "receive-message":
+      mockMainState.historyMessages = [...mockMainState.historyMessages, getMockMessage()];
+      break;
     case "clear-chat-history":
       mockMainState.historyMessages = [];
       sendMessageFromMockMain({
@@ -65,6 +68,7 @@ window.addEventListener("click", (e) => {
       sendMessageFromMockMain({
         requestMap: true,
       });
+      break;
   }
 });
 
@@ -91,4 +95,16 @@ function getMockHistory(): HistoryMessage[] {
       timestamp: Date.now() - 30000,
     },
   ];
+}
+
+let mockMessageSeq = 0;
+function getMockMessage() {
+  return {
+    msgId: `mock-msg-id-${mockMessageSeq++}`,
+    fromId: "mock-user-03",
+    fromNickname: "Bot (test)",
+    fromColor: "#333333",
+    content: `Test message ${Date.now()}`,
+    timestamp: Date.now(),
+  };
 }
