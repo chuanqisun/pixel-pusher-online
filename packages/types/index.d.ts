@@ -1,3 +1,5 @@
+import type { PrebuiltMap } from "assets/src/interface";
+
 export interface MessageToUI {
   defaultNickname?: string;
   reset?: ture;
@@ -9,6 +11,7 @@ export interface MessageToMain {
   nickname?: string;
   transform?: AffineMatrix;
   newMessage?: NewMessage;
+  map?: PrebuiltMap;
   move?: Direction;
   imgUrl?: string;
   getHistoryMessages?: GetMessage;

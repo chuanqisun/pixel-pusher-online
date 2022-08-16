@@ -2,7 +2,7 @@ import type { PrebuiltMap } from "../interface";
 import imgUrl from "./leoford.png";
 
 export const leowood: PrebuiltMap = {
-  name: "Leowoord",
+  name: "Leowood",
   rows: 24,
   cols: 32,
   tileSize: 16,

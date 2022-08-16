@@ -5,17 +5,24 @@ console.log("[debug-shim] ready");
 
 const mockMainState = {
   historyMessages: getMockHistory(),
+  allowPolling: false,
 };
 
 window.addEventListener("message", (e) => {
-  console.log(e.data?.pluginMessage);
+  const message = e.data?.pluginMessage as MessageToMain;
+  if (!mockMainState.allowPolling && message.getHistoryMessages) {
+    // don't log
+  } else {
+    console.log(`[debug] UI -> Main`, message);
+  }
 
   const pluginMessage = e.data?.pluginMessage as MessageToMain;
 
   if (pluginMessage.getHistoryMessages) {
-    sendMessageFromMockMain({
-      historyMessages: mockMainState.historyMessages,
-    });
+    mockMainState.allowPolling &&
+      sendMessageFromMockMain({
+        historyMessages: mockMainState.historyMessages,
+      });
   }
 
   if (pluginMessage.newMessage) {
@@ -34,8 +41,14 @@ window.addEventListener("message", (e) => {
 });
 
 window.addEventListener("click", (e) => {
-  const action = (e.target as HTMLElement).closest("[data-action]")?.getAttribute("data-action");
+  const target = (e.target as HTMLElement).closest("[data-action]");
+  const action = target?.closest("[data-action]")?.getAttribute("data-action");
+
   switch (action) {
+    case "allow-polling":
+      console.log(target);
+      mockMainState.allowPolling = target!.querySelector("input")!.checked;
+      break;
     case "reset":
       sendMessageFromMockMain({ reset: true });
       break;

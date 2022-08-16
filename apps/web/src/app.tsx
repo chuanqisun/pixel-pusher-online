@@ -1,3 +1,4 @@
+import type { PrebuiltMap } from "assets/src/interface";
 import { Fragment } from "preact";
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import type { HistoryMessage, MessageToMain, MessageToUI } from "types";
@@ -8,8 +9,8 @@ import { sendMessage } from "./utils/ipc";
 import { throttle } from "./utils/throttle";
 import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
-export const AVATAR_SIZE = 32;
 export const CHAT_POLLING_INTERVAL = 1000;
+const DEBUG = false;
 
 const allAvatars = Object.entries(avatars);
 const allMaps = Object.entries(maps);
@@ -33,7 +34,7 @@ export function App() {
   useEffect(() => {
     const handleMainMessage = (e: MessageEvent) => {
       const pluginMessage = e.data.pluginMessage as MessageToUI;
-      console.log(`[ipc] received from main`, e.data.pluginMessage);
+      console.log(`[ipc] Main -> UI`, pluginMessage);
       if (pluginMessage.defaultNickname) {
         setNickname((prevNickname) => (prevNickname?.length ? prevNickname : pluginMessage.defaultNickname!));
         localStorage.setItem("nickname", pluginMessage.defaultNickname);
@@ -140,6 +141,10 @@ export function App() {
     (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
   }, [lastId]);
 
+  const handleSelectMap = useCallback((selectedMap: PrebuiltMap) => {
+    sendToMain({ map: selectedMap });
+  }, []);
+
   return (
     <>
       <nav id="nav-tabs" class="nav-tabs" onClick={handleNavTabClick}>
@@ -209,9 +214,9 @@ export function App() {
         ></textarea>
       </section>
 
-      <section class="app-layout__main nav-section" data-section="map">
+      <section class="app-layout__main nav-section maps-layout" data-section="map">
         {allMaps.map(([mapKey, mapData]) => (
-          <div key={mapKey}>
+          <div class="map-item" key={mapKey}>
             <details>
               <summary>{mapData.name}</summary>
               <dl class="metadata-list">
@@ -232,7 +237,7 @@ export function App() {
                 ))}
               </dl>
             </details>
-            <button class="u-pad-0 u-bdr-0 map-preview">
+            <button class="u-pad-0 u-bdr-0 map-preview" onClick={() => handleSelectMap(mapData)}>
               <img class="map-preview__image" src={mapData.imgUrl}></img>
             </button>
           </div>

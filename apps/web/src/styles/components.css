@@ -46,6 +46,18 @@
 }
 
 /* MAP */
+.maps-layout {
+  display: grid;
+  gap: 16px;
+  padding-block: 16px;
+  flex-grow: 0;
+  overflow-y: auto;
+}
+
+.map-item {
+  display: grid;
+  gap: 8px;
+}
 .map-preview {
   display: grid;
   width: 100%;
@@ -70,7 +82,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0 16px;
-  padding-block: 4px 8px;
+  padding-block-start: 4px;
 }
 .metadata-list dt {
   width: 140px;
