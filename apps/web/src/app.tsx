@@ -204,17 +204,37 @@ export function App() {
           </button>
         </div>
         <h2>Avatar</h2>
-        <div class="character-grid">
+        <div class="character-list">
           {allAvatars.map(([id, atlas]) => (
-            <button
-              class="character-button"
-              key={id}
-              onMouseEnter={() => setDemoAvatarId(id)}
-              onMouseLeave={() => setDemoAvatarId(null)}
-              onClick={() => handleSelectAvatar(id)}
-            >
-              <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.tileSize), atlas)}></div>
-            </button>
+            <div class="character-item" key={id}>
+              <button
+                class="character-button"
+                onMouseEnter={() => setDemoAvatarId(id)}
+                onMouseLeave={() => setDemoAvatarId(null)}
+                onClick={() => handleSelectAvatar(id)}
+              >
+                <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.tileSize), atlas)}></div>
+              </button>
+              <p>
+                <div>{atlas.name}</div>
+                <dl class="character-details">
+                  {atlas.details.map((item) => (
+                    <div key={item.key}>
+                      <dt>{item.key}: </dt>
+                      <dd>
+                        {item.link ? (
+                          <a href={item.link} target="_blank">
+                            {item.value}
+                          </a>
+                        ) : (
+                          item.value
+                        )}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </p>
+            </div>
           ))}
         </div>
       </section>

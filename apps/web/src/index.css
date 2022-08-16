@@ -16,14 +16,3 @@ body {
 #app {
   height: 100%;
 }
-
-.character-button {
-  padding: 16px;
-  image-rendering: pixelated;
-}
-
-.character-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
