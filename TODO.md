@@ -21,6 +21,8 @@
 - Avatar
   - [DONE] Bring to top on center
   - [DONE] When map already exists, spawn on point
+  - [!] PC walk drift issue
+  - [!] Center on Avatar when open UI
   - Use notify API to offer Create or Find myself options
   - Indicating currenly active avatar
   - Auto-align to pixel grid
