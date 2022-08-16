@@ -1,3 +1,7 @@
+/**
+ * A script that splits a single PNG into tiles given tile size and desired gap
+ */
+
 const TILE_SIZE = 16;
 const GAP = 2;
 
