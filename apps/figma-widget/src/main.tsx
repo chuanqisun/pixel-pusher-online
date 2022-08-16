@@ -45,6 +45,9 @@ function Widget() {
 
         widgetNode.name = figma.currentUser.name;
         widgetNode.setPluginData("userId", figma.currentUser.id);
+        alignViewport(getNodeCenter(widgetNode));
+        figma.viewport.zoom = 2;
+
         sendToUI({ defaultNickname: figma.currentUser.name });
 
         console.log(`Cleanup: ${otherInstances.length} other instances`);
@@ -158,6 +161,8 @@ function Widget() {
           node.y = spawnTiles[0].row * AVATAR_SIZE;
           figma.currentPage.appendChild(node); // bring above the map
         });
+
+        alignViewport(getNodeCenter(widgetNode));
 
         const mapMetadata = { tileSize: AVATAR_SIZE, spawnTiles };
         rect.setPluginData("mapMetadata", JSON.stringify(mapMetadata));
