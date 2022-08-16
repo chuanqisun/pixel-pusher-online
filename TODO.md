@@ -81,7 +81,8 @@
   - [DONE] Multi-tab panel system
   - [DONE] Smart initial positioning
   - [DONE] Consistent focus outline
-  - [!] Place panel at upper right corner
+  - [!] Place UI at upper right corner
+  - [!] Track active panel
   - [!] Help and tips
   - [!] Open source and CC license display
   - Keyboard input handling on tab control
