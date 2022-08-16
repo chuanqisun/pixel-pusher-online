@@ -73,7 +73,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    sendToMain({ imgUrl: avatars[selectedAvatarId].imgUrl });
+    sendToMain({ avatarUrl: avatars[selectedAvatarId].imgUrl });
   }, [selectedAvatarId]);
 
   const avatarController = useMemo(

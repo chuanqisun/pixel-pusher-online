@@ -13,7 +13,7 @@ export interface MessageToMain {
   newMessage?: NewMessage;
   map?: PrebuiltMap;
   move?: Direction;
-  imgUrl?: string;
+  avatarUrl?: string;
   getHistoryMessages?: GetMessage;
 }
 

@@ -126,8 +126,8 @@ function Widget() {
         }
       }
 
-      if (message.imgUrl) {
-        setImageUrl(message.imgUrl);
+      if (message.avatarUrl) {
+        setImageUrl(message.avatarUrl);
       }
     };
   });
