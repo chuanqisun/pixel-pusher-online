@@ -9,8 +9,8 @@
   - [DONE] Name display and customization
   - [DONE] Avatar selection list with static preview
   - [DONE] Character panel (self) in UI
-  - [!] "Start" button respawn to random point + reset zoom + center
-  - Nickname length limit
+  - [DONE] Nickname length limit
+  - [DONE] "Locate" button reset zoom, center, and idle at South
   - Avatar selection list with animated preview
   - Character panel (others)
   - Custom name plate color
@@ -20,7 +20,7 @@
   - Gear system
 - Avatar
   - [DONE] Bring to top on center
-  - [!] When map already exists, spawn on point
+  - [DONE] When map already exists, spawn on point
   - [!] Handle clicking on other people's avatar
     - Use notify API to offer Create or Find myself options
   - Auto-align to pixel grid
@@ -76,13 +76,13 @@
   - Video chat
 - UI
   - [DONE] Multi-tab panel system
-  - [!] Open source and CC license display
-  - [!] Auto open help tab on initial launch
+  - [DONE] Smart initial positioning
   - [!] Help and tips
-  - [!] Smart initial positioning
+  - [!] Open source and CC license display
   - [!] Panel button pixel art
   - [!] Consistent focus outline
   - [!] Keyboard input handling on tab control
+  - Auto open help tab on initial launch
   - Pixel art mouse cursor
   - Customizable keybinding
   - Sound effect

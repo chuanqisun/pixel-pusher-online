@@ -10,7 +10,6 @@ import { throttle } from "./utils/throttle";
 import { getAvatarScale, getDisplayFrame, getFrameCss, getStaticDemoFrame } from "./utils/transform";
 
 export const CHAT_POLLING_INTERVAL = 1000;
-const DEBUG = false;
 
 const allAvatars = Object.entries(avatars);
 const allMaps = Object.entries(maps);
@@ -112,8 +111,9 @@ export function App() {
   const [activeDemoFrame, setDemoFrame] = useState<any>(null);
 
   const handleFindMyself = useCallback(() => {
+    avatarController.idle();
     sendToMain({ findMyself: true });
-  }, []);
+  }, [avatarController]);
 
   const handleChatKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
@@ -188,16 +188,21 @@ export function App() {
 
       <section class="app-layout__main nav-section active" data-section="character">
         <h2>Name</h2>
-        <input
-          class="u-bdr-2 u-pad-8 u-fs-16"
-          name="nickname"
-          type="text"
-          required
-          value={nickname}
-          maxLength={24}
-          onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
-        />
-        <button onClick={handleFindMyself}>Locate</button>
+        <div class="name-setup">
+          <input
+            class="u-bdr-2 u-pad-8 u-fs-16 name-setup__nickname"
+            name="nickname"
+            type="text"
+            required
+            value={nickname}
+            spellcheck={false}
+            maxLength={24}
+            onInput={(e) => handleNickname((e.target as HTMLInputElement).value)}
+          />
+          <button class="u-bdr-2 name-setup__locator" onClick={handleFindMyself}>
+            ⌖
+          </button>
+        </div>
         <h2>Avatar</h2>
         <div class="character-grid">
           {allAvatars.map(([id, atlas]) => (

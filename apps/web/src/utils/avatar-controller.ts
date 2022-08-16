@@ -49,6 +49,7 @@ export function getAvatarController(atlas: CharacterAtlas, onChange: (change: Av
   const idle = () => {
     frameIndex = 0;
     currentPose = "idle";
+    currentDir = "S";
 
     onChange({ transform: getFigmaTransform(getFrames()[frameIndex]) });
   };

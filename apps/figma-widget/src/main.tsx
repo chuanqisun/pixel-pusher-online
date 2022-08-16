@@ -23,9 +23,13 @@ function Widget() {
   const [user, setUser] = useSyncedState<User | null>("user", null);
   const [nickname, setNickname] = useSyncedState("nickname", "Loading...");
 
-  // Auto-open UI on creation
+  // Auto-open UI on start
   useEffect(() => {
-    if (!isUiOpen)
+    if (!isUiOpen) {
+      if (user && user?.id !== figma.currentUser.id) {
+        figma.notify("Sorry, this avatar is created by someone else.");
+        return;
+      }
       waitForTask(
         new Promise((resolve) => {
           figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
@@ -33,6 +37,7 @@ function Widget() {
           figma.currentPage.selection = [];
         })
       );
+    }
   });
 
   // Assign new widget to current user
@@ -48,6 +53,7 @@ function Widget() {
 
     widgetNode.name = figma.currentUser.name;
     widgetNode.setPluginData("userId", figma.currentUser.id);
+    widgetNode.locked = true;
 
     const existingMapMetadataString = figma.currentPage.findChild((node) => node.getPluginDataKeys().includes("mapMetadata"))?.getPluginData("mapMetadata");
     if (existingMapMetadataString) {
@@ -78,8 +84,8 @@ function Widget() {
 
       if (message.findMyself) {
         alignViewport(getNodeCenter(widgetNode));
-        widgetNode.parent.appendChild(widgetNode); // bring to front
         figma.viewport.zoom = 2;
+        widgetNode.parent.appendChild(widgetNode); // bring to front
       }
 
       if (typeof message.nickname === "string") {
@@ -102,7 +108,6 @@ function Widget() {
           timestamp: Date.now(),
           content: message.newMessage.content,
         };
-        console.log(historyMessage);
 
         const existingHistoryMessages = getHistoryMessages();
         const allMessages = [...existingHistoryMessages, historyMessage].slice(-HISTORY_MESSAGE_LIMIT);
@@ -189,25 +194,8 @@ function Widget() {
     };
   });
 
-  const handleAvatarClick = async () => {
-    const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
-    console.log(`Current widget`, widgetNode);
-    console.log(`Current data`, user);
-
-    if (user.id !== figma.currentUser.id) {
-      figma.notify("Sorry, this avatar is created by someone else.");
-      return;
-    }
-
-    figma.currentPage.selection = [];
-
-    await new Promise((resolve) => {
-      figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, { height: 600, width: 400 });
-    });
-  };
-
   return (
-    <AutoLayout tooltip={user?.name} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
+    <AutoLayout tooltip={user?.name} onClick={noop} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
       <AutoLayout
         fill={user?.color}
         padding={{ vertical: 2, horizontal: 4 }}
@@ -222,7 +210,6 @@ function Widget() {
       </AutoLayout>
       {transform && imageUrl && (
         <Rectangle
-          onClick={handleAvatarClick}
           width={AVATAR_SIZE}
           height={AVATAR_SIZE}
           fill={{
@@ -266,5 +253,8 @@ function spawnWidgetOnMap(avatarSize: number, widgetNode: WidgetNode, spawnTile:
   widgetNode.y = spawnTile.row * avatarSize;
   figma.currentPage.appendChild(widgetNode); // bring above the map
 }
+
+// This async function allows the widget to become a click target
+async function noop() {}
 
 figma.widget.register(Widget);
