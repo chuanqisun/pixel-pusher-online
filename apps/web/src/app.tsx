@@ -203,9 +203,9 @@ export function App() {
             ⌖
           </button>
         </div>
-        <div class="character-list u-bg-accent-ll character-layout__scroll">
+        <div class="character-list u-bg-bk character-layout__scroll">
           {allAvatars.map(([id, atlas]) => (
-            <div class="u-bdr-2 u-bg-accent-l character-item" key={id}>
+            <div class="u-bg-accent-ll character-item" key={id}>
               <button
                 class="u-bdr-0 u-bg-accent character-button"
                 data-active={selectedAvatarId === id}

@@ -21,23 +21,22 @@
 }
 
 .character-layout__scroll {
-  padding: 16px;
   overflow-y: auto;
 }
 
 .character-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 2px;
 }
 
 .character-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .character-button {
-  padding: 16px;
+  padding: 24px 16px;
   image-rendering: pixelated;
   filter: grayscale(0.8);
   will-change: transform;
@@ -53,7 +52,6 @@
 }
 
 .character-bio {
-  padding-block: 4px;
   padding-inline: 16px;
 }
 
