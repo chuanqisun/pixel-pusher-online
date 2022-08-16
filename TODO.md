@@ -134,7 +134,7 @@
 
 # Archive
 
-## Phase 0: Technical POC
+## Technical POC
 
 - [OK] Persist character setting across sessions
   - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
