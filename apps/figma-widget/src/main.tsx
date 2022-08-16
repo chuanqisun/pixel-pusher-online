@@ -144,13 +144,24 @@ function Widget() {
           scaleMode: "FILL",
         };
 
+        // clean up other maps on the canvas
+        figma.currentPage.findChildren((node) => node.getPluginDataKeys().includes("mapMetadata")).forEach((node) => node.remove());
+
         const rect = figma.createRectangle();
-        rect.resize(cols * tileSize, rows * tileSize);
+        rect.resize(cols * AVATAR_SIZE, rows * AVATAR_SIZE);
         rect.fills = [imageFill];
         rect.name = name;
 
-        const mapMetadata = { tileSize, spawnTiles };
+        const allAvatarNodes = figma.currentPage.findWidgetNodesByWidgetId(widgetNode.widgetId);
+        allAvatarNodes.forEach((node) => {
+          node.x = spawnTiles[0].col * AVATAR_SIZE;
+          node.y = spawnTiles[0].row * AVATAR_SIZE;
+          figma.currentPage.appendChild(node); // bring above the map
+        });
+
+        const mapMetadata = { tileSize: AVATAR_SIZE, spawnTiles };
         rect.setPluginData("mapMetadata", JSON.stringify(mapMetadata));
+        console.log("[map] updated", rect);
       }
     };
   });

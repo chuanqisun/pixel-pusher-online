@@ -2,6 +2,9 @@
 
 [!] Planned for public preview
 
+- Game play
+  - Game creation: map > character
+  - Allow game owner to switch map
 - Character customzation
   - [DONE] Name display and customization
   - [DONE] Avatar selection list with static preview
@@ -35,6 +38,7 @@
 - Map
   - [!] One-click built-in map creation
   - [!] Spawn on point
+  - Transfer raw bytes in shared memory from UI to main thread
   - Prevent covering avatars
   - Map scale adjustment
   - Auto-align to pixel grid

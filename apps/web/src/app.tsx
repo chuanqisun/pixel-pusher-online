@@ -126,7 +126,7 @@ export function App() {
   }, []);
 
   const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
-  const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId, [chatMessages]);
+  const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId ?? "", [chatMessages]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -152,6 +152,7 @@ export function App() {
 
       return bytes;
     }
+
     sendToMain({
       map: {
         name: selectedMap.name,
