@@ -91,8 +91,8 @@
   - Quick menu on the avatar
   - Preference panel
 - Info
+  - [DONE] Open source and CC license display
   - [!] Help and tips
-  - [!] Open source and CC license display
 - Pet
 - Infra
   - [DONE] Non-null origin web view
