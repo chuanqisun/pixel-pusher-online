@@ -82,6 +82,7 @@
   - [!] Panel button pixel art
   - [!] Consistent focus outline
   - [!] Keyboard input handling on tab control
+  - [!] Place panel at upper right corner
   - Auto open help tab on initial launch
   - Pixel art mouse cursor
   - Customizable keybinding
