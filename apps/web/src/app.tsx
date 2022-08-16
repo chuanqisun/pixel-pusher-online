@@ -192,11 +192,59 @@ export function App() {
         ))}
       </section>
       <section class="app-layout__main nav-section info-layout" data-active={activeTab === "info"}>
-        <h2>About</h2>
-        <h2>Control</h2>
-        <h2>Chat</h2>
-        <h2>Map</h2>
-        <h2>Contribute</h2>
+        <article class="info-card">
+          <h2>Quickstart</h2>
+          <ul>
+            <li>Run widget to start</li>
+            <li>Close widget to pause</li>
+            <li>Click avatar to resume</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h2>Control</h2>
+          <ul>
+            <li>
+              <kbd class="u-bdr-2 u-bg-accent-ll">W</kbd> <kbd class="u-bdr-2 u-bg-accent-ll">A</kbd> <kbd class="u-bdr-2 u-bg-accent-ll">S</kbd>{" "}
+              <kbd class="u-bdr-2 u-bg-accent-ll">D</kbd> to walk, or
+            </li>
+            <li>
+              <kbd class="u-bdr-2 u-bg-accent-ll">↑</kbd> <kbd class="u-bdr-2 u-bg-accent-ll">←</kbd> <kbd class="u-bdr-2 u-bg-accent-ll">↓</kbd>{" "}
+              <kbd class="u-bdr-2 u-bg-accent-ll">→</kbd> to walk
+            </li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h2>Chat</h2>
+          <ul>
+            <li>History stored in page</li>
+            <li>Delete page to clear history</li>
+            <li>128 messages per file</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h2>Map</h2>
+          <ul>
+            <li>One map per file</li>
+            <li>Avatar respawn on map change</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h2>Contribute</h2>
+          <ul>
+            <li>Avatar design</li>
+            <li>Tile and map design</li>
+            <li>Game development</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h2>Credit</h2>
+          <ul>
+            <li>Jackie Chui</li>
+            <li>June Punkasem</li>
+            <li>Interactive Figmaland</li>
+            <li>See credit per avatar/map</li>
+          </ul>
+        </article>
       </section>
     </>
   );

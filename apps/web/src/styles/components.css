@@ -98,6 +98,39 @@
   margin-left: auto;
 }
 
+/* KEYBOARD */
+kbd {
+  display: inline-flex;
+  width: 2ch;
+  place-content: center;
+  padding: 0 2px;
+  margin-block: 1px;
+}
+
+/* INFO */
+
+.info-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.info-card {
+  display: grid;
+  gap: 4px;
+}
+
+.info-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: var(--color-accent);
+  list-style-type: square;
+  padding: 8px 8px 8px 28px;
+}
+
 /* MAP */
 .maps-layout {
   display: grid;
