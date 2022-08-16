@@ -1,26 +1,20 @@
 import { Fragment } from "preact";
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect } from "preact/hooks";
 import type { MessageToUI } from "types";
 import { useChatPanel } from "./hooks/use-chat-panel";
 import { useKeyboardControl } from "./hooks/use-keyboard-control";
 import { useMapPanel } from "./hooks/use-map-panel";
 import { useMePanel } from "./hooks/use-me-panel";
+import { useTabs } from "./hooks/use-tabs";
 import { sendMessage } from "./utils/ipc";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
 export const CHAT_POLLING_INTERVAL = 1000;
 
 export function App() {
-  const [activeTab, setActiveTab] = useState("me");
-
-  const handleNavTabClick = useCallback((e: Event) => {
-    const targetTab = (e.target as HTMLElement).closest("[data-target-tab]")?.getAttribute("data-target-tab");
-    if (targetTab) {
-      setActiveTab(targetTab);
-    }
-  }, []);
-
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
+
+  const { activeTab, handleNavTabClick } = useTabs();
 
   const {
     activeDemoAvatarId,
@@ -46,6 +40,7 @@ export function App() {
     const handleMainMessage = (e: MessageEvent) => {
       const pluginMessage = e.data.pluginMessage as MessageToUI;
       console.log(`[ipc] Main -> UI`, pluginMessage);
+
       if (pluginMessage.reset) {
         localStorage.clear();
         location.reload();
