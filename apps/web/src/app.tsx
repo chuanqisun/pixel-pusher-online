@@ -210,7 +210,9 @@ export function App() {
                 class="u-bdr-0 u-bg-accent character-button"
                 data-active={selectedAvatarId === id}
                 onMouseEnter={() => setDemoAvatarId(id)}
+                onfocusin={() => setDemoAvatarId(id)}
                 onMouseLeave={() => setDemoAvatarId(null)}
+                onfocusout={() => setDemoAvatarId(null)}
                 onClick={() => handleSelectAvatar(id)}
               >
                 <div style={activeDemoFrame && activeDemoAvatarId === id ? activeDemoFrame : getStaticDemoFrame(getAvatarScale(atlas.tileSize), atlas)}></div>

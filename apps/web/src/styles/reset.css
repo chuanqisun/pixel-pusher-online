@@ -3,6 +3,9 @@
   font: inherit;
   margin: 0;
 }
+*:focus {
+  outline: none;
+}
 
 button {
   cursor: pointer;
@@ -13,8 +16,9 @@ summary {
 }
 
 a {
-  text-decoration-thickness: 2px;
-}
-a:not(:hover) {
   text-decoration: none;
+}
+a:where(:hover, :focus) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }

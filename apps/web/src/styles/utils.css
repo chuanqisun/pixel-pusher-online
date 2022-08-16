@@ -29,13 +29,13 @@
   background-color: var(--color-accent-ll);
 }
 
-.u-hover-bg-accent-l:hover {
+.u-hover-bg-accent-l:where(:hover, :focus) {
   background-color: var(--color-accent-l);
 }
-.u-hover-bg-accent-ll:hover {
+.u-hover-bg-accent-ll:where(:hover, :focus) {
   background-color: var(--color-accent-ll);
 }
-.u-hover-bg-wt:hover {
+.u-hover-bg-wt:where(:hover, :focus) {
   background-color: white;
 }
 

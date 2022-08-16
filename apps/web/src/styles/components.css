@@ -47,7 +47,7 @@
   filter: grayscale(0);
 }
 
-.character-button:hover {
+.character-button:where(:hover, :focus) {
   filter: grayscale(0);
 }
 
@@ -118,7 +118,7 @@
   will-change: transform filter;
   transition: all 200ms;
 }
-.map-preview__image:hover {
+.map-preview:where(:hover, :focus) .map-preview__image {
   transform: scale(1.25);
   filter: grayscale(0);
 }
@@ -128,12 +128,14 @@
   padding-inline: 16px;
   padding-block: 16px 8px;
 }
-.metadata-accordion:hover summary::before {
+.metadata-accordion:hover summary::before,
+.metadata-accordion summary:focus::before {
   content: "▼ ";
   position: absolute;
   left: 12px;
 }
-.metadata-accordion:hover summary {
+.metadata-accordion:hover summary,
+.metadata-accordion summary:focus {
   padding-inline-start: 16px;
 }
 .metadata-accordion summary {
