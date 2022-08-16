@@ -9,8 +9,6 @@ import { useTabs } from "./hooks/use-tabs";
 import { sendMessage } from "./utils/ipc";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
-export const CHAT_POLLING_INTERVAL = 1000;
-
 export function App() {
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
 
@@ -32,7 +30,7 @@ export function App() {
 
   useKeyboardControl(avatarController);
 
-  const { setChatMessages, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain });
+  const { setChatMessages, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain, isActive: activeTab === "chat" });
 
   const { allMaps, handleSelectMap } = useMapPanel({ sendToMain });
 

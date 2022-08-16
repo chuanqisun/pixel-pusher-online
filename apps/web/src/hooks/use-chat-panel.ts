@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import type { HistoryMessage } from "types";
-import { CHAT_POLLING_INTERVAL } from "../app";
+import { useInterval } from "./use-interval";
 
+export const BACKGROUND_POLL_INTERVAL = 3000;
+export const ACTIVE_POLL_INTERVAL = 500;
 export interface UseChatProps {
   sendToMain: (message: any) => any;
+  isActive: boolean;
 }
 
-export function useChatPanel({ sendToMain }: UseChatProps) {
+export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
   const handleChatKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.code === "Enter" && !e.shiftKey && !e.ctrlKey) {
       const textarea = e.target as HTMLTextAreaElement;
@@ -24,13 +27,12 @@ export function useChatPanel({ sendToMain }: UseChatProps) {
   const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
   const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId ?? "", [chatMessages]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  useInterval(
+    () => {
       sendToMain({ getHistoryMessages: { lastId } });
-    }, CHAT_POLLING_INTERVAL);
-
-    return () => clearInterval(timer);
-  }, [lastId]);
+    },
+    isActive ? ACTIVE_POLL_INTERVAL : BACKGROUND_POLL_INTERVAL
+  );
 
   const chatMessagesRef = useRef<HTMLDivElement>(null);
   useEffect(() => {

@@ -65,7 +65,7 @@
   - [DONE] Chat panel in UI
   - [DONE] Public text chat
   - [DONE] Auto-scroll to last message
-  - [!] Reduce polling rate when not in chat
+  - [DONE] Reduce polling rate when not in chat
   - [!] Auto-focus on open panel
   - [!] Indicate new message
   - Message length reminder
