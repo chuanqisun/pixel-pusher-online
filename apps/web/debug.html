@@ -6,7 +6,14 @@
       margin: 0;
       height: 100vh;
       display: grid;
+      grid-template-columns: auto auto;
       place-content: center center;
+      gap: 16px;
+    }
+
+    .debug-panel {
+      display: flex;
+      flex-direction: column;
     }
 
     iframe {
@@ -17,11 +24,14 @@
   </style>
 </head>
 <body>
-  <label data-action="allow-polling"><input name="allow-poll" type="checkbox" />Allow history polling</label>
-  <button data-action="reset">Reset</button>
-  <button data-action="init-nickname">Init nickname</button>
-  <button data-action="init-chat-history">Init chat history</button>
-  <button data-action="request-map">Request map</button>
+  <div class="debug-panel">
+    <label data-action="allow-polling"><input name="allow-poll" type="checkbox" />Allow history polling</label>
+    <button data-action="reset">Reset</button>
+    <button data-action="init-nickname">Init nickname</button>
+    <button data-action="clear-chat-history">Clear chat history</button>
+    <button data-action="receive-message">Receive mock message</button>
+    <button data-action="request-map">Request map</button>
+  </div>
   <iframe src="http://localhost:8192"></iframe>
   <script type="module" src="./src/dev-shim.ts"></script>
 </body>
