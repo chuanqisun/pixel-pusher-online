@@ -186,8 +186,8 @@ export function App() {
         </button>
       </nav>
 
-      <section class="app-layout__main nav-section character-layout active" data-section="character">
-        <div class="name-setup character-layout__header">
+      <section class="u-bg-accent-ll app-layout__main nav-section character-layout active" data-section="character">
+        <div class="u-bg-accent-l name-setup character-layout__header">
           <input
             class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt name-setup__nickname"
             name="nickname"
@@ -205,7 +205,7 @@ export function App() {
         </div>
         <div class="character-list u-bg-accent-ll character-layout__scroll">
           {allAvatars.map(([id, atlas]) => (
-            <div class="u-bdr-2 u-bg-accent-l u-hover-bg-accent-ll character-item" key={id}>
+            <div class="u-bdr-2 u-bg-accent-l character-item" key={id}>
               <button
                 class="u-bdr-0 u-bg-accent character-button"
                 data-active={selectedAvatarId === id}
