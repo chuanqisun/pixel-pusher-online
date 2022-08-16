@@ -197,7 +197,7 @@ export function App() {
           <ul>
             <li>Run widget to start</li>
             <li>Close widget to pause</li>
-            <li>Click avatar to resume</li>
+            <li>Click avatar or run widget again to resume</li>
           </ul>
         </article>
         <article class="info-card">
