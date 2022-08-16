@@ -9,6 +9,7 @@
   - [DONE] Name display and customization
   - [DONE] Avatar selection list with static preview
   - [DONE] Character panel (self) in UI
+  - [!] "Start" button respawn to random point + reset zoom + center
   - Nickname length limit
   - Avatar selection list with animated preview
   - Character panel (others)
