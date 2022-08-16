@@ -4,6 +4,7 @@ import { useInterval } from "./use-interval";
 
 export const BACKGROUND_POLL_INTERVAL = 5000;
 export const ACTIVE_POLL_INTERVAL = 1000;
+
 export interface UseChatProps {
   sendToMain: (message: any) => any;
   isActive: boolean;
@@ -34,6 +35,7 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
 
   const [chatMessages, setChatMessages] = useState<HistoryMessage[]>([]);
   const lastId = useMemo(() => chatMessages[chatMessages.length - 1]?.msgId ?? "", [chatMessages]);
+  const [isUnread, setIsUnread] = useState(false);
 
   useInterval(
     () => {
@@ -45,12 +47,16 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
   const chatMessagesRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
+    if (!isActive && lastId) {
+      setIsUnread(true);
+    }
   }, [lastId]);
 
   const chatBoxRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (isActive) {
       chatBoxRef?.current?.focus();
+      setIsUnread(false);
     }
   }, [isActive]);
 
@@ -60,5 +66,6 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
     chatMessagesRef,
     handleChatKeyDown,
     setChatMessages,
+    isUnread,
   };
 }

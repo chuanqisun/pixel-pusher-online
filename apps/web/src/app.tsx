@@ -30,7 +30,10 @@ export function App() {
 
   useKeyboardControl(avatarController);
 
-  const { setChatMessages, chatBoxRef, chatMessagesRef, chatMessages, handleChatKeyDown } = useChatPanel({ sendToMain, isActive: activeTab === "chat" });
+  const { setChatMessages, chatBoxRef, chatMessagesRef, chatMessages, isUnread, handleChatKeyDown } = useChatPanel({
+    sendToMain,
+    isActive: activeTab === "chat",
+  });
 
   const { allMaps, handleSelectMap } = useMapPanel({ sendToMain });
 
@@ -69,7 +72,7 @@ export function App() {
           Me
         </button>
         <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "chat"} data-target-tab="chat">
-          Chat
+          {isUnread ? "*" : ""}Chat
         </button>
         <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "map"} data-target-tab="map">
           Map
