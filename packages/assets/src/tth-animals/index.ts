@@ -5,7 +5,7 @@ const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
   details: [
     {
       key: "Artist",
-      value: "Kacper Woźniak",
+      value: "Kacper Wozniak",
       link: "https://thkaspar.itch.io/",
     },
     {
