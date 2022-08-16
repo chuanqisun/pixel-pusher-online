@@ -1,5 +1,5 @@
 import { Fragment } from "preact";
-import { useCallback, useEffect } from "preact/hooks";
+import { useCallback, useEffect, useState } from "preact/hooks";
 import type { MessageToUI } from "types";
 import { useChatPanel } from "./hooks/use-chat-panel";
 import { useKeyboardControl } from "./hooks/use-keyboard-control";
@@ -11,11 +11,12 @@ import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 export const CHAT_POLLING_INTERVAL = 1000;
 
 export function App() {
+  const [activeTab, setActiveTab] = useState("me");
+
   const handleNavTabClick = useCallback((e: Event) => {
-    const sectionName = (e.target as HTMLElement).closest("[data-target-section]")?.getAttribute("data-target-section");
-    if (sectionName) {
-      const sections = [...document.querySelectorAll("[data-section]")];
-      sections.forEach((section) => section.classList.toggle("active", section.getAttribute("data-section") === sectionName));
+    const targetTab = (e.target as HTMLElement).closest("[data-target-tab]")?.getAttribute("data-target-tab");
+    if (targetTab) {
+      setActiveTab(targetTab);
     }
   }, []);
 
@@ -71,21 +72,21 @@ export function App() {
   return (
     <>
       <nav id="nav-tabs" class="u-bg-bk nav-tabs" onClick={handleNavTabClick}>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="character">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "me"} data-target-tab="me">
           Me
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="chat">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "chat"} data-target-tab="chat">
           Chat
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="map">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "map"} data-target-tab="map">
           Map
         </button>
-        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-target-section="help">
+        <button class="u-bdr-0 u-bg-accent u-hover-bg-accent-l u-active-bg-accent-ll nav-button" data-active={activeTab === "info"} data-target-tab="info">
           Info
         </button>
       </nav>
 
-      <section class="u-bg-accent-ll app-layout__main nav-section character-layout active" data-section="character">
+      <section class="u-bg-accent-ll app-layout__main nav-section character-layout active" data-active={activeTab === "me"}>
         <div class="u-bg-accent-l name-setup character-layout__header">
           <input
             class="u-bdr-2 u-pad-8 u-bg-accent-ll u-hover-bg-wt u-focus-bg-wt name-setup__nickname"
@@ -140,7 +141,7 @@ export function App() {
         </div>
       </section>
 
-      <section class="app-layout__main nav-section chat-layout" data-section="chat">
+      <section class="app-layout__main nav-section chat-layout" data-active={activeTab === "chat"}>
         <div class="chat-layout__messages" ref={chatMessagesRef}>
           {chatMessages.map((chatMessage) => (
             <article key={chatMessage.msgId}>
@@ -164,7 +165,7 @@ export function App() {
         ></textarea>
       </section>
 
-      <section class="app-layout__main nav-section maps-layout" data-section="map">
+      <section class="app-layout__main nav-section maps-layout" data-active={activeTab === "map"}>
         {allMaps.map(([mapKey, mapData]) => (
           <div class="map-item" key={mapKey}>
             <details class="metadata-accordion">

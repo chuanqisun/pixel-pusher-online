@@ -176,7 +176,7 @@
   border-bottom: 2px solid black;
 }
 
-.nav-section:not(.active) {
+.nav-section:not([data-active]) {
   display: none;
 }
 
