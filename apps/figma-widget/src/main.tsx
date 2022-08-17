@@ -30,6 +30,11 @@ function Widget() {
         figma.notify("Sorry, this avatar is created by someone else.");
         return;
       }
+
+      const widgetNode = figma.getNodeById(widgetId) as WidgetNode;
+      alignViewport(getNodeCenter(widgetNode));
+      figma.viewport.zoom = 2;
+
       waitForTask(
         new Promise((resolve) => {
           figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, {
