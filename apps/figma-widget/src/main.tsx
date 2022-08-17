@@ -208,7 +208,7 @@ function Widget() {
   });
 
   return (
-    <AutoLayout tooltip={user?.name} onClick={noop} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
+    <AutoLayout onClick={noop} width={AVATAR_SIZE} height={AVATAR_SIZE} overflow="visible">
       <AutoLayout
         fill={user?.color}
         padding={{ vertical: 4, horizontal: 6 }}
