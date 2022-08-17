@@ -21,9 +21,9 @@
 - Avatar
   - [DONE] Bring to top on center
   - [DONE] When map already exists, spawn on point
+  - [DONE] Center on Avatar when open UI
   - [WONTFIX] PC walk drift issue (due to viewport congestion)
-  - [!] Center on Avatar when open UI
-  - Use notify API to offer Create or Find myself options
+  - [WONTFIX] Use notify API to offer Create or Find myself options (API no longer available)
   - Indicating currenly active avatar
   - Auto-align to pixel grid
   - Chat typing indication
