@@ -27,7 +27,7 @@ function Widget() {
   useEffect(() => {
     if (!isUiOpen) {
       if (user && user?.id !== figma.currentUser.id) {
-        figma.notify("Sorry, this avatar is created by someone else.");
+        figma.notify("This is not your avatar. Re-run the widget to find yours.");
         return;
       }
 
