@@ -2,22 +2,20 @@
 
 [!] Planned for public preview
 
-- Game play
-  - Game creation: map > character
-  - Allow game owner to switch map
 - Character customzation
   - [DONE] Name display and customization
   - [DONE] Avatar selection list with static preview
   - [DONE] Character panel (self) in UI
   - [DONE] Nickname length limit
   - [DONE] "Locate" button reset zoom, center, and idle at South
-  - Avatar selection list with animated preview
-  - Character panel (others)
+  - [DONE] Name persist issue
+  - [DONE] Avatar selection list with animated preview
+  - Character inspector panel (other player)
   - Custom name plate color
   - In-house designed characters
-  - Modular body building
+  - Modular body customization
   - Color customization
-  - Gear system
+  - Gear add-on system
 - Avatar
   - [DONE] Bring to top on center
   - [DONE] When map already exists, spawn on point
@@ -29,7 +27,7 @@
   - Chat typing indication
   - Presence indication (outline name plate when blurred)
   - Pixel font for name play (Figma missing Silkscreen font)
-  - 64px hit box for easiser mouse selection
+  - 48px hit box for easiser mouse selection
   - Shadow effect
   - Skeleton based animation
 - Walk
@@ -43,9 +41,10 @@
   - [DONE] One-click built-in map creation
   - [DONE] Spawn creator on fixed point
   - [DONE] Enforce single map per file
+  - [DONE] Prevent new map from covering avatars
   - Spawn on random points
+  - Admin permission for map switching
   - Transfer raw bytes in shared memory from UI to main thread
-  - Prevent covering avatars
   - Map scale adjustment
   - Auto-align to pixel grid
   - Tiled map builder
@@ -86,13 +85,16 @@
   - [DONE] Consistent focus outline
   - [DONE] Track active panel
   - [DONE] Place UI at upper right corner
-  - Keyboard input handling on tab control
+  - [WONTFIX] Arrow key handling for nav tabs (conflict with Walk input)
+  - Indicate input listening status (walking vs. no walking)
   - Panel button pixel art
   - Auto open help tab on initial launch
+  - "What's new" announcement
   - Pixel art mouse cursor
   - Customizable keybinding
   - Sound effect
-  - Quick menu on the avatar
+  - Intuitive game creation: map > character
+  - Quick menu on the avatar: e.g. emote
   - Preference panel
 - Info
   - [DONE] Open source and CC license display
@@ -109,8 +111,8 @@
   - Multiplayer sound broadcast
   - Main/UI IPC utils
 - Figma integration
+  - Anonymous and readonly user handling (figma.activeUser = null)
   - Ctrl-Z handling
-  - Anonymous user handling (figma.activeUser = null)
   - Implement deps array for useEffect and useMemo
 - Brand
   - [!] Favicon
@@ -120,7 +122,7 @@
 - Music
   - https://bakudas.itch.io/generic-rpg-pack
   - https://ansimuz.itch.io/patreons-top-down-collection
-- Map
+- Map design
   - [DONE] Forest map
   - Indoor map
   - Ice world map

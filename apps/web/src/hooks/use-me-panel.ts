@@ -23,8 +23,14 @@ export function useMePanel({ sendToMain }: UseMePanelProps) {
   }, []);
 
   const handleDefaultNickname = useCallback((defaultNickname: string) => {
-    setNickname((prevNickname) => (prevNickname?.length ? prevNickname : defaultNickname!));
-    localStorage.setItem("nickname", defaultNickname);
+    setNickname((prevNickname) => {
+      if (prevNickname?.length) {
+        return prevNickname;
+      } else {
+        localStorage.setItem("nickname", defaultNickname);
+        return defaultNickname;
+      }
+    });
   }, []);
 
   useEffect(() => {
