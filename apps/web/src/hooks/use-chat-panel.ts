@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import type { HistoryMessage } from "types";
+import { useBottomSentinel } from "./use-bottom-sentinel";
 import { useInterval } from "./use-interval";
 
 export const BACKGROUND_POLL_INTERVAL = 5000;
@@ -57,11 +58,21 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
     }
   }, [lastId]);
 
-  // autoscroll to bottom when last id changes
+  // autoscroll to bottom when open panel
   useEffect(() => {
     if (!isActive) return;
+
     (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
-  }, [isActive, lastId]);
+  }, [isActive]);
+
+  // autoscroll to bottom when new message arrives
+  const { isAtBottom, sentinelRef } = useBottomSentinel();
+  useEffect(() => {
+    if (!isActive) return;
+    if (!isAtBottom) return;
+
+    (chatMessagesRef.current?.lastChild as HTMLElement)?.scrollIntoView();
+  }, [lastId]);
 
   const chatBoxRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
@@ -72,6 +83,7 @@ export function useChatPanel({ sendToMain, isActive }: UseChatProps) {
   }, [isActive]);
 
   return {
+    sentinelRef,
     chatBoxRef,
     chatMessages,
     chatMessagesRef,

@@ -70,7 +70,7 @@
   - [DONE] Auto-focus on open panel
   - [DONE] Indicate new message
   - [DONE] Scroll to bottom on open
-  - [!] Pause scroll when user is browsing history
+  - [DONE] Pause scroll when user is browsing history
   - Message length reminder
   - Timestamp for older message
   - Private text chat

@@ -31,7 +31,15 @@ export function App() {
 
   useKeyboardControl(avatarController);
 
-  const { setChatMessages, chatBoxRef, chatMessagesRef, chatMessages, isUnread, handleChatKeyDown } = useChatPanel({
+  const {
+    setChatMessages,
+    sentinelRef: bottomSentinelRef,
+    chatBoxRef,
+    chatMessagesRef,
+    chatMessages,
+    isUnread,
+    handleChatKeyDown,
+  } = useChatPanel({
     sendToMain,
     isActive: activeTab === "chat",
   });
@@ -152,6 +160,7 @@ export function App() {
               <p class="u-bg-accent-ll message-body">{chatMessage.content}</p>
             </article>
           ))}
+          <div ref={bottomSentinelRef}></div>
         </div>
         <textarea
           ref={chatBoxRef}
