@@ -1,5 +1,6 @@
-import { leowood } from "assets";
+import { calatan, leowood } from "assets";
 
 export const maps = {
   leowood,
+  calatan,
 };

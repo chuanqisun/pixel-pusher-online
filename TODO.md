@@ -127,11 +127,10 @@
   - Indoor map
   - Ice world map
   - Dessert map
-  - https://franopx.itch.io/rpg-village-tileset-16x16
+  - https://kia.itch.io/16x16-desert-tile-set
   - https://projectalme.itch.io/16x16-rpg-starter-set
   - https://xevin.itch.io/dungeon-tileset-x16
   - https://merchant-shade.itch.io/16x16-mini-world-sprites
-  - https://kia.itch.io/16x16-desert-tile-set
   - https://ansimuz.itch.io/patreons-top-down-collection
   - https://blueapollo.itch.io/16x16-forest-tileset
   - https://fawf-art.itch.io/16x16-forest-tileset

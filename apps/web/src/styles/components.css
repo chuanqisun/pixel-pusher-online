@@ -39,7 +39,7 @@
 .character-button {
   padding: 24px 16px;
   image-rendering: pixelated;
-  filter: grayscale(0.8);
+  filter: grayscale(1);
   will-change: filter, background-color;
   transition: filter 200ms, background-color 200ms;
 }
@@ -151,7 +151,7 @@ kbd {
   width: 100%;
   max-height: 80px;
   object-fit: cover;
-  filter: grayscale(0.8);
+  filter: grayscale(1);
   will-change: transform, filter;
   transition: all 200ms;
 }

@@ -1,0 +1,3 @@
+- Website: https://kia.itch.io/16x16-desert-tile-set
+- By: [kia](https://kia.itch.io/)
+- The author did not use any licnese
