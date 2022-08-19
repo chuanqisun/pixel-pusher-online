@@ -34,7 +34,7 @@ The project encourages learning and experimentation from new game designers and 
 ### Avatar design requirement
 
 - Dimension: 16 × 16
-- Full color
+- Full color support
 - Sprite
   - 4-direction walk frames
   - Idle frame (optional if walk frame includes idle state)
@@ -47,6 +47,7 @@ The project encourages learning and experimentation from new game designers and 
 ### Map design requirement
 
 - Grid size: 16 × 16
+- Full color support
 - Dimension: up to you
 - Submit a PR with the following information
   - Spawn point(s): which row and column should players initially appear at?
