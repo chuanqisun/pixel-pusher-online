@@ -61,6 +61,11 @@ The project encourages learning and experimentation from new game designers and 
 
 - Please [file a GitHub issue](https://github.com/chuanqisun/pixel-pusher-online/issues/new).
 
+### Development
+
+- The roadmap is currently unprioritized and NOT ready to accept new feature PRs. 
+- Will update development plan after beta stage ends.
+
 ## Licenses and credits
 
 - Source code: MIT
