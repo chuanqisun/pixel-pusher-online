@@ -1,5 +1,5 @@
 import type { CharacterAtlas } from "assets";
-import { alec, ayla, bek, kradin, leif, lyster, meg, takari } from "assets";
+import { alec, ayla, bek, dusa, kradin, leif, lyster, meg, takari } from "assets";
 
 export const avatars: Record<string, CharacterAtlas> = {
   alec,
@@ -7,7 +7,8 @@ export const avatars: Record<string, CharacterAtlas> = {
   meg,
   ayla,
   kradin,
-  ela: takari,
+  takari,
   bek,
   lyster,
+  dusa,
 };
