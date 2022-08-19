@@ -235,23 +235,26 @@ export function App() {
           <h2>Map</h2>
           <ul>
             <li>One map per file</li>
-            <li>Avatar respawn on map change</li>
+            <li>Avatar respawn when map changes</li>
           </ul>
         </article>
         <article class="info-card">
           <h2>Contribute</h2>
           <ul>
-            <li>Avatar design</li>
-            <li>Tile and map design</li>
-            <li>Game development</li>
+            <li>Avatar and map design</li>
+            <li>
+              <a href="https://github.com/chuanqisun/pixel-pusher-online#how-to-contribute" target="_blank">
+                View details on GitHub
+              </a>
+            </li>
           </ul>
         </article>
         <article class="info-card">
           <h2>Lisenses and Credits</h2>
           <ul>
             <li>
-              <a href="" target="_blank">
-                View on website
+              <a href="https://github.com/chuanqisun/pixel-pusher-online#licenses-and-credits" target="_blank">
+                View details on GitHub
               </a>
             </li>
           </ul>
