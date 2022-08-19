@@ -5,7 +5,11 @@
     "dev": "concurrently npm:dev:*",
     "dev:web": "npm run dev -w apps/web",
     "dev:figma-widget": "npm run dev -w apps/main",
-    "dev:assets": "npm run dev -w packages/assets"
+    "dev:assets": "npm run dev -w packages/assets",
+    "build": "npm run build:assets && npm run build:web && npm run build:main",
+    "build:assets": "npm run build -w packages/assets",
+    "build:main": "npm run build -w apps/main",
+    "build:web": "npm run build -w apps/web"
   },
   "repository": {
     "type": "git",

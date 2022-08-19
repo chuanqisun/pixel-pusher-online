@@ -1,9 +1,9 @@
 {
   "name": "pixel-pusher-online",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Your Figma widget",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs && node scripts/pack.mjs",
     "dev": "npm run build -- --dev"
   },
   "author": "",

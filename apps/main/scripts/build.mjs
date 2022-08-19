@@ -4,8 +4,8 @@ import fs from "fs/promises";
 const isDev = process.argv.includes("--dev");
 
 async function main() {
-  await fs.mkdir("dist", { recursive: true });
-  await fs.copyFile("src/manifest.json", "dist/manifest.json");
+  await fs.mkdir("dist/unpacked", { recursive: true });
+  await fs.copyFile("src/manifest.json", "dist/unpacked/manifest.json");
 
   const mainBuildAsync = esbuild.build({
     entryPoints: ["src/main.tsx"],
@@ -16,7 +16,7 @@ async function main() {
     format: "esm",
     minify: true,
     watch: process.argv.includes("--dev"),
-    outdir: "dist",
+    outdir: "dist/unpacked",
   });
 
   await mainBuildAsync;
