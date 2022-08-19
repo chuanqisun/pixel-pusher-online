@@ -1,7 +1,8 @@
 import type { CharacterAtlas } from "../../interface";
-import imgUrl from "./01-generic.png";
+import genericImgUrl from "./01-generic.png";
+import bardImgUrl from "./02-bard.png";
 
-const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
+const genericShared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
   details: [
     {
       key: "Artist",
@@ -19,10 +20,28 @@ const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
   tileSize: 16,
 };
 
+const bardShared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {
+  details: [
+    {
+      key: "Artist",
+      value: "javikolog",
+      link: "https://route1rodent.itch.io/",
+    },
+    {
+      key: "License",
+      value: "CC BY-SA 3.0",
+      link: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+  ],
+  cols: 12,
+  rows: 8,
+  tileSize: 16,
+};
+
 export const alec: CharacterAtlas = {
-  ...shared,
+  ...genericShared,
   name: "Alec",
-  imgUrl: imgUrl,
+  imgUrl: genericImgUrl,
   animations: {
     idleN: [{ row: 3, col: 1 }],
     idleE: [{ row: 2, col: 1 }],
@@ -56,9 +75,9 @@ export const alec: CharacterAtlas = {
 };
 
 export const leif: CharacterAtlas = {
-  ...shared,
+  ...genericShared,
   name: "Leif",
-  imgUrl: imgUrl,
+  imgUrl: genericImgUrl,
   animations: {
     idleN: [{ row: 3, col: 10 }],
     idleE: [{ row: 2, col: 10 }],
@@ -92,9 +111,9 @@ export const leif: CharacterAtlas = {
 };
 
 export const meg: CharacterAtlas = {
-  ...shared,
+  ...genericShared,
   name: "Meg",
-  imgUrl: imgUrl,
+  imgUrl: genericImgUrl,
   animations: {
     idleN: [{ row: 3, col: 7 }],
     idleE: [{ row: 2, col: 7 }],
@@ -128,9 +147,9 @@ export const meg: CharacterAtlas = {
 };
 
 export const ayla: CharacterAtlas = {
-  ...shared,
+  ...genericShared,
   name: "Ayla",
-  imgUrl: imgUrl,
+  imgUrl: genericImgUrl,
   animations: {
     idleN: [{ row: 3, col: 13 }],
     idleE: [{ row: 2, col: 13 }],
@@ -159,6 +178,78 @@ export const ayla: CharacterAtlas = {
       { row: 1, col: 13 },
       { row: 1, col: 14 },
       { row: 1, col: 13 },
+    ],
+  },
+};
+
+export const kradin: CharacterAtlas = {
+  ...bardShared,
+  name: "Kradin",
+  imgUrl: bardImgUrl,
+  animations: {
+    idleN: [{ row: 3, col: 7 }],
+    idleE: [{ row: 2, col: 7 }],
+    idleS: [{ row: 0, col: 7 }],
+    idleW: [{ row: 1, col: 7 }],
+    walkN: [
+      { row: 3, col: 6 },
+      { row: 3, col: 7 },
+      { row: 3, col: 8 },
+      { row: 3, col: 7 },
+    ],
+    walkE: [
+      { row: 2, col: 6 },
+      { row: 2, col: 7 },
+      { row: 2, col: 8 },
+      { row: 2, col: 7 },
+    ],
+    walkS: [
+      { row: 0, col: 6 },
+      { row: 0, col: 7 },
+      { row: 0, col: 8 },
+      { row: 0, col: 7 },
+    ],
+    walkW: [
+      { row: 1, col: 6 },
+      { row: 1, col: 7 },
+      { row: 1, col: 8 },
+      { row: 1, col: 7 },
+    ],
+  },
+};
+
+export const takari: CharacterAtlas = {
+  ...bardShared,
+  name: "Takari",
+  imgUrl: bardImgUrl,
+  animations: {
+    idleN: [{ row: 7, col: 4 }],
+    idleE: [{ row: 6, col: 4 }],
+    idleS: [{ row: 4, col: 4 }],
+    idleW: [{ row: 5, col: 4 }],
+    walkN: [
+      { row: 7, col: 3 },
+      { row: 7, col: 4 },
+      { row: 7, col: 5 },
+      { row: 7, col: 4 },
+    ],
+    walkE: [
+      { row: 6, col: 3 },
+      { row: 6, col: 4 },
+      { row: 6, col: 5 },
+      { row: 6, col: 4 },
+    ],
+    walkS: [
+      { row: 4, col: 3 },
+      { row: 4, col: 4 },
+      { row: 4, col: 5 },
+      { row: 4, col: 4 },
+    ],
+    walkW: [
+      { row: 5, col: 3 },
+      { row: 5, col: 4 },
+      { row: 5, col: 5 },
+      { row: 5, col: 4 },
     ],
   },
 };
