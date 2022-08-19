@@ -8,7 +8,7 @@
     "clean": "rm -rf dist"
   },
   "author": "",
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "@figma/plugin-typings": "*",
     "@figma/widget-typings": "*",

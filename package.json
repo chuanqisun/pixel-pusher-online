@@ -16,8 +16,8 @@
     "url": "git+https://github.com/chuanqisun/figma-rpg-mode.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "https://github.com/chuanqisun",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chuanqisun/figma-rpg-mode/issues"
   },
