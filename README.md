@@ -63,8 +63,12 @@ The project encourages learning and experimentation from new game designers and 
 
 ### Development
 
-- The roadmap is currently unprioritized and NOT ready to accept new feature PRs. 
-- Will update development plan after beta stage ends.
+- Open-source contribution is welcome but expect developer friction and long delay at this stage of the project.
+- Bug-fixing PRs are welcome!
+- If you want to build new features, please reference the [roadmap](https://github.com/chuanqisun/pixel-pusher-online/blob/master/ROADMAP.md). Since it is not prioritized yet, please file an issue first before picking up any items so we can disucss the plan.
+- The dev environment is optimized for Linux. It should work on Mac and PC too but might require tweaking.
+- Developer documentation is pending.
+- I'll make a developer guide after we successfully wrap up the beta.
 
 ## Licenses and credits
 
