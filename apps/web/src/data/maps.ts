@@ -1,6 +1,7 @@
-import { calatan, leowood } from "assets";
+import { calatan, huntersTavern, leowood } from "assets";
 
 export const maps = {
   leowood,
   calatan,
+  huntersTavern,
 };

@@ -1,0 +1,3 @@
+- Website: https://www.figma.com/exit?url=https%3A%2F%2Fo-lobster.itch.io%2Fsimple-dungeon-crawler-16x16-pixel-pack
+- By: [o_lobster](https://o-lobster.itch.io/)
+- License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
