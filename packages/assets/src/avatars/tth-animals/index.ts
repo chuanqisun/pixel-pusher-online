@@ -144,3 +144,42 @@ export const dusa: CharacterAtlas = {
     ],
   },
 };
+
+export const ludwig: CharacterAtlas = {
+  ...shared,
+  name: "Ludwig",
+  imgUrl,
+  cols: 16,
+  rows: 30,
+  tileSize: 16,
+  animations: {
+    idleS: [{ row: 25, col: 0 }],
+    idleW: [{ row: 24, col: 0, flipX: true }],
+    idleN: [{ row: 26, col: 0 }],
+    idleE: [{ row: 24, col: 0 }],
+    walkS: [
+      { row: 25, col: 1 },
+      { row: 25, col: 2 },
+      { row: 25, col: 3 },
+      { row: 25, col: 2 },
+    ],
+    walkW: [
+      { row: 24, col: 1, flipX: true },
+      { row: 24, col: 2, flipX: true },
+      { row: 24, col: 3, flipX: true },
+      { row: 24, col: 2, flipX: true },
+    ],
+    walkN: [
+      { row: 26, col: 1 },
+      { row: 26, col: 2 },
+      { row: 26, col: 3 },
+      { row: 26, col: 2 },
+    ],
+    walkE: [
+      { row: 24, col: 1 },
+      { row: 24, col: 2 },
+      { row: 24, col: 3 },
+      { row: 24, col: 2 },
+    ],
+  },
+};
