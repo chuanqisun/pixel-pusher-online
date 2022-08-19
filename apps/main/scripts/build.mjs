@@ -11,7 +11,7 @@ async function main() {
     entryPoints: ["src/main.tsx"],
     bundle: true,
     define: {
-      "process.env.WEB_URL": isDev ? `"http://localhost:8192"` : `"http://localhost:8192"`,
+      "process.env.WEB_URL": isDev ? `"http://localhost:8192"` : `"https://chuanqisun.github.io/pixel-pusher-online/"`,
     },
     format: "esm",
     minify: true,
