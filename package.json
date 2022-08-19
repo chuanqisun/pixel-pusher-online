@@ -1,11 +1,6 @@
 {
-  "name": "figma-rpg-mode",
+  "name": "root",
   "version": "1.0.0",
-  "description": "Below are the steps to get your widget running. You can also find instructions at:",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "dev": "concurrently npm:dev:*",
     "dev:web": "npm run dev -w apps/web",
