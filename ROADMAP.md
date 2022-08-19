@@ -1,15 +1,6 @@
 # Roadmap
 
-[!] Planned for public preview
-
 - Character customzation
-  - [DONE] Name display and customization
-  - [DONE] Avatar selection list with static preview
-  - [DONE] Character panel (self) in UI
-  - [DONE] Nickname length limit
-  - [DONE] "Locate" button reset zoom, center, and idle at South
-  - [DONE] Name persist issue
-  - [DONE] Avatar selection list with animated preview
   - Character inspector panel (other player)
   - Custom name plate color
   - In-house designed characters
@@ -17,11 +8,7 @@
   - Color customization
   - Gear add-on system
 - Avatar
-  - [DONE] Bring to top on center
-  - [DONE] When map already exists, spawn on point
-  - [DONE] Center on Avatar when open UI
-  - [WONTFIX] PC walk drift issue (due to viewport congestion)
-  - [WONTFIX] Use notify API to offer Create or Find myself options (API no longer available)
+  available)
   - Indicating currenly active avatar
   - Auto-align to pixel grid
   - Chat typing indication
@@ -31,17 +18,11 @@
   - Shadow effect
   - Skeleton based animation
 - Walk
-  - [DONE] Jitter issue due to unstable figma.viewport.center
-  - [DONE] Debounce input
   - Bring to top on walk
   - Sound effect
   - Smooth walk animation
   - Collision detection and prevention
 - Map
-  - [DONE] One-click built-in map creation
-  - [DONE] Spawn creator on fixed point
-  - [DONE] Enforce single map per file
-  - [DONE] Prevent new map from covering avatars
   - Spawn on random points
   - Admin permission for map switching
   - Transfer raw bytes in shared memory from UI to main thread
@@ -62,14 +43,6 @@
   - Sound effect
   - Personal emoji palette
 - Chat
-  - [DONE] Chat panel in UI
-  - [DONE] Public text chat
-  - [DONE] Auto-scroll to last message
-  - [DONE] Reduce polling rate when not in chat
-  - [DONE] Auto-focus on open panel
-  - [DONE] Indicate new message
-  - [DONE] Scroll to bottom on open
-  - [DONE] Pause scroll when user is browsing history
   - Message length reminder
   - Timestamp for older message
   - Private text chat
@@ -80,12 +53,6 @@
   - P2P chat
   - Video chat
 - UI
-  - [DONE] Multi-tab panel system
-  - [DONE] Smart initial positioning
-  - [DONE] Consistent focus outline
-  - [DONE] Track active panel
-  - [DONE] Place UI at upper right corner
-  - [WONTFIX] Arrow key handling for nav tabs (conflict with Walk input)
   - Indicate input listening status (walking vs. no walking)
   - Panel button pixel art
   - Auto open help tab on initial launch
@@ -97,12 +64,8 @@
   - Quick menu on the avatar: e.g. emote
   - Preference panel
 - Info
-  - [DONE] Open source and CC license display
-  - [!] Help and tips
 - Pet
 - Infra
-  - [DONE] Non-null origin web view
-  - [DONE] Dynamic sprite
   - [!] GitHub page host
   - Progressive loading of assets
   - Cloudflare DNS on top of GitHub page
@@ -115,34 +78,69 @@
   - Ctrl-Z handling
   - Implement deps array for useEffect and useMemo
 - Brand
+
+# Archive
+
+## Beta release
+
+- Character customization
+  - [DONE] Name display and customization
+  - [DONE] Avatar selection list with static preview
+  - [DONE] Character panel (self) in UI
+  - [DONE] Nickname length limit
+  - [DONE] "Locate" button reset zoom, center, and idle at South
+  - [DONE] Name persist issue
+  - [DONE] Avatar selection list with animated preview
+- Avatar
+  - [DONE] Bring to top on center
+  - [DONE] When map already exists, spawn on point
+  - [DONE] Center on Avatar when open UI
+  - [WONTFIX] PC walk drift issue (due to viewport congestion)
+  - [WONTFIX] Use notify API to offer Create or Find myself options (API no longer
+- Walk
+  - [DONE] Jitter issue due to unstable figma.viewport.center
+  - [DONE] Debounce input
+- Map
+  - [DONE] One-click built-in map creation
+  - [DONE] Spawn creator on fixed point
+  - [DONE] Enforce single map per file
+  - [DONE] Prevent new map from covering avatars
+- Chat
+  - [DONE] Chat panel in UI
+  - [DONE] Public text chat
+  - [DONE] Auto-scroll to last message
+  - [DONE] Reduce polling rate when not in chat
+  - [DONE] Auto-focus on open panel
+  - [DONE] Indicate new message
+  - [DONE] Scroll to bottom on open
+  - [DONE] Pause scroll when user is browsing history
+- UI
+  - [DONE] Multi-tab panel system
+  - [DONE] Smart initial positioning
+  - [DONE] Consistent focus outline
+  - [DONE] Track active panel
+  - [DONE] Place UI at upper right corner
+  - [WONTFIX] Arrow key handling for nav tabs (conflict with Walk input)
+- Info
+  - [DONE] Open source and CC license display
+  - [DONE] Help and tips
+- Infra
+  - [DONE] Non-null origin web view
+  - [DONE] Dynamic sprite
+- Brand
   - [DONE] Icon 128 x 128
   - [DONE] Favicon
-  - [!] Cover art 1920 X 960 (safe 1600 X 960)
-  - [!] Figma splash screen
-  - [!] Figma market place introduction
-  - [!] Name: Figma World Online, Fetaverse, Pixel Hangout, Pixel Pusher Online
-- Music
-  - https://bakudas.itch.io/generic-rpg-pack
-  - https://ansimuz.itch.io/patreons-top-down-collection
+  - [Done] Cover art 1920 X 960 (safe 1600 X 960)
+  - [Done] Figma splash screen
+  - [Done] Figma market place introduction
+  - [Done] Name: Figma World Online, Fetaverse, Pixel Hangout, Pixel Pusher Online
 - Map design
   - [DONE] Forest map
   - [DONE] Indoor map
   - [DONE] Ice world map
   - [DONE] Dessert map
-  - https://analogstudios.itch.io/
-  - https://kia.itch.io/16x16-desert-tile-set
-  - https://projectalme.itch.io/16x16-rpg-starter-set
-  - https://xevin.itch.io/dungeon-tileset-x16
-  - https://merchant-shade.itch.io/16x16-mini-world-sprites
-  - https://ansimuz.itch.io/patreons-top-down-collection
-  - https://blueapollo.itch.io/16x16-forest-tileset
-  - https://fawf-art.itch.io/16x16-forest-tileset
-  - https://pixelhole.itch.io/pixelholes-overworld-tileset
-  - https://analogstudios.itch.io/tundra
 
-# Archive
-
-## Technical POC
+## Alpha release
 
 - [OK] Persist character setting across sessions
   - [FAIL] Remove inactive characters -> Only FigJam allows query all active users
