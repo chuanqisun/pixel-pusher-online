@@ -1,4 +1,4 @@
-import type { PrebuiltMap } from "../interface";
+import type { PrebuiltMap } from "../../interface";
 import imgUrl from "./hunters-tavern.png";
 
 export const huntersTavern: PrebuiltMap = {
@@ -7,11 +7,6 @@ export const huntersTavern: PrebuiltMap = {
   cols: 32,
   tileSize: 16,
   details: [
-    {
-      key: "Map artist",
-      value: "d0tn3t",
-      link: "https://chuanqisun.com",
-    },
     {
       key: "Tile artist",
       value: "o_lobster",

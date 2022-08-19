@@ -1,4 +1,4 @@
-import type { CharacterAtlas } from "../interface";
+import type { CharacterAtlas } from "../../interface";
 import imgUrl from "./01-generic.png";
 
 const shared: Pick<CharacterAtlas, "details" | "cols" | "rows" | "tileSize"> = {

@@ -124,9 +124,10 @@
   - https://ansimuz.itch.io/patreons-top-down-collection
 - Map design
   - [DONE] Forest map
-  - Indoor map
-  - Ice world map
-  - Dessert map
+  - [DONE] Indoor map
+  - [DONE] Ice world map
+  - [DONE] Dessert map
+  - https://analogstudios.itch.io/
   - https://kia.itch.io/16x16-desert-tile-set
   - https://projectalme.itch.io/16x16-rpg-starter-set
   - https://xevin.itch.io/dungeon-tileset-x16
