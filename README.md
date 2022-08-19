@@ -13,7 +13,7 @@ Features include:
 
 ## Install
 
-- [![Install widget from Figma](/design/install-badge.svg)](<https://www.figma.com/community/widget/1142531655223087736/Pixel-Pusher-Online-(Beta)>)
+[![Install widget from Figma](/design/install-badge.svg)](<https://www.figma.com/community/widget/1142531655223087736/Pixel-Pusher-Online-(Beta)>)
 
 ## Screenshot
 
