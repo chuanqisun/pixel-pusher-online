@@ -6,7 +6,7 @@ A free and open-source MMORPG inside Figma. Pick a character and explore a varie
 
 - 10 avatars
 - 4 maps
-- Customizable nickname
+- Custom nickname
 - Chatroom
 
 ## Screenshot

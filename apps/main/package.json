@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "Your Figma widget",
   "scripts": {
-    "build": "node scripts/build.mjs && node scripts/pack.mjs",
-    "dev": "npm run build -- --dev"
+    "build": "npm run clean && node scripts/build.mjs && node scripts/pack.mjs",
+    "dev": "npm run build -- --dev",
+    "clean": "rm -rf dist"
   },
   "author": "",
   "license": "",
