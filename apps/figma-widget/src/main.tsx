@@ -38,7 +38,7 @@ function Widget() {
       waitForTask(
         new Promise((resolve) => {
           figma.showUI(`<script>window.location.href = "${process.env.WEB_URL}"</script>`, {
-            height: 600,
+            height: 580,
             width: 400,
             position: {
               // top-right corner

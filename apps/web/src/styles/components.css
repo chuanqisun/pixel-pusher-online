@@ -28,7 +28,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  border-bottom: 2px solid black;
 }
 
 .character-item {
