@@ -15,7 +15,11 @@ A free and open-source MMORPG game inside Figma. Pick a character and explore a 
 
 ## Under the hood
 
-The game is built with Figma's Plugin and Widget API. The avatar animation is achieved with PNG sprite. The maps are images built from existing tilesets and assembled using Figma. The control UI is a web app that sends command to the Figma main app, built in Preact.
+- The game is built with Figma's Plugin and Widget API.
+- The avatar animation is achieved with PNG sprite.
+- The chat system stores messages inside each page and polls for update.
+- The maps are built from existing tilesets and assembled using Figma.
+- The control UI is a web app that sends commands to the Figma main app, built in Preact.
 
 ## How to contribute
 
@@ -23,7 +27,7 @@ My goal is to encourage more game designers and developers to learn and experime
 
 ### Avatar design requirement
 
-- Dimension: 16 x 16
+- Dimension: 16 × 16
 - Full color
 - Sprite
   - 4-direction walk frames
@@ -36,7 +40,7 @@ My goal is to encourage more game designers and developers to learn and experime
 
 ### Map design requirement
 
-- Grid size: 16 x 16
+- Grid size: 16 × 16
 - Dimension: up to you
 - Submit a PR with the following information
   - Spwan point(s): which row and column should players initially appear at?
