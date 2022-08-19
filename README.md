@@ -2,7 +2,9 @@
 
 # Pixel Pusher Online (Beta)
 
-A free and open-source MMORPG inside Figma. Pick a character and explore a variety of maps together with your coworkers. Features include:
+A free and open-source MMORPG inside Figma. Pick a character and explore fantasy worlds together with your friends. It's time to play!
+
+Features include:
 
 - 10 avatars
 - 4 maps
