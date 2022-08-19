@@ -248,11 +248,13 @@ export function App() {
         </article>
         <article class="info-card">
           <h2>Lisenses and Credits</h2>
-          <p>
-            <a href="" target="_blank">
-              See online
-            </a>
-          </p>
+          <ul>
+            <li>
+              <a href="" target="_blank">
+                View on website
+              </a>
+            </li>
+          </ul>
         </article>
       </section>
     </>

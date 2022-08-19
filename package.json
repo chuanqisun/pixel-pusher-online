@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "concurrently npm:dev:*",
     "dev:web": "npm run dev -w apps/web",
-    "dev:figma-widget": "npm run dev -w apps/figma-widget",
+    "dev:figma-widget": "npm run dev -w apps/main",
     "dev:assets": "npm run dev -w packages/assets"
   },
   "repository": {
