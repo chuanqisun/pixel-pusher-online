@@ -2,7 +2,7 @@
 
 # Pixel Pusher Online (Beta)
 
-A free and open-source MMORPG inside Figma. Pick a character and explore a variety of maps together with your coworkers. Currently supporting:
+A free and open-source MMORPG game inside Figma. Pick a character and explore a variety of maps together with your coworkers. Features include:
 
 - 10 avatars
 - 4 maps
@@ -19,7 +19,7 @@ The game is built with Figma's Plugin and Widget API. The avatar animation is ac
 
 ## How to contribute
 
-My goal is to encourage more game designers and developers to learn and experiment. You may submit your avatar or map artwork. I'll happily showcase your work together with your social link.
+My goal is to encourage more game designers and developers to learn and experiment. You are welcome to submit your avatar or map design and a social link that you would to promote.
 
 ### Avatar design requirement
 
@@ -50,4 +50,4 @@ My goal is to encourage more game designers and developers to learn and experime
 
 - Source code: MIT
 - Cover art is made from [javikolog](https://route1rodent.itch.io/)'s tileset, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
-- Avatars and maps bear credits to a variety of artists. The artist names and lienses are listed in game UI as well as in source code.
+- Avatars and maps bear credits to a variety of artists whose names and lienses are listed in the game UI.
