@@ -1,36 +1,53 @@
-Below are the steps to get your widget running. You can also find instructions at:
+![Pixel Pusher Logo](/design/cover.png)
 
-https://www.figma.com/widget-docs/setup-guide/
+# Pixel Pusher Online (Beta)
 
-This widget template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+A free and open-source MMORPG inside Figma. Pick a character and explore a variety of maps together with your coworkers. Currently supporting:
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+- 10 avatars
+- 4 maps
+- Customizable nickname
+- Chatroom
 
-https://nodejs.org/en/download/
+## Screenshot
 
-Next, install TypeScript and the latest type definitions by running:
+![Gameplay screenshot](/design/screenshot.png)
 
-npm install
+## Under the hood
 
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+The game is built with Figma's Plugin and Widget API. The avatar animation is achieved with PNG sprite. The maps are images built from existing tilesets and assembled using Figma. The control UI is a web app that sends command to the Figma main app, built in Preact.
 
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+## How to contribute
 
-For more information, visit https://www.typescriptlang.org/
+My goal is to encourage more game designers and developers to learn and experiment. You may submit your avatar or map artwork. I'll happily showcase your work together with your social link.
 
-Using TypeScript requires a compiler to convert TypeScript (code.tsx) into JavaScript (code.js)
-for the browser to run.
+### Avatar design requirement
 
-We recommend writing TypeScript code using Visual Studio code:
+- Dimension: 16 x 16
+- Full color
+- Sprite
+  - 4-direction walk frames
+  - Idle frame (optional if walk frame includes idle state)
+- Submit a PR with the following information
+  - Avatar name
+  - Your name (either real or artist name)
+  - Your social link (optional)
+  - Your preferred license (optional)
 
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-   then select "npm: watch". You will have to do this again every time
-   you reopen Visual Studio Code.
+### Map design requirement
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+- Grid size: 16 x 16
+- Dimension: up to you
+- Submit a PR with the following information
+  - Spwan point(s): which row and column should players initially appear at?
+  - Map name
+  - Ideal number of players (this might be used in the future)
+  - Your name (either real or artist name)
+  - Your social link (optional)
+  - Your preferred license (optional)
+
+## Licenses and credits
+
+- Source code: MIT
+- Cover art is made from [javikolog](https://route1rodent.itch.io/)'s tileset, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
+- Avatars and maps bear credits to a variety of artists. The artist names and lienses are listed in game UI as well as in source code.
