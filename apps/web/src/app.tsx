@@ -247,14 +247,12 @@ export function App() {
           </ul>
         </article>
         <article class="info-card">
-          <h2>Credits</h2>
-          <ul>
-            <li>Technical advice from Jackie Chui</li>
-            <li>Design advice from June Punkasem</li>
-            <li>Inspiration from Interactive Figmaland</li>
-            <li>Cover art is based on ___ sprite, under ___ license</li>
-            <li>See credit per avatar/map</li>
-          </ul>
+          <h2>Lisenses and Credits</h2>
+          <p>
+            <a href="" target="_blank">
+              See online
+            </a>
+          </p>
         </article>
       </section>
     </>

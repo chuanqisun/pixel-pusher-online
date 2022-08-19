@@ -55,3 +55,7 @@ My goal is to encourage more game designers and developers to learn and experime
 - Source code: MIT
 - Cover art is made from [javikolog](https://route1rodent.itch.io/)'s tileset, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
 - Avatars and maps bear credits to a variety of artists whose names and lienses are listed in the game UI.
+- Inspiration from Interactive Figmaland
+- My gratitude to the following individuals:
+  - Jackie Chui for technical advice
+  - June Punkasem for design advice
