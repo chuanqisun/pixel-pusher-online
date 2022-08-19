@@ -14,6 +14,7 @@ const links = {
   submitAvatar: "https://github.com/chuanqisun/pixel-pusher-online#avatar-design-requirement",
   submitMap: "https://github.com/chuanqisun/pixel-pusher-online#map-design-requirement",
   license: "https://github.com/chuanqisun/pixel-pusher-online#licenses-and-credits",
+  issue: "https://github.com/chuanqisun/pixel-pusher-online/issues",
 };
 
 export function App() {
@@ -151,7 +152,7 @@ export function App() {
             </div>
           ))}
           <a class="u-bg-accent-ll u-fg-accent-d character-submit-design" href={links.submitAvatar} target="_blank">
-            Submit your design
+            Submit your avatar
           </a>
         </div>
       </section>
@@ -209,8 +210,8 @@ export function App() {
             </button>
           </div>
         ))}
-        <a href={links.submitMap} target="_blank">
-          Submit your design
+        <a class="u-bg-accent-l u-fg-accent-dd map-submit-design" href={links.submitMap} target="_blank">
+          Submit your map
         </a>
       </section>
       <section class="app-layout__main nav-section info-layout" data-active={activeTab === "info"}>
@@ -254,13 +255,18 @@ export function App() {
           <h2>Contribute</h2>
           <ul>
             <li>
-              <a href={links.submitAvatar} target="_blank">
+              <a class="u-fg-accent-dd" href={links.submitAvatar} target="_blank">
                 Submit your avatar
               </a>
             </li>
             <li>
-              <a href={links.submitMap} target="_blank">
+              <a class="u-fg-accent-dd" href={links.submitMap} target="_blank">
                 Submit your map
+              </a>
+            </li>
+            <li>
+              <a class="u-fg-accent-dd" href={links.issue} target="_blank">
+                Issues and feedback
               </a>
             </li>
           </ul>
@@ -269,7 +275,7 @@ export function App() {
           <h2>Licenses and Credits</h2>
           <ul>
             <li>
-              <a href={links.license} target="_blank">
+              <a class="u-fg-accent-dd" href={links.license} target="_blank">
                 View details on GitHub
               </a>
             </li>

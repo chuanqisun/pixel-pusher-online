@@ -59,7 +59,10 @@ The project encourages learning and experimentation from new game designers and 
 ## Licenses and credits
 
 - Source code: MIT
-- Cover art is made from [javikolog](https://route1rodent.itch.io/)'s tileset, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
+- Cover art is made from [javikolog](https://route1rodent.itch.io/)'s sprites, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
+- Screenshot is made from multiple assets
+  - Avatars from [javikolog](https://route1rodent.itch.io/)'s sprites, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
+  - Map from [franopx](https://franopx.itch.io/)'s tileset, without license.
 - Avatars and maps bear credits to a variety of artists whose names and licenses are listed in the game UI.
 - Inspiration from Interactive Figmaland
 - My gratitude to the following individuals:
