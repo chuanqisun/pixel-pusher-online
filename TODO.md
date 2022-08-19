@@ -116,7 +116,7 @@
   - Implement deps array for useEffect and useMemo
 - Brand
   - [DONE] Icon 128 x 128
-  - [!] Favicon
+  - [DONE] Favicon
   - [!] Cover art 1920 X 960 (safe 1600 X 960)
   - [!] Figma splash screen
   - [!] Figma market place introduction
