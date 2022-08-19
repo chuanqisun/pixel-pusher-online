@@ -29,7 +29,7 @@ Features include:
 
 ## How to contribute
 
-My goal is to encourage more game designers and developers to learn and experiment. You are welcome to submit your avatar or map design and a social link that you would to promote.
+The project encourages learning and experimentation from new game designers and developers. You are welcome to submit your avatar or map design along with your social link. I'll try accommodate as many submissions as possible and provide feedback if improvement is needed.
 
 ### Avatar design requirement
 
@@ -49,7 +49,7 @@ My goal is to encourage more game designers and developers to learn and experime
 - Grid size: 16 × 16
 - Dimension: up to you
 - Submit a PR with the following information
-  - Spwan point(s): which row and column should players initially appear at?
+  - Spawn point(s): which row and column should players initially appear at?
   - Map name
   - Ideal number of players (this might be used in the future)
   - Your name (either real or artist name)
@@ -60,7 +60,7 @@ My goal is to encourage more game designers and developers to learn and experime
 
 - Source code: MIT
 - Cover art is made from [javikolog](https://route1rodent.itch.io/)'s tileset, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
-- Avatars and maps bear credits to a variety of artists whose names and lienses are listed in the game UI.
+- Avatars and maps bear credits to a variety of artists whose names and licenses are listed in the game UI.
 - Inspiration from Interactive Figmaland
 - My gratitude to the following individuals:
   - Jackie Chui for technical advice

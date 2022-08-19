@@ -10,6 +10,11 @@ import { useTabs } from "./hooks/use-tabs";
 import { sendMessage } from "./utils/ipc";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
+const links = {
+  contribute: "https://github.com/chuanqisun/pixel-pusher-online#how-to-contribute",
+  license: "https://github.com/chuanqisun/pixel-pusher-online#licenses-and-credits",
+};
+
 export function App() {
   const sendToMain = useCallback(sendMessage.bind(null, import.meta.env.VITE_IFRAME_HOST_ORIGIN, import.meta.env.VITE_PLUGIN_ID), []);
 
@@ -144,6 +149,9 @@ export function App() {
               </p>
             </div>
           ))}
+          <a href={links.contribute} target="_blank">
+            Submit your design
+          </a>
         </div>
       </section>
 
@@ -200,6 +208,9 @@ export function App() {
             </button>
           </div>
         ))}
+        <a href={links.contribute} target="_blank">
+          Submit your design
+        </a>
       </section>
       <section class="app-layout__main nav-section info-layout" data-active={activeTab === "info"}>
         <article class="info-card">
@@ -242,7 +253,7 @@ export function App() {
           <h2>Contribute</h2>
           <ul>
             <li>
-              <a href="https://github.com/chuanqisun/pixel-pusher-online#how-to-contribute" target="_blank">
+              <a href={links.contribute} target="_blank">
                 Submit avatar or map design
               </a>
             </li>
@@ -252,7 +263,7 @@ export function App() {
           <h2>Lisenses and Credits</h2>
           <ul>
             <li>
-              <a href="https://github.com/chuanqisun/pixel-pusher-online#licenses-and-credits" target="_blank">
+              <a href={links.license} target="_blank">
                 View details on GitHub
               </a>
             </li>
