@@ -2,7 +2,7 @@
 
 # Pixel Pusher Online (Beta)
 
-A free and open-source MMORPG inside Figma. Pick a character and explore fantasy worlds together with your friends. Simply walk with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd >↑</kbd> <kbd >←</kbd> <kbd >↓</kbd> <kbd >→</kbd>. It's time to play!
+A free and open-source MMORPG inside Figma. Pick a character and explore fantasy worlds with your friends. Simply walk with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd >↑</kbd> <kbd >←</kbd> <kbd >↓</kbd> <kbd >→</kbd>. It's time to play!
 
 Features include:
 
@@ -21,11 +21,11 @@ Features include:
 
 ## Under the hood
 
-- The game is built with Figma's Plugin and Widget API.
+- The game is built with Figma's [Plugin](https://www.figma.com/plugin-docs/) and [Widget](https://www.figma.com/widget-docs/) API.
 - The avatar animation is achieved with PNG sprite.
 - The chat system stores messages inside each page and polls for update.
 - The maps are built from existing tilesets and assembled using Figma.
-- The control UI is a web app that sends commands to the Figma main app, built in Preact.
+- The control UI is a [web app](https://chuanqisun.github.io/pixel-pusher-online/) that sends commands to the Figma main app, built in [Preact](https://preactjs.com/).
 
 ## How to contribute
 
@@ -55,6 +55,11 @@ The project encourages learning and experimentation from new game designers and 
   - Your name (either real or artist name)
   - Your social link (optional)
   - Your preferred license (optional)
+
+
+### Issues, feature requests and feedback
+
+- Please [file a GitHub issue](https://github.com/chuanqisun/pixel-pusher-online/issues/new).
 
 ## Licenses and credits
 
