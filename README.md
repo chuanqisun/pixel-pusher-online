@@ -64,7 +64,7 @@ The project encourages learning and experimentation from new game designers and 
   - Avatars from [javikolog](https://route1rodent.itch.io/)'s sprites, under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.
   - Map from [franopx](https://franopx.itch.io/)'s tileset, without license.
 - Avatars and maps bear credits to a variety of artists whose names and licenses are listed in the game UI.
-- Inspiration from Interactive Figmaland
+- Inspiration from [Interactive Figmaland](https://www.figma.com/community/file/1118658708951135857)
 - My gratitude to the following individuals:
-  - Jackie Chui for technical advice
-  - June Punkasem for design advice
+  - [Jackie Chui](https://www.linkedin.com/in/jackiechui/) for technical advice
+  - [June Punkasem](https://junethanaon.com/) for design advice
