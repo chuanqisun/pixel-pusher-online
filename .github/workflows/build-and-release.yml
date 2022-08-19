@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - master
-    tags:
-      - "v*"
 
 jobs:
-  build-test-and-publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +21,33 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Archive production artifacts
+      - name: Upload main app
         uses: actions/upload-artifact@v3
         with:
           name: figma-plugin-dist
           path: |
             apps/main/dist
+      - name: Upload web app
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-pages
+          path: |
+            apps/web/dist
+
+  # Deploy to GitHub page
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
