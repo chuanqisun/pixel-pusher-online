@@ -276,7 +276,7 @@ export function App() {
           <ul>
             <li>
               <a class="u-fg-accent-dd" href={links.license} target="_blank">
-                View details on GitHub
+                View on GitHub
               </a>
             </li>
           </ul>
