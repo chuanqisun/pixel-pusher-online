@@ -27,12 +27,10 @@ jobs:
           name: figma-plugin-dist
           path: |
             apps/main/dist
-      - name: Upload web app
-        uses: actions/upload-artifact@v3
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
-          path: |
-            apps/web/dist
+          path: apps/web/dist
 
   # Deploy to GitHub page
   deploy:
@@ -48,6 +46,8 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
