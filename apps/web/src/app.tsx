@@ -11,7 +11,8 @@ import { sendMessage } from "./utils/ipc";
 import { getAvatarScale, getStaticDemoFrame } from "./utils/transform";
 
 const links = {
-  contribute: "https://github.com/chuanqisun/pixel-pusher-online#how-to-contribute",
+  submitAvatar: "https://github.com/chuanqisun/pixel-pusher-online#avatar-design-requirement",
+  submitMap: "https://github.com/chuanqisun/pixel-pusher-online#map-design-requirement",
   license: "https://github.com/chuanqisun/pixel-pusher-online#licenses-and-credits",
 };
 
@@ -149,7 +150,7 @@ export function App() {
               </p>
             </div>
           ))}
-          <a href={links.contribute} target="_blank">
+          <a class="u-bg-accent-ll u-fg-accent-d character-submit-design" href={links.submitAvatar} target="_blank">
             Submit your design
           </a>
         </div>
@@ -208,7 +209,7 @@ export function App() {
             </button>
           </div>
         ))}
-        <a href={links.contribute} target="_blank">
+        <a href={links.submitMap} target="_blank">
           Submit your design
         </a>
       </section>
@@ -253,14 +254,19 @@ export function App() {
           <h2>Contribute</h2>
           <ul>
             <li>
-              <a href={links.contribute} target="_blank">
-                Submit avatar or map design
+              <a href={links.submitAvatar} target="_blank">
+                Submit your avatar
+              </a>
+            </li>
+            <li>
+              <a href={links.submitMap} target="_blank">
+                Submit your map
               </a>
             </li>
           </ul>
         </article>
         <article class="info-card">
-          <h2>Lisenses and Credits</h2>
+          <h2>Licenses and Credits</h2>
           <ul>
             <li>
               <a href={links.license} target="_blank">
