@@ -241,10 +241,9 @@ export function App() {
         <article class="info-card">
           <h2>Contribute</h2>
           <ul>
-            <li>Avatar and map design</li>
             <li>
               <a href="https://github.com/chuanqisun/pixel-pusher-online#how-to-contribute" target="_blank">
-                View details on GitHub
+                Submit avatar or map design
               </a>
             </li>
           </ul>
