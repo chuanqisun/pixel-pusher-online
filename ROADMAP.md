@@ -43,6 +43,7 @@
   - Sound effect
   - Personal emoji palette
 - Chat
+  - Heads-up message display above avatar
   - Message length reminder
   - Timestamp for older message
   - Private text chat
